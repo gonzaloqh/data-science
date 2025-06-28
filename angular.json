@@ -44,6 +44,7 @@
                   "maximumError": "4kb"
                 }
               ],
+              "baseHref": "/data-science/",
               "outputHashing": "all"
             },
             "development": {
