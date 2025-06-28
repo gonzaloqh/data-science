@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
 }
 
   goToHome() {
-    this.router.navigate(['/data-science']);
+    this.router.navigate(['/']);
   }
 
   private _filter(value: string): { id: string, nombre: string }[] {
