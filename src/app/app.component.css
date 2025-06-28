@@ -1,0 +1,49 @@
+.fab-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1000;
+}
+
+.max-width{
+    width: 100%;
+}
+
+.custom-card {
+  width: 100%;
+}
+
+.custom-title-container {
+  text-align: center;
+  width: 100%;
+}
+
+.custom-title-container mat-card-title,
+.custom-title-container mat-card-subtitle {
+  display: block;
+  width: 100%;
+}
+
+.justified-text {
+  text-align: justify;
+}
+
+mat-card img {
+  width: 100%;
+  height: auto;
+}
+
+.fab-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.fab-full {
+  width: 100%;
+}
+
+.card-img{
+  margin: 5px 0 !important;
+}
