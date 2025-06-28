@@ -40,15 +40,15 @@ export class AppComponent implements OnInit {
 
   constructor(public route: ActivatedRoute) { }
   ngOnInit() {
-    let path = window.location.pathname;
-    const repoBase = '/data-science/';
-    if (path.startsWith(repoBase)) {
-      path = path.slice(repoBase.length);
-    } else if (path.startsWith('/')) {
-      path = path.slice(1);
-    }
-    const id = path.split('/')[0];
-    console.log("id:",id)
+      let path = window.location.pathname;
+      const repoBase = '/data-science/';
+      if (path.startsWith(repoBase)) {
+        path = path.slice(repoBase.length);
+      } else if (path.startsWith('/')) {
+        path = path.slice(1);
+      }
+      const id = path.split('/')[0];
+      console.log("id:",id)
     if (id.length > 0) {
       this.node = this.getNodeById(id);
     }
@@ -123,8 +123,17 @@ export class AppComponent implements OnInit {
   }
 
   goToChild(child: TopicNode) {
-    const path = child.id;
-    console.log("Going to child:", path);
-    window.location.href = `/${path}`;
+    const path_child = child.id;
+    console.log("Going to child:", path_child);
+    window.location.href = `/${path_child}`;
+
+
+    let path = window.location.pathname;
+      const repoBase = '/data-science/';
+      if (path.startsWith(repoBase)) {
+        window.location.href = `/data-science/${path_child}`;
+      } else if (path.startsWith('/')) {
+        window.location.href = `/${path_child}`;
+      }
   }
 }
