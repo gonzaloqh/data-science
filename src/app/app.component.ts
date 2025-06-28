@@ -40,9 +40,14 @@ export class AppComponent implements OnInit {
 
   constructor(public route: ActivatedRoute) { }
   ngOnInit() {
-    const path = window.location.pathname;
-    console.log("init:",path)
-    const id = path.startsWith('/') ? path.slice(1) : path;
+    let path = window.location.pathname;
+    const repoBase = '/data-science/';
+    if (path.startsWith(repoBase)) {
+      path = path.slice(repoBase.length);
+    } else if (path.startsWith('/')) {
+      path = path.slice(1);
+    }
+    const id = path.split('/')[0];
     console.log("id:",id)
     if (id.length > 0) {
       this.node = this.getNodeById(id);
