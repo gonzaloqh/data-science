@@ -1,26 +1,22 @@
 <div class="header">
-<form class="example-form">
-  <mat-form-field class="example-full-width max-width" appearance="fill">
-    <mat-label>Search...</mat-label>
-    <input type="text"
-           aria-label="Number"
-           matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
-        {{option.nombre}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+  <form class="example-form">
+    <mat-form-field class="example-full-width max-width" appearance="fill">
+      <mat-label>Search...</mat-label>
+      <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
+          {{option.nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 
-<mat-form-field appearance="fill" class="max-width">
-  <mat-label>Select Path</mat-label>
-  <mat-select>
-<!--   <mat-option *ngFor="let item of optionSearchPath" [value]="item.id">{{ returnSearchPathLabel(item) }}</mat-option>
- -->  </mat-select>
-</mat-form-field>
+  <mat-form-field appearance="fill" class="max-width">
+    <mat-label>Select Path</mat-label>
+    <mat-select>
+      <!--   <mat-option *ngFor="let item of optionSearchPath" [value]="item.id">{{ returnSearchPathLabel(item) }}</mat-option>
+ --> </mat-select>
+  </mat-form-field>
 </div>
 
 <mat-card class="custom-card">
@@ -32,13 +28,21 @@
   </mat-card-header>
 
   <div *ngFor="let item of node.content">
-    <mat-card-content  *ngIf="item.type === 'text'">
-        <p class="justified-text">
-          {{ item.value }}
-        </p>
+    <mat-card-content *ngIf="item.type === 'text'">
+      <p class="justified-text"  style="white-space: pre-line;">
+        {{ item.value }}
+      </p>
     </mat-card-content>
+
     <img mat-card-image *ngIf="item.type === 'img'" [src]="item.value" style="margin: 5px 0;">
+
+    <mat-card-content *ngIf="item.type === 'code'">
+      <pre class="code-block" style="white-space: pre-line;">
+        {{ item.value }}
+      </pre>
+    </mat-card-content>
   </div>
+
 
   <div class="fab-wrapper" *ngFor="let child of children_label" class="card-img">
     <button mat-stroked-button color="primary" class="fab-full" (click)="goToChild(child)">{{child.title}}</button>

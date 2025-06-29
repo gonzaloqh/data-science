@@ -47,3 +47,14 @@ mat-card img {
 .card-img{
   margin: 5px 0 !important;
 }
+
+.code-block {
+  background-color: #1e1e1e; /* color estilo VSCode */
+  color: #dcdcdc;            /* texto blanco-grisáceo */
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre-wrap; /* para que respete \n y se ajuste */
+}
