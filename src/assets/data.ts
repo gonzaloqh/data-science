@@ -13,7 +13,7 @@ export const TIPOS_DATA : TopicNode[] = [
           value: "Resumen MAE DataScience es una recopilación estructurada de los principales conceptos, métodos y aplicaciones dentro del ámbito de la Inteligencia Artificial (IA), organizada por tópicos clave. Esta app está diseñada como una guía de referencia rápida y educativa para estudiantes, profesionales y entusiastas del área, cubriendo desde fundamentos teóricos hasta enfoques prácticos actuales en machine learning, deep learning, procesamiento de lenguaje natural y más. Cada sección busca presentar información clara, concisa y contextualizada, facilitando el aprendizaje continuo y la consulta ágil de temas esenciales en ciencia de datos e IA."
         }
       ],
-      children: ["estadistica", "data", "modelos_de_ia", "topicos_de_inteligencia_artificial", "mlops_y_automatizacion"]
+      children: ["estadistica", "data", "modelos_de_ia", "neuronas_artificiales", "topicos_de_inteligencia_artificial", "mlops_y_automatizacion"]
     },
 {
   id: "estadistica",
@@ -5379,40 +5379,11413 @@ export const TIPOS_DATA : TopicNode[] = [
       }
     ],
     children: []
+  },
+  {
+  id: "herramientas_y_librerias",
+  title: "Herramientas y Librerías Esenciales para Data Science",
+  subtitle: "Panorama completo de las principales bibliotecas para machine learning y deep learning",
+  content: [
+    {
+      type: "text",
+      value: "El ecosistema de Data Science cuenta con numerosas librerías especializadas que cubren todo el flujo de trabajo, desde el preprocesamiento de datos hasta el despliegue de modelos. Esta sección explora las herramientas más utilizadas en la industria."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo de librerías de ML vs DL mostrando sus áreas de aplicación"
+    },
+    {
+      type: "text",
+      value: "La elección de herramientas depende de varios factores: tipo de problema, tamaño de datos, necesidad de escalabilidad y preferencias del equipo. A continuación analizaremos cada una en profundidad."
+    }
+  ],
+  children: [
+    "scikitlearn",
+    "tensorflow",
+    "keras",
+    "pytorch",
+    "hugging_face_transformers",
+    "langchain",
+    "llamaindex"
+  ]
+},
+{
+  id: "scikitlearn",
+  title: "Scikit-learn",
+  subtitle: "La biblioteca fundamental para Machine Learning tradicional en Python",
+  content: [
+    {
+      type: "text",
+      value: "Scikit-learn es la librería más utilizada para machine learning tradicional en Python. Ofrece implementaciones eficientes de algoritmos clásicos y herramientas para el procesamiento de datos."
+    },
+    {
+      type: "text",
+      value: "Principales características:"
+    },
+    {
+      type: "text",
+      value: "- Implementación de algoritmos supervisados y no supervisados\n- Herramientas para preprocesamiento y selección de características\n- Métricas de evaluación y validación cruzada\n- Interfaz consistente para todos los estimadores (fit/predict/transform)"
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo típico en scikit-learn: preprocesamiento -> entrenamiento -> evaluación"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo básico de pipeline en scikit-learn
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+# Creación del pipeline
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', RandomForestClassifier(n_estimators=100))
+])
+
+# División de datos
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Entrenamiento y predicción
+pipeline.fit(X_train, y_train)
+predictions = pipeline.predict(X_test)`
+    },
+    {
+      type: "text",
+      value: "Cuándo usarlo:\n- Problemas de ML clásico (regresión, clasificación, clustering)\n- Conjuntos de datos medianos (que caben en memoria)\n- Necesidad de prototipado rápido\n\nCuándo evitarlo:\n- Aprendizaje profundo\n- Datos a gran escala (necesidad de distributed computing)\n- Modelos de última generación (SOTA)"
+    }
+  ],
+  children: []
+},
+{
+  id: "tensorflow",
+  title: "TensorFlow",
+  subtitle: "Plataforma integral para machine learning a escala industrial",
+  content: [
+    {
+      type: "text",
+      value: "TensorFlow es un framework de código abierto desarrollado por Google para construir y desplegar modelos de machine learning a escala. Su arquitectura flexible permite ejecución en CPU, GPU y TPU."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de TensorFlow mostrando el flujo de tensores a través del grafo computacional"
+    },
+    {
+      type: "text",
+      value: "Características destacadas:\n- Grafos computacionales estáticos para optimización\n- Diferenciación automática\n- Soporte para distributed training\n- TensorFlow Serving para despliegue\n- TensorFlow Lite para edge devices"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de red neuronal en TensorFlow
+import tensorflow as tf
+from tensorflow.keras import layers
+
+# Definición del modelo
+model = tf.keras.Sequential([
+    layers.Dense(64, activation='relu', input_shape=(784,)),
+    layers.Dropout(0.2),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+# Compilación
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Entrenamiento
+model.fit(train_images, train_labels, epochs=10, 
+          validation_data=(test_images, test_labels))`
+    },
+    {
+      type: "text",
+      value: "Ventajas:\n- Maduro y con amplia adopción industrial\n- Excelente soporte para producción\n- Ecosistema completo (TFX, TensorBoard)\n\nDesventajas:\n- Curva de aprendizaje más pronunciada\n- Grafos estáticos menos intuitivos que ejecución eager"
+    }
+  ],
+  children: []
+},
+{
+  id: "keras",
+  title: "Keras",
+  subtitle: "API de alto nivel para construir modelos de deep learning",
+  content: [
+    {
+      type: "text",
+      value: "Keras es una API de alto nivel para construir y entrenar modelos de deep learning. Originalmente independiente, ahora viene integrada en TensorFlow como tf.keras, combinando facilidad de uso con el poder de TensorFlow."
+    },
+    {
+      type: "img",
+      value: "Comparación entre la API secuencial y funcional de Keras"
+    },
+    {
+      type: "text",
+      value: "Principales beneficios:\n- Interfaz intuitiva y fácil de usar\n- Modularidad y extensibilidad\n- Soporte para múltiples backends (aunque ahora principalmente TensorFlow)\n- Gran colección de capas preimplementadas"
+    },
+    {
+      type: "text",
+      value: "Keras sigue dos paradigmas principales:\n1. API Secuencial: Para modelos simples de pila lineal\n2. API Funcional: Para arquitecturas complejas con múltiples entradas/salidas"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo con API Funcional
+from tensorflow.keras import Input, Model
+from tensorflow.keras.layers import Dense, Concatenate
+
+# Definición de múltiples entradas
+input_a = Input(shape=(32,))
+input_b = Input(shape=(64,))
+
+# Capas de procesamiento
+dense_1 = Dense(16, activation='relu')(input_a)
+dense_2 = Dense(32, activation='relu')(input_b)
+
+# Concatenación
+concat = Concatenate()([dense_1, dense_2])
+output = Dense(1, activation='sigmoid')(concat)
+
+# Creación del modelo
+model = Model(inputs=[input_a, input_b], outputs=output)`
+    }
+  ],
+  children: [
+    "keras_classifier",
+    "keras_tuner"
+  ]
+},
+{
+  id: "keras_classifier",
+  title: "Keras Classifier",
+  subtitle: "Implementación de modelos de clasificación con Keras",
+  content: [
+    {
+      type: "text",
+      value: "Keras proporciona herramientas específicas para problemas de clasificación, incluyendo funciones de pérdida especializadas, métricas y wrappers para scikit-learn."
+    },
+    {
+      type: "text",
+      value: "Componentes clave para clasificación:\n- Funciones de pérdida: binary_crossentropy, categorical_crossentropy\n- Métricas: accuracy, precision, recall\n- Capas finales: Dense con activación softmax (multiclase) o sigmoid (binaria)"
+    },
+    {
+      type: "code",
+      value: `// Clasificador de imágenes con CNN en Keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+
+model = Sequential([
+    Conv2D(32, (3,3), activation='relu', input_shape=(28,28,1)),
+    MaxPooling2D((2,2)),
+    Conv2D(64, (3,3), activation='relu'),
+    MaxPooling2D((2,2)),
+    Flatten(),
+    Dense(64, activation='relu'),
+    Dense(10, activation='softmax')  # 10 clases
+])
+
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])`
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas:\n- Normalizar los datos de entrada\n- Usar early stopping para evitar overfitting\n- Balancear clases desequilibradas con class_weight\n- Empezar con arquitecturas simples e ir incrementando complejidad"
+    }
+  ],
+  children: []
+},
+{
+  id: "keras_tuner",
+  title: "Keras Tuner",
+  subtitle: "Optimización de hiperparámetros para modelos Keras",
+  content: [
+    {
+      type: "text",
+      value: "Keras Tuner es una biblioteca para optimizar hiperparámetros que se integra perfectamente con los modelos Keras/TensorFlow. Automatiza la búsqueda de la mejor configuración para un modelo."
+    },
+    {
+      type: "img",
+      value: "Diagrama del proceso de tuning: espacio de búsqueda -> estrategia de muestreo -> evaluación"
+    },
+    {
+      type: "text",
+      value: "Algoritmos de búsqueda disponibles:\n- RandomSearch: Muestreo aleatorio\n- Hyperband: Optimización basada en sucesivos halving\n- BayesianOptimization: Modela la función objetivo\n- Sklearn: Para integración con scikit-learn"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de Keras Tuner
+import keras_tuner as kt
+
+def build_model(hp):
+    model = tf.keras.Sequential()
+    model.add(layers.Flatten())
+    
+    # Hiperparámetros a optimizar
+    hp_units = hp.Int('units', min_value=32, max_value=512, step=32)
+    hp_learning_rate = hp.Choice('learning_rate', values=[1e-2, 1e-3, 1e-4])
+    
+    model.add(layers.Dense(units=hp_units, activation='relu'))
+    model.add(layers.Dense(10, activation='softmax'))
+    
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=hp_learning_rate),
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+tuner = kt.Hyperband(build_model,
+                     objective='val_accuracy',
+                     max_epochs=10,
+                     directory='my_dir',
+                     project_name='intro_to_kt')`
+    },
+    {
+      type: "text",
+      value: "Consideraciones:\n- Definir un espacio de búsqueda razonable\n- Usar recursos computacionales adecuados (puede ser costoso)\n- Monitorear el progreso con TensorBoard\n- Validar los mejores modelos en un conjunto de test independiente"
+    }
+  ],
+  children: []
+},
+{
+  id: "pytorch",
+  title: "PyTorch",
+  subtitle: "Framework de deep learning con ejecución dinámica y amplia flexibilidad",
+  content: [
+    {
+      type: "text",
+      value: "PyTorch es un framework de deep learning desarrollado por Facebook que se ha vuelto extremadamente popular en investigación gracias a su ejecución dinámica (eager execution) y diseño flexible."
+    },
+    {
+      type: "img",
+      value: "Comparación entre el grafo estático de TensorFlow y el grafo dinámico de PyTorch"
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:\n- Sintaxis Pythonica y orientada a objetos\n- Computación diferencial con autograd\n- Facilidad para debugging\n- Gran comunidad en investigación\n- Soporte nativo para GPUs"
+    },
+    {
+      type: "code",
+      value: `// Red neuronal simple en PyTorch
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(784, 256)
+        self.fc2 = nn.Linear(256, 10)
+        self.dropout = nn.Dropout(0.2)
+    
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)
+        return x
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# Loop de entrenamiento
+for epoch in range(10):
+    for data, labels in train_loader:
+        optimizer.zero_grad()
+        outputs = model(data)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()`
+    },
+    {
+      type: "text",
+      value: "Ecosistema PyTorch:\n- TorchVision: Para visión por computadora\n- TorchText: Para procesamiento de lenguaje natural\n- TorchAudio: Para audio\n- PyTorch Lightning: Para simplificar el entrenamiento\n- TorchServe: Para despliegue de modelos"
+    }
+  ],
+  children: []
+},
+{
+  id: "hugging_face_transformers",
+  title: "Hugging Face Transformers",
+  subtitle: "Biblioteca líder para modelos de lenguaje basados en transformers",
+  content: [
+    {
+      type: "text",
+      value: "Hugging Face Transformers es la biblioteca de referencia para trabajar con modelos de lenguaje basados en la arquitectura transformer, como BERT, GPT y T5."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de un transformer mostrando las capas de atención multi-head"
+    },
+    {
+      type: "text",
+      value: "Características principales:\n- Implementación de miles de modelos preentrenados\n- API simple para fine-tuning\n- Soporte para TensorFlow y PyTorch\n- Pipeline para tareas comunes (NER, question answering, etc.)\n- Model Hub para compartir modelos"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de pipeline para análisis de sentimientos
+from transformers import pipeline
+
+classifier = pipeline('sentiment-analysis')
+result = classifier("I love using transformers library!")
+
+// Fine-tuning de BERT
+from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import Trainer, TrainingArguments
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
+
+training_args = TrainingArguments(
+    output_dir='./results',
+    num_train_epochs=3,
+    per_device_train_batch_size=16,
+    evaluation_strategy="epoch"
+)
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=train_dataset,
+    eval_dataset=eval_dataset
+)
+
+trainer.train()`
+    },
+    {
+      type: "text",
+      value: "Casos de uso típicos:\n- Clasificación de texto\n- Respuesta a preguntas\n- Generación de texto\n- Traducción automática\n- Resumen de texto\n\nRecomendaciones:\n- Empezar con modelos pequeños (distilbert)\n- Usar GPU para fine-tuning\n- Aprovechar los modelos preentrenados"
+    }
+  ],
+  children: []
+},
+{
+  id: "langchain",
+  title: "LangChain",
+  subtitle: "Framework para construir aplicaciones con modelos de lenguaje",
+  content: [
+    {
+      type: "text",
+      value: "LangChain es un framework para desarrollar aplicaciones potenciadas por modelos de lenguaje (LLMs) que permite conectar estos modelos con fuentes de datos externas y herramientas."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de LangChain mostrando la conexión entre LLMs, herramientas y memoria"
+    },
+    {
+      type: "text",
+      value: "Componentes principales:\n- Modelos: Interfaces para diferentes LLMs\n- Prompts: Gestión de plantillas y optimización\n- Memoria: Mantener estado entre interacciones\n- Indexes: Conexión con datos externos\n- Chains: Secuencias de llamadas\n- Agents: LLMs que deciden acciones"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de agente en LangChain
+from langchain.agents import load_tools
+from langchain.agents import initialize_agent
+from langchain.llms import OpenAI
+
+llm = OpenAI(temperature=0)
+tools = load_tools(["serpapi", "wolfram-alpha"], llm=llm)
+agent = initialize_agent(tools, llm, agent="zero-shot-react-description", verbose=True)
+
+agent.run("¿Cuál fue el PIB de México en 2022 y cuánto creció respecto a 2021?")`
+    },
+    {
+      type: "text",
+      value: "Patrones comunes:\n- Q&A sobre documentos\n- Chatbots con memoria\n- Agentes para tomar decisiones\n- Extracción estructurada de texto\n\nIntegraciones:\n- Bases de datos vectoriales (Pinecone, Weaviate)\n- Herramientas de búsqueda (SerpAPI)\n- APIs matemáticas (Wolfram Alpha)"
+    }
+  ],
+  children: []
+},
+{
+  id: "llamaindex",
+  title: "LlamaIndex",
+  subtitle: "Conecta datos personalizados con modelos de lenguaje",
+  content: [
+    {
+      type: "text",
+      value: "LlamaIndex (antes GPT Index) es una solución para conectar fuentes de datos privadas con modelos de lenguaje, permitiendo Q&A y análisis sobre información específica."
+    },
+    {
+      type: "img",
+      value: "Flujo de LlamaIndex: ingesta de datos -> creación de índices -> consulta con LLM"
+    },
+    {
+      type: "text",
+      value: "Funcionalidades clave:\n- Ingesta de datos de múltiples formatos (PDFs, SQL, etc.)\n- Construcción de índices eficientes\n- Búsqueda semántica\n- Integración con frameworks como LangChain\n- Manejo de contexto extenso"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo básico de LlamaIndex
+from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
+
+# Cargar documentos
+documents = SimpleDirectoryReader('data').load_data()
+
+# Crear índice
+index = GPTVectorStoreIndex.from_documents(documents)
+
+# Guardar y cargar índice
+index.storage_context.persist(persist_dir="./storage")
+loaded_index = load_index_from_storage(storage_context)
+
+# Consulta
+query_engine = index.as_query_engine()
+response = query_engine.query("¿Cuáles son las políticas de seguridad descritas?")`
+    },
+    {
+      type: "text",
+      value: "Casos de uso:\n- Q&A sobre documentación interna\n- Análisis de informes financieros\n- Asistentes de conocimiento especializado\n- Búsqueda semántica en repositorios\n\nOptimizaciones:\n- Usar embeddings locales para privacidad\n- Ajustar chunk_size para el contexto\n- Experimentar con diferentes índices (lista, árbol, grafo)"
+    }
+  ],
+  children: []
+}
+,
+{
+  id: "neuronas_artificiales",
+  title: "Neuronas Artificiales y Redes Neuronales",
+  subtitle: "Componentes fundamentales del aprendizaje profundo",
+  content: [
+    {
+      type: "text",
+      value: "Las neuronas artificiales son la unidad básica de las redes neuronales, inspiradas en el funcionamiento biológico del cerebro humano pero implementadas matemáticamente para resolver problemas de machine learning."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo entre neurona biológica y neurona artificial"
+    }
+  ],
+  children: [
+    "neuronas_artificiales_fundamentos",
+    "capas",
+    "funciones_de_activacion",
+    "inicializacion_de_pesos",
+    "optimizadores",
+    "funciones_de_perdida",
+    "hiperparametros_y_ajuste",
+    "rnn",
+    "cnn",
+    "gan",
+    "transformers",
+    "estrategias_de_optimizacion_de_hiperparametros",
+    "neuronas_artificiales_frameworks"
+  ]
+},
+{
+  id: "neuronas_artificiales_fundamentos",
+  title: "Fundamentos de Neuronas Artificiales",
+  subtitle: "Cómo funcionan las unidades básicas de las redes neuronales",
+  content: [
+    {
+      type: "text",
+      value: "Una neurona artificial recibe múltiples entradas, aplica pesos a cada una, suma los resultados y pasa esta suma a través de una función de activación para producir la salida."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo simple de neurona
+function neurona(x, w, b) {
+  let z = b;
+  for (let i = 0; i < x.length; i++) {
+    z += x[i] * w[i];
+  }
+  return Math.max(0, z); // ReLU
+}`
+    }
+  ],
+  children: [
+    "forward_propagation",
+    "backpropagation",
+    "representacion_profunda_representation_learning"
+  ]
+},
+{
+  id: "forward_propagation",
+  title: "Forward Propagation",
+  subtitle: "El flujo de información hacia adelante en una red neuronal",
+  content: [
+    {
+      type: "text",
+      value: "El forward propagation es el proceso donde los datos de entrada se transforman a través de las capas de la red para producir una predicción."
+    },
+    {
+      type: "code",
+      value: `// Forward pass simple
+function forwardPass(input, weights, bias) {
+  return input.map((x, i) => x * weights[i]).reduce((a, b) => a + b, bias);
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "backpropagation",
+  title: "Backpropagation",
+  subtitle: "El algoritmo de aprendizaje de redes neuronales",
+  content: [
+    {
+      type: "text",
+      value: "Backpropagation es el método para calcular gradientes que permite ajustar los pesos de la red mediante descenso de gradiente, propagando errores desde la salida hacia atrás."
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo de backpropagation
+function backprop(input, target, weights) {
+  const output = forwardPass(input, weights);
+  const error = output - target;
+  return weights.map(w => w - 0.1 * error * input);
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "representacion_profunda_representation_learning",
+  title: "Representación Profunda",
+  subtitle: "Cómo las redes aprenden representaciones de datos",
+  content: [
+    {
+      type: "text",
+      value: "Las redes neuronales profundas aprenden automáticamente representaciones jerárquicas de los datos, donde cada capa transforma la representación en una más abstracta."
+    }
+  ],
+  children: []
+},
+{
+  id: "capas",
+  title: "Capas en Redes Neuronales",
+  subtitle: "Tipos de capas y sus funciones",
+  content: [
+    {
+      type: "text",
+      value: "Las capas son los bloques de construcción de las redes neuronales, cada una especializada en diferentes transformaciones de los datos."
+    }
+  ],
+  children: [
+    "densa",
+    "dropout",
+
+    "conv2d",
+    "pooling",
+    "flatten",
+    "batch_normalization",
+    "lstm",
+    "gru"
+  ]
+}
+
+,
+{
+  id: "densa",
+  title: "Capa Densa (Fully Connected)",
+  subtitle: "La capa básica de redes neuronales donde cada neurona está conectada a todas las entradas",
+  content: [
+    {
+      type: "text",
+      value: "Las capas densas son el tipo más común en redes neuronales, donde cada neurona recibe todas las salidas de la capa anterior."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de capa densa en Keras
+from tensorflow.keras.layers import Dense
+
+# Capa densa con 64 neuronas y activación ReLU
+dense_layer = Dense(units=64, activation='relu')`
+    }
+  ],
+  children: []
+},
+{
+  id: "dropout",
+  title: "Capa Dropout",
+  subtitle: "Técnica de regularización que previene overfitting",
+  content: [
+    {
+      type: "text",
+      value: "Dropout apaga aleatoriamente un porcentaje de neuronas durante el entrenamiento, forzando a la red a aprender características más robustas."
+    },
+    {
+      type: "code",
+      value: `// Añadir dropout en un modelo
+from tensorflow.keras.layers import Dropout
+
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.5))  # Apaga el 50% de neuronas`
+    }
+  ],
+  children: []
+},
+{
+  id: "batch_normalization",
+  title: "Batch Normalization",
+  subtitle: "Normalización por lotes para entrenamiento más estable",
+  content: [
+    {
+      type: "text",
+      value: "Esta capa normaliza las activaciones de la capa anterior, reduciendo el internal covariate shift y permitiendo mayores tasas de aprendizaje."
+    },
+    {
+      type: "code",
+      value: `// Uso de BatchNorm
+from tensorflow.keras.layers import BatchNormalization
+
+model.add(Dense(64))
+model.add(BatchNormalization())
+model.add(Activation('relu'))`
+    }
+  ],
+  children: []
+},
+{
+  id: "flatten",
+  title: "Capa Flatten",
+  subtitle: "Transforma tensores multidimensionales a 1D",
+  content: [
+    {
+      type: "text",
+      value: "Convierte la salida de capas convolucionales (2D/3D) en un vector unidimensional para conectarlo a capas densas."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de flatten
+from tensorflow.keras.layers import Flatten
+
+model.add(Flatten())  # Convierte (batch, height, width, channels) a (batch, height*width*channels)`
+    }
+  ],
+  children: []
+},
+{
+  id: "conv2d",
+  title: "Capa Conv2D",
+  subtitle: "Capa convolucional para procesamiento de imágenes",
+  content: [
+    {
+      type: "text",
+      value: "Aplica filtros convolucionales que detectan patrones locales en imágenes, preservando relaciones espaciales."
+    },
+    {
+      type: "code",
+      value: `// Capa convolucional típica
+from tensorflow.keras.layers import Conv2D
+
+model.add(Conv2D(filters=32, kernel_size=(3,3), activation='relu'))`
+    }
+  ],
+  children: []
+},
+{
+  id: "pooling",
+  title: "Capas Pooling",
+  subtitle: "Reducción dimensional para características aprendidas",
+  content: [
+    {
+      type: "text",
+      value: "MaxPooling y AveragePooling reducen dimensionalidad conservando las características más importantes."
+    },
+    {
+      type: "code",
+      value: `// MaxPooling 2D
+from tensorflow.keras.layers import MaxPooling2D
+
+model.add(MaxPooling2D(pool_size=(2,2)))  # Reduce dimensiones a la mitad`
+    }
+  ],
+  children: []
+},
+{
+  id: "lstm",
+  title: "Capa LSTM",
+  subtitle: "Long Short-Term Memory para secuencias",
+  content: [
+    {
+      type: "text",
+      value: "Redes recurrentes especializadas que aprenden dependencias a largo plazo en datos secuenciales."
+    },
+    {
+      type: "code",
+      value: `// LSTM en Keras
+from tensorflow.keras.layers import LSTM
+
+model.add(LSTM(units=64, return_sequences=True))`
+    }
+  ],
+  children: []
+},
+{
+  id: "gru",
+  title: "Capa GRU",
+  subtitle: "Gated Recurrent Unit - versión simplificada de LSTM",
+  content: [
+    {
+      type: "text",
+      value: "Variante más eficiente computacionalmente que LSTM, con rendimiento similar en muchos casos."
+    },
+    {
+      type: "code",
+      value: `// Implementación de GRU
+from tensorflow.keras.layers import GRU
+
+model.add(GRU(units=32, return_sequences=False))`
+    }
+  ],
+  children: []
+},
+{
+  id: "funciones_de_activacion",
+  title: "Funciones de Activación",
+  subtitle: "No linealidades que permiten aprender relaciones complejas",
+  content: [
+    {
+      type: "text",
+      value: "Las funciones de activación introducen no linealidades en la red, permitiendo modelar relaciones complejas entre inputs y outputs."
+    },
+    {
+      type: "img",
+      value: "Comparativa gráfica de diferentes funciones de activación"
+    }
+  ],
+  children: [
+    "relu",
+    "sigmoide",
+    "tanh",
+    "leaky_relu",
+    "elu",
+    "selu",
+    "swish",
+    "gelu",
+    "mish"
+  ]
+}
+,
+{
+  id: "relu",
+  title: "ReLU (Rectified Linear Unit)",
+  subtitle: "La función de activación más popular en deep learning",
+  content: [
+    {
+      type: "text",
+      value: "ReLU (Unidad Lineal Rectificada) es la función de activación más utilizada en redes neuronales profundas debido a su simplicidad computacional y efectividad para evitar el problema del vanishing gradient."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = max(0, x)\n\nVentajas:\n- Cómputo eficiente (operación simple)\n- No linealidad que permite aprender patrones complejos\n- Evita el vanishing gradient en redes profundas\n\nDesventajas:\n- Problema de 'neuronas muertas' (Dying ReLU)\n- No es diferenciable en x=0"
+    },
+    {
+      type: "code",
+      value: `// Implementación de ReLU en Python
+def relu(x):
+    return max(0.0, x)
+
+# Ejemplo de uso en una capa
+import numpy as np
+inputs = np.array([1.2, -0.5, 0.0, 2.3])
+outputs = np.array([relu(x) for x in inputs])`
+    },
+    {
+      type: "img",
+      value: "Gráfico de la función ReLU mostrando la línea recta para valores positivos y cero para negativos"
+    }
+  ],
+  children: []
+},
+{
+  id: "sigmoide",
+  title: "Función Sigmoide",
+  subtitle: "Función clásica para probabilidades entre 0 y 1",
+  content: [
+    {
+      type: "text",
+      value: "La función sigmoide mapea valores reales al rango (0,1), lo que la hace ideal para problemas de clasificación binaria y estimación de probabilidades."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: σ(x) = 1 / (1 + e^-x)\n\nVentajas:\n- Salida interpretable como probabilidad\n- Función suave y diferenciable\n\nDesventajas:\n- Sufre de vanishing gradient en redes profundas\n- Salidas no centradas en cero\n- Computacionalmente más costosa que ReLU"
+    },
+    {
+      type: "code",
+      value: `// Implementación de sigmoide en Python
+import math
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+# Ejemplo de uso
+print(sigmoid(0.5))  # Salida: ~0.62`
+    },
+    {
+      type: "img",
+      value: "Gráfico de la curva sigmoide característica en forma de S"
+    }
+  ],
+  children: []
+},
+{
+  id: "tanh",
+  title: "Tangente Hiperbólica (Tanh)",
+  subtitle: "Versión centrada en cero de la sigmoide",
+  content: [
+    {
+      type: "text",
+      value: "Similar a la sigmoide pero con rango (-1,1), lo que la hace más adecuada para capas ocultas ya que sus salidas están centradas en cero."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: tanh(x) = (e^x - e^-x)/(e^x + e^-x)\n\nVentajas:\n- Salidas centradas en cero (mejor para aprendizaje)\n- Derivada más pronunciada que sigmoide\n\nDesventajas:\n- Todavía sufre de vanishing gradient\n- Computacionalmente costosa"
+    },
+    {
+      type: "code",
+      value: `// Implementación de tanh en Python
+import math
+
+def tanh(x):
+    return math.tanh(x)
+
+# Ejemplo de uso
+print(tanh(1.0))  # Salida: ~0.7615`
+    },
+    {
+      type: "img",
+      value: "Gráfico comparativo entre sigmoide y tanh mostrando sus diferencias de rango"
+    }
+  ],
+  children: []
+},
+{
+  id: "leaky_relu",
+  title: "Leaky ReLU",
+  subtitle: "Variante que soluciona el problema de las 'neuronas muertas'",
+  content: [
+    {
+      type: "text",
+      value: "Leaky ReLU introduce una pequeña pendiente para valores negativos (generalmente α=0.01), evitando que las neuronas se 'apaguen' completamente durante el entrenamiento."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = max(αx, x) donde α ≈ 0.01\n\nVentajas:\n- Soluciona el problema Dying ReLU\n- Mantiene la eficiencia computacional\n- Permite gradientes para valores negativos\n\nDesventajas:\n- Resultados inconsistentes cuando α no está bien calibrado"
+    },
+    {
+      type: "code",
+      value: `// Implementación de Leaky ReLU en Python
+def leaky_relu(x, alpha=0.01):
+    return max(alpha * x, x)
+
+# Ejemplo de uso
+print(leaky_relu(-0.5))  # Salida: -0.005`
+    },
+    {
+      type: "img",
+      value: "Gráfico de Leaky ReLU mostrando la pequeña pendiente para valores negativos"
+    }
+  ],
+  children: []
+},
+{
+  id: "elu",
+  title: "ELU (Exponential Linear Unit)",
+  subtitle: "Función de activación con comportamiento suave para valores negativos",
+  content: [
+    {
+      type: "text",
+      value: "ELU combina las ventajas de ReLU y Leaky ReLU con un comportamiento suave para valores negativos, lo que ayuda a normalizar las activaciones."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = x si x > 0, α(e^x - 1) si x ≤ 0\n\nVentajas:\n- Comportamiento suave para valores negativos\n- Reduce el bias shift\n- Mejor rendimiento que ReLU en algunas arquitecturas\n\nDesventajas:\n- Cálculo exponencial más costoso computacionalmente"
+    },
+    {
+      type: "code",
+      value: `// Implementación de ELU en Python
+import math
+
+def elu(x, alpha=1.0):
+    return x if x > 0 else alpha * (math.exp(x) - 1)
+
+# Ejemplo de uso
+print(elu(-1.0))  # Salida: ~-0.632`
+    },
+    {
+      type: "img",
+      value: "Gráfico de ELU mostrando la curva exponencial para valores negativos"
+    }
+  ],
+  children: []
+},
+{
+  id: "selu",
+  title: "SELU (Scaled Exponential Linear Unit)",
+  subtitle: "Función auto-normalizante para redes profundas",
+  content: [
+    {
+      type: "text",
+      value: "SELU es una variante de ELU con propiedades de auto-normalización, especialmente útil para redes neuronales completamente conectadas profundas sin normalización por lotes."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = λx si x > 0, λα(e^x - 1) si x ≤ 0 (λ≈1.0507, α≈1.6733)\n\nVentajas:\n- Propiedades auto-normalizantes\n- Buen rendimiento en redes profundas\n- Evita vanishing y exploding gradients\n\nDesventajas:\n- Requiere inicialización específica de pesos (Lecun normal)\n- No funciona bien con dropout estándar"
+    },
+    {
+      type: "code",
+      value: `// Implementación de SELU en Python
+import math
+
+def selu(x, lambda_=1.0507, alpha=1.6733):
+    return lambda_ * x if x > 0 else lambda_ * alpha * (math.exp(x) - 1)`
+    },
+    {
+      type: "img",
+      value: "Gráfico de SELU comparado con otras funciones de activación"
+    }
+  ],
+  children: []
+},
+{
+  id: "swish",
+  title: "Swish",
+  subtitle: "Función de activación descubierta mediante búsqueda automatizada",
+  content: [
+    {
+      type: "text",
+      value: "Swish es una función de activación descubierta por investigadores de Google mediante búsqueda automatizada, que ha demostrado superar a ReLU en muchas arquitecturas profundas."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = x * σ(βx) donde σ es la sigmoide (β puede ser aprendido o fijo)\n\nVentajas:\n- Mejor rendimiento que ReLU en redes muy profundas\n- Función suave y diferenciable en todos los puntos\n\nDesventajas:\n- Computacionalmente más costosa que ReLU\n- Menos interpretable que otras funciones"
+    },
+    {
+      type: "code",
+      value: `// Implementación de Swish en Python
+import math
+
+def swish(x, beta=1.0):
+    return x / (1 + math.exp(-beta * x))
+
+# Ejemplo de uso
+print(swish(1.0))  # Salida: ~0.731`
+    },
+    {
+      type: "img",
+      value: "Gráfico de Swish mostrando su comportamiento no monótono para valores negativos"
+    }
+  ],
+  children: []
+},
+{
+  id: "gelu",
+  title: "GELU (Gaussian Error Linear Unit)",
+  subtitle: "Función utilizada en modelos de última generación como BERT y GPT",
+  content: [
+    {
+      type: "text",
+      value: "GELU es una función de activación que multiplica la entrada por la función de distribución acumulativa de una distribución normal, ampliamente utilizada en modelos de lenguaje grandes."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: GELU(x) = xΦ(x) donde Φ es la CDF de N(0,1)\n\nVentajas:\n- Comportamiento más suave que ReLU\n- Buen rendimiento en transformers\n- Fundamentación probabilística\n\nDesventajas:\n- Cálculo computacionalmente costoso\n- Difícil implementación exacta"
+    },
+    {
+      type: "code",
+      value: `// Aproximación de GELU en Python
+import math
+
+def gelu(x):
+    return 0.5 * x * (1 + math.tanh(math.sqrt(2/math.pi) * (x + 0.044715 * x**3)))`
+    },
+    {
+      type: "img",
+      value: "Comparación visual entre GELU y ReLU mostrando la transición suave"
+    }
+  ],
+  children: []
+},
+{
+  id: "mish",
+  title: "Mish",
+  subtitle: "Nueva función de activación con excelente rendimiento empírico",
+  content: [
+    {
+      type: "text",
+      value: "Mish es una función de activación reciente que combina propiedades de Swish y ELU, demostrando mejor rendimiento en diversas tareas de visión por computadora."
+    },
+    {
+      type: "text",
+      value: "Fórmula matemática: f(x) = x * tanh(softplus(x)) donde softplus(x) = ln(1 + e^x)\n\nVentajas:\n- Mejor precisión que ReLU y Swish en algunos benchmarks\n- Comportamiento suave en todo el dominio\n- Evita neuronas muertas\n\nDesventajas:\n- Computacionalmente costosa\n- Menos estudiada que otras funciones"
+    },
+    {
+      type: "code",
+      value: `// Implementación de Mish en Python
+import math
+
+def softplus(x):
+    return math.log(1 + math.exp(x))
+
+def mish(x):
+    return x * math.tanh(softplus(x))`
+    },
+    {
+      type: "img",
+      value: "Gráfico de Mish comparado con otras funciones de activación populares"
+    }
+  ],
+  children: []
+},
+{
+  id: "inicializacion_de_pesos",
+  title: "Inicialización de Pesos en Redes Neuronales",
+  subtitle: "Estrategias para inicializar parámetros y evitar problemas de convergencia",
+  content: [
+    {
+      type: "text",
+      value: "La inicialización adecuada de los pesos es crucial para el entrenamiento eficiente de redes neuronales. Una mala inicialización puede llevar a vanishing/exploding gradients o a una convergencia lenta."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo de distribuciones de diferentes métodos de inicialización"
+    },
+    {
+      type: "text",
+      value: "Objetivos de una buena inicialización:\n- Mantener varianza similar en forward/backward pass\n- Permitir un flujo estable de gradientes\n- Evitar simetrías perjudiciales\n- Acelerar la convergencia"
+    }
+  ],
+  children: [
+    "he_normal",
+    "he_uniform",
+    "glorot",
+    "lecun",
+    "inicializacion_basada_en_activacion_sigmoid_tanh_etc"
+  ]
+},
+{
+  id: "he_normal",
+  title: "He Normal Initialization",
+  subtitle: "Inicialización normal adaptada a ReLU y variantes",
+  content: [
+    {
+      type: "text",
+      value: "Propuesta por Kaiming He, está diseñada específicamente para redes que usan ReLU o sus variantes como función de activación."
+    },
+    {
+      type: "text",
+      value: "Fórmula: W ~ N(0, √(2/n_in))\nDonde n_in es el número de neuronas en la capa anterior.\n\nVentajas:\n- Mantiene varianza constante en capas profundas\n- Ideal para arquitecturas con ReLU/LeakyReLU\n- Evita vanishing gradients"
+    },
+    {
+      type: "code",
+      value: `# En Keras
+from tensorflow.keras.layers import Dense
+
+layer = Dense(64, activation='relu', kernel_initializer='he_normal')`
+    }
+  ],
+  children: []
+},
+{
+  id: "he_uniform",
+  title: "He Uniform Initialization",
+  subtitle: "Versión uniforme para inicialización con ReLU",
+  content: [
+    {
+      type: "text",
+      value: "Variante uniforme de la inicialización He, con similar comportamiento pero usando distribución uniforme en lugar de normal."
+    },
+    {
+      type: "text",
+      value: "Fórmula: W ~ U(-√(6/n_in), √(6/n_in))\n\nCasos de uso:\n- Alternativa a He Normal\n- Cuando se prefiere distribución uniforme\n- En combinación con regularización L2"
+    },
+    {
+      type: "code",
+      value: `# En PyTorch
+import torch.nn as nn
+
+layer = nn.Linear(10, 20)
+nn.init.kaiming_uniform_(layer.weight, mode='fan_in', nonlinearity='relu')`
+    }
+  ],
+  children: []
+},
+{
+  id: "glorot",
+  title: "Glorot/Xavier Initialization",
+  subtitle: "Método clásico para funciones de activación sigmoide/tanh",
+  content: [
+    {
+      type: "text",
+      value: "También conocida como inicialización Xavier, fue diseñada para funciones de activación sigmoide y tanh."
+    },
+    {
+      type: "text",
+      value: "Fórmula (Normal): W ~ N(0, √(2/(n_in + n_out)))\nFórmula (Uniforme): W ~ U(-√(6/(n_in + n_out)), √(6/(n_in + n_out)))\n\nRecomendada para:\n- Redes con activaciones sigmoide/tanh\n- Arquitecturas no muy profundas\n- Problemas donde ReLU no es adecuado"
+    },
+    {
+      type: "code",
+      value: `# En TensorFlow
+initializer = tf.keras.initializers.GlorotNormal()
+layer = tf.keras.layers.Dense(64, kernel_initializer=initializer)`
+    }
+  ],
+  children: []
+},
+{
+  id: "lecun",
+  title: "LeCun Initialization",
+  subtitle: "Inicialización para SELU y redes auto-normalizantes",
+  content: [
+    {
+      type: "text",
+      value: "Desarrollada por Yann LeCun, es especialmente adecuada para redes que usan SELU como función de activación."
+    },
+    {
+      type: "text",
+      value: "Fórmula (Normal): W ~ N(0, √(1/n_in))\nFórmula (Uniforme): W ~ U(-√(3/n_in), √(3/n_in))\n\nCaracterísticas:\n- Mantiene media 0 y varianza 1 en capas profundas\n- Requerida para el correcto funcionamiento de SELU\n- Usada en redes auto-normalizantes"
+    },
+    {
+      type: "code",
+      value: `# En Keras con SELU
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.initializers import LecunNormal
+
+layer = Dense(64, activation='selu', kernel_initializer=LecunNormal())`
+    }
+  ],
+  children: []
+},
+{
+  id: "inicializacion_basada_en_activacion_sigmoid_tanh_etc",
+  title: "Inicialización por Tipo de Activación",
+  subtitle: "Selección del método según la función de activación",
+  content: [
+    {
+      type: "text",
+      value: "Guía para elegir el método de inicialización óptimo según la función de activación utilizada:"
+    },
+    {
+      type: "text",
+      value: "Recomendaciones:\n- ReLU/LeakyReLU: He Normal/Uniform\n- SELU: LeCun Normal\n- Sigmoid/Tanh: Glorot/Xavier\n- Swish/GELU: He Normal o variantes\n- Linear: He Normal con factor de escala reducido"
+    },
+    {
+      type: "img",
+      value: "Tabla comparativa de métodos de inicialización vs funciones de activación"
+    },
+    {
+      type: "code",
+      value: `# Función para selección automática
+def get_initializer(activation):
+    if activation in ['relu', 'leaky_relu']:
+        return 'he_normal'
+    elif activation == 'selu':
+        return 'lecun_normal'
+    elif activation in ['sigmoid', 'tanh']:
+        return 'glorot_normal'
+    else:
+        return 'he_normal'`
+    }
+  ],
+  children: []
+},
+{
+  id: "optimizadores",
+  title: "Optimizadores en Deep Learning",
+  subtitle: "Algoritmos para actualizar los pesos de la red durante el entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "Los optimizadores son algoritmos que determinan cómo se actualizan los pesos de una red neuronal durante el entrenamiento, combinando el cálculo de gradientes con técnicas para acelerar la convergencia y evitar mínimos locales."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo de trayectorias de diferentes optimizadores en un espacio de parámetros"
+    },
+    {
+      type: "text",
+      value: "Factores clave al elegir un optimizador:\n- Velocidad de convergencia\n- Estabilidad del entrenamiento\n- Manejo de gradientes pequeños (vanishing gradients)\n- Requerimientos de memoria\n- Hiperparámetros a ajustar"
+    }
+  ],
+  children: [
+    "sgd",
+    "rmsprop",
+    "adam",
+    "adamw",
+    "nadam",
+    "adamax",
+    "nadamw"
+  ]
+},
+{
+  id: "sgd",
+  title: "SGD (Stochastic Gradient Descent)",
+  subtitle: "El optimizador más básico en aprendizaje profundo",
+  content: [
+    {
+      type: "text",
+      value: "Descenso de Gradiente Estocástico actualiza los pesos en dirección opuesta al gradiente de la función de pérdida. Es la base sobre la que se construyen optimizadores más avanzados."
+    },
+    {
+      type: "text",
+      value: "Fórmula: θ = θ - η·∇J(θ)\nDonde:\n- θ: Parámetros del modelo\n- η: Tasa de aprendizaje\n- ∇J(θ): Gradiente de la función de pérdida\n\nVentajas:\n- Simple y predecible\n- Buen rendimiento con learning rate schedule\n\nDesventajas:\n- Convergencia lenta\n- Sensible a la escala de características\n- Puede quedar atrapado en mínimos locales"
+    },
+    {
+      type: "code",
+      value: `# SGD en Keras
+from tensorflow.keras.optimizers import SGD
+
+optimizer = SGD(learning_rate=0.01, momentum=0.0)
+model.compile(optimizer=optimizer, loss='categorical_crossentropy')`
+    }
+  ],
+  children: [
+    "momentum",
+    "nesterov"
+  ]
+},
+{
+  id: "momentum",
+  title: "SGD con Momentum",
+  subtitle: "Variante que acumula velocidad en la dirección de gradientes consistentes",
+  content: [
+    {
+      type: "text",
+      value: "Momentum ayuda a acelerar SGD en la dirección relevante y amortigua oscilaciones, acumulando un vector de velocidad en la dirección del gradiente."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nv = γ·v + η·∇J(θ)\nθ = θ - v\n\nDonde:\n- v: Vector de velocidad (momentum)\n- γ: Factor de momentum (típicamente 0.9)\n\nEfectos:\n- Acelera convergencia en direcciones relevantes\n- Reduce oscilaciones en gradientes ruidosos\n- Ayuda a escapar de mínimos locales superficiales"
+    },
+    {
+      type: "code",
+      value: `# SGD con Momentum en PyTorch
+import torch.optim as optim
+
+optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)`
+    }
+  ],
+  children: []
+},
+{
+  id: "nesterov",
+  title: "Nesterov Accelerated Gradient (NAG)",
+  subtitle: "Variante de momentum que anticipa la actualización",
+  content: [
+    {
+      type: "text",
+      value: "Nesterov es una mejora sobre momentum clásico que realiza una corrección anticipada, calculando el gradiente no en la posición actual sino en una posición aproximada futura."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nv = γ·v + η·∇J(θ - γ·v)\nθ = θ - v\n\nBeneficios:\n- Convergencia más rápida que momentum estándar\n- Corrección más precisa de la dirección\n- Mejor comportamiento en puntos de silla\n\nUso típico:\n- Problemas con curvaturas variables\n- Redes muy profundas\n- Cuando momentum estándar oscila demasiado"
+    },
+    {
+      type: "code",
+      value: `# Nesterov en Keras
+optimizer = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)`
+    }
+  ],
+  children: []
+},
+{
+  id: "rmsprop",
+  title: "RMSprop",
+  subtitle: "Adapta la tasa de aprendizaje por parámetro basado en promedios móviles",
+  content: [
+    {
+      type: "text",
+      value: "RMSprop (Root Mean Square Propagation) adapta la tasa de aprendizaje dividiendo el gradiente por una media móvil de sus magnitudes recientes."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nE[g²] = ρE[g²] + (1-ρ)g²\nθ = θ - (η/√(E[g²] + ε))·g\n\nDonde:\n- E[g²]: Media móvil de gradientes al cuadrado\n- ρ: Factor de decaimiento (típicamente 0.9)\n- ε: Término pequeño para estabilidad (1e-8)\n\nVentajas:\n- Maneja bien escalas variables de características\n- Bueno para problemas no estacionarios\n- Requiere poco ajuste de hiperparámetros"
+    },
+    {
+      type: "code",
+      value: `# RMSprop en TensorFlow
+optimizer = tf.keras.optimizers.RMSprop(
+    learning_rate=0.001,
+    rho=0.9,
+    momentum=0.0,
+    epsilon=1e-07
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "adam",
+  title: "Adam (Adaptive Moment Estimation)",
+  subtitle: "El optimizador más popular que combina momentum y adaptación por parámetro",
+  content: [
+    {
+      type: "text",
+      value: "Adam combina las ideas de momentum y RMSprop, manteniendo promedios móviles tanto de los gradientes como de sus segundos momentos (varianzas)."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nm = β₁·m + (1-β₁)·g\nv = β₂·v + (1-β₂)·g²\nm̂ = m/(1-β₁^t)\nv̂ = v/(1-β₂^t)\nθ = θ - η·m̂/(√v̂ + ε)\n\nParámetros típicos:\n- β₁=0.9 (momentum)\n- β₂=0.999 (RMS)\n- ε=1e-8\n\nVentajas:\n- Rápida convergencia\n- Poco ajuste de hiperparámetros\n- Buen comportamiento en muchos problemas"
+    },
+    {
+      type: "code",
+      value: `# Adam en PyTorch
+optimizer = torch.optim.Adam(
+    model.parameters(),
+    lr=0.001,
+    betas=(0.9, 0.999),
+    eps=1e-08
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "adamw",
+  title: "AdamW",
+  subtitle: "Versión de Adam con decaimiento de pesos correctamente implementado",
+  content: [
+    {
+      type: "text",
+      value: "AdamW corrige la implementación del weight decay en Adam, desacoplando el término de regularización L2 de la adaptación de la tasa de aprendizaje."
+    },
+    {
+      type: "text",
+      value: "Diferencias clave con Adam:\n- Weight decay no afecta a los momentos adaptativos\n- Mejor generalización\n- Más estable con grandes valores de weight decay\n\nUso recomendado:\n- Entrenamiento de transformers\n- Cuando se usa regularización L2\n- Fine-tuning de modelos preentrenados"
+    },
+    {
+      type: "code",
+      value: `# AdamW en Transformers
+from transformers import AdamW
+
+optimizer = AdamW(
+    model.parameters(),
+    lr=5e-5,
+    weight_decay=0.01
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "nadam",
+  title: "Nadam",
+  subtitle: "Adam + Nesterov momentum",
+  content: [
+    {
+      type: "text",
+      value: "Nadam combina Adam con la idea de anticipación de Nesterov, generalmente ofreciendo una convergencia ligeramente más rápida que Adam estándar."
+    },
+    {
+      type: "text",
+      value: "Características:\n- Usa la corrección de Nesterov para el momento\n- Tasa de aprendizaje adaptativa por parámetro\n- Bueno para problemas con ruido\n\nCasos de uso:\n- Cuando Adam converge muy lentamente\n- Problemas con gradientes ruidosos\n- Arquitecturas recurrentes complejas"
+    },
+    {
+      type: "code",
+      value: `# Nadam en Keras
+optimizer = tf.keras.optimizers.Nadam(
+    learning_rate=0.001,
+    beta_1=0.9,
+    beta_2=0.999
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "adamax",
+  title: "AdaMax",
+  subtitle: "Variante de Adam basada en norma infinita",
+  content: [
+    {
+      type: "text",
+      value: "AdaMax es una variante de Adam que usa la norma infinita (max) en lugar de la norma L2 para el segundo momento, lo que puede hacerlo más estable en algunos casos."
+    },
+    {
+      type: "text",
+      value: "Diferencias con Adam:\n- Reemplaza v̂ con u = max(β₂·u, |g|)\n- Más robusto a gradientes extremos\n- Menos sensible a la elección de β₂\n\nRecomendado para:\n- Gradientes muy dispersos\n- Cuando Adam es inestable\n- Problemas con características de escalas muy diferentes"
+    },
+    {
+      type: "code",
+      value: `# AdaMax en Keras
+optimizer = tf.keras.optimizers.Adamax(
+    learning_rate=0.001,
+    beta_1=0.9,
+    beta_2=0.999
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "nadamw",
+  title: "NadamW",
+  subtitle: "Combinación de Nadam con weight decay correcto",
+  content: [
+    {
+      type: "text",
+      value: "NadamW aplica las mismas correcciones de AdamW al optimizador Nadam, desacoplando el weight decay de los mecanismos adaptativos."
+    },
+    {
+      type: "text",
+      value: "Ventajas:\n- Propiedades de convergencia rápida de Nadam\n- Mejor generalización que Nadam\n- Comportamiento más predecible con regularización\n\nUso actual:\n- Entrenamiento de modelos vision transformers\n- Fine-tuning de grandes modelos\n- Cuando se necesita máxima velocidad de convergencia"
+    },
+    {
+      type: "code",
+      value: `# Implementación custom de NadamW
+# (No disponible directamente en Keras/TF)
+optimizer = tfa.optimizers.NadamW(
+    learning_rate=0.001,
+    weight_decay=0.01
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "funciones_de_perdida",
+  title: "Funciones de Pérdida en Deep Learning",
+  subtitle: "Métricas para cuantificar el error y guiar el aprendizaje de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Las funciones de pérdida (loss functions) miden qué tan bien está performando un modelo comparando sus predicciones con los valores reales. Son críticas para el entrenamiento ya que guían la optimización de los parámetros."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo de funciones de pérdida mostrando sus formas y aplicaciones"
+    },
+    {
+      type: "text",
+      value: "Características clave:\n- Deben ser diferenciables\n- Deben reflejar adecuadamente el objetivo del modelo\n- Su elección afecta la velocidad y calidad del aprendizaje\n- Varían según tipo de problema (clasificación, regresión, etc.)"
+    }
+  ],
+  children: [
+    "binary_crossentropy",
+    "sparse_categorical_crossentropy",
+    "categorical_crossentropy",
+    "hinge_loss",
+    "kl_divergence",
+    "jensenshannon_divergence"
+  ]
+},
+{
+  id: "binary_crossentropy",
+  title: "Binary Crossentropy",
+  subtitle: "Función de pérdida para clasificación binaria",
+  content: [
+    {
+      type: "text",
+      value: "Mide la diferencia entre dos distribuciones de probabilidad para el caso de clasificación binaria (2 clases). Ideal cuando las salidas son probabilísticas."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nL = -[y·log(p) + (1-y)·log(1-p)]\n\nDonde:\n- y: Etiqueta real (0 o 1)\n- p: Probabilidad predicha (0-1)\n\nUso típico:\n- Clasificación binaria\n- Redes con capa final sigmoide\n- Cuando se necesitan probabilidades"
+    },
+    {
+      type: "code",
+      value: `# En Keras
+model.compile(
+    loss='binary_crossentropy',
+    optimizer='adam',
+    metrics=['accuracy']
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "categorical_crossentropy",
+  title: "Categorical Crossentropy",
+  subtitle: "Pérdida para clasificación multiclase con one-hot encoding",
+  content: [
+    {
+      type: "text",
+      value: "Extensión de crossentropy para múltiples clases cuando las etiquetas están en formato one-hot encoded (ej: [0,0,1,0])."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nL = -Σ y_i·log(p_i)\n\nRequisitos:\n- Capa final con softmax\n- Etiquetas en one-hot encoding\n- Número fijo de clases\n\nEjemplo de uso:\n- Clasificación de imágenes (CIFAR-10)\n- Modelos con salidas mutuamente excluyentes"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo en TensorFlow
+loss_fn = tf.keras.losses.CategoricalCrossentropy(
+    from_logits=False,  # True si no hay softmax
+    label_smoothing=0.1  # Regularización
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "sparse_categorical_crossentropy",
+  title: "Sparse Categorical Crossentropy",
+  subtitle: "Versión para etiquetas enteras (no one-hot)",
+  content: [
+    {
+      type: "text",
+      value: "Variante que evita el one-hot encoding aceptando etiquetas como enteros (ej: clase 2 en lugar de [0,0,1,0]). Más eficiente en memoria."
+    },
+    {
+      type: "text",
+      value: "Diferencias con categorical crossentropy:\n- Etiquetas son índices enteros\n- Mismo cálculo matemático internamente\n- Más eficiente para muchas clases\n\nCuando usarla:\n- Grandes conjuntos de datos\n- Problemas con muchas clases\n- Cuando las etiquetas ya son enteras"
+    },
+    {
+      type: "code",
+      value: `# En PyTorch (usando CrossEntropyLoss que combina logsoftmax + NLLLoss)
+criterion = nn.CrossEntropyLoss()
+loss = criterion(outputs, labels)  # labels como tensores de índices`
+    }
+  ],
+  children: []
+},
+{
+  id: "hinge_loss",
+  title: "Hinge Loss (Pérdida de Margen Máximo)",
+  subtitle: "Función para clasificación con márgenes",
+  content: [
+    {
+      type: "text",
+      value: "Usada en Support Vector Machines (SVMs) y algunos modelos de deep learning, maximiza el margen entre clases."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nL = max(0, 1 - y·ŷ)\nDonde y ∈ {-1,1}\n\nCaracterísticas:\n- Menos sensible a outliers que crossentropy\n- Produce vectores de soporte\n- No da probabilidades\n\nAplicaciones:\n- SVMs neuronales\n- Cuando se necesita decisión clara más que probabilidades\n- Problemas con márgenes claros entre clases"
+    },
+    {
+      type: "code",
+      value: `# En Keras
+model.compile(
+    loss='hinge',  # Para etiquetas codificadas como +1/-1
+    optimizer='adam'
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "kl_divergence",
+  title: "KL Divergence (Kullback-Leibler)",
+  subtitle: "Mide diferencia entre distribuciones de probabilidad",
+  content: [
+    {
+      type: "text",
+      value: "Mide cuánto se diferencia una distribución de probabilidad de otra. Usada en modelos generativos y de aproximación."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nKL(P||Q) = Σ P(x)·log(P(x)/Q(x))\n\nPropiedades:\n- Asimétrica (KL(P||Q) ≠ KL(Q||P))\n- No es una distancia métrica\n- KL ≥ 0\n\nCasos de uso:\n- Autoencoders variacionales (VAEs)\n- Regularización\n- Modelado de distribuciones"
+    },
+    {
+      type: "code",
+      value: `# Cálculo en TensorFlow
+loss = tf.keras.losses.KLDivergence()
+kl_loss = loss(p_distribution, q_distribution)`
+    }
+  ],
+  children: []
+},
+{
+  id: "jensenshannon_divergence",
+  title: "Jensen-Shannon Divergence",
+  subtitle: "Métrica simétrica basada en KL Divergence",
+  content: [
+    {
+      type: "text",
+      value: "Versión simétrica y suavizada de la KL Divergence, acotada entre 0 y 1. Útil para comparar distribuciones."
+    },
+    {
+      type: "text",
+      value: "Fórmula:\nJS(P||Q) = ½(KL(P||M) + KL(Q||M))\nDonde M = ½(P+Q)\n\nVentajas sobre KL:\n- Simétrica (JS(P,Q) = JS(Q,P))\n- Acotada (0 ≤ JS ≤ 1)\n- Más estable numéricamente\n\nAplicaciones:\n- GANs (Generative Adversarial Networks)\n- Comparación de distribuciones\n- Cuando se necesita simetría"
+    },
+    {
+      type: "code",
+      value: `# Implementación en SciPy
+from scipy.spatial.distance import jensenshannon
+import numpy as np
+
+p = np.array([0.1, 0.4, 0.5])
+q = np.array([0.2, 0.3, 0.5])
+js_distance = jensenshannon(p, q)`
+    }
+  ],
+  children: []
+},
+{
+  id: "hiperparametros_y_ajuste",
+  title: "Hiperparámetros y Ajuste de Modelos",
+  subtitle: "Configuración óptima de parámetros para mejorar el rendimiento del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Los hiperparámetros son configuraciones externas al modelo que controlan el proceso de aprendizaje. Su correcto ajuste es crucial para obtener el mejor rendimiento de una red neuronal."
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo para el ajuste de hiperparámetros mostrando métodos manuales y automáticos"
+    },
+    {
+      type: "text",
+      value: "Estrategias comunes de ajuste:\n- Búsqueda en cuadrícula (Grid Search)\n- Búsqueda aleatoria (Random Search)\n- Optimización bayesiana\n- Algoritmos genéticos\n- Pruebas manuales basadas en experiencia"
+    }
+  ],
+  children: [
+    "numero_de_capas",
+    "numero_de_neuronas",
+    "learning_rate",
+    "tamano_de_batch",
+    "epochs",
+    "regularizacion",
+    "callbacks"
+  ]
+},
+{
+  id: "numero_de_capas",
+  title: "Número de Capas",
+  subtitle: "Profundidad de la red neuronal",
+  content: [
+    {
+      type: "text",
+      value: "La profundidad de la red (número de capas ocultas) afecta su capacidad de aprendizaje. Más capas permiten modelar funciones más complejas pero son más difíciles de entrenar."
+    },
+    {
+      type: "text",
+      value: "Guía práctica:\n- Problemas simples: 1-2 capas\n- Problemas moderados: 3-5 capas\n- Problemas complejos (imágenes, lenguaje): 10+ capas\n\nConsideraciones:\n- Redes muy profundas sufren de vanishing gradients\n- Pueden requerir técnicas especiales (skip connections, normalización)"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de modelo con diferente profundidad en Keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+def build_model(num_layers=3):
+    model = Sequential()
+    model.add(Dense(64, activation='relu', input_shape=(input_dim,)))
+    for _ in range(num_layers-1):
+        model.add(Dense(64, activation='relu'))
+    model.add(Dense(output_dim, activation='softmax'))
+    return model`
+    }
+  ],
+  children: []
+},
+{
+  id: "numero_de_neuronas",
+  title: "Número de Neuronas por Capa",
+  subtitle: "Ancho de las capas ocultas",
+  content: [
+    {
+      type: "text",
+      value: "El número de neuronas por capa determina la capacidad de aprendizaje de cada capa. Demasiadas pueden causar overfitting, muy pocas underfitting."
+    },
+    {
+      type: "text",
+      value: "Recomendaciones:\n- Comenzar con potencias de 2 (32, 64, 128, 256)\n- Aumentar progresivamente hasta ver mejoras\n- Usar más neuronas en primeras capas para problemas complejos\n\nRegla empírica:\n- Entre tamaño de entrada y salida\n- 2/3 del tamaño de la capa anterior + tamaño de salida"
+    },
+    {
+      type: "code",
+      value: `# Modelo con ancho variable en PyTorch
+import torch.nn as nn
+
+class Net(nn.Module):
+    def __init__(self, layer_sizes=[64, 128, 64]):
+        super().__init__()
+        layers = []
+        for i in range(len(layer_sizes)-1):
+            layers.append(nn.Linear(layer_sizes[i], layer_sizes[i+1]))
+            layers.append(nn.ReLU())
+        self.net = nn.Sequential(*layers)`
+    }
+  ],
+  children: []
+},
+{
+  id: "learning_rate",
+  title: "Tasa de Aprendizaje (Learning Rate)",
+  subtitle: "El hiperparámetro más importante",
+  content: [
+    {
+      type: "text",
+      value: "Controla cuánto ajustamos los pesos en cada paso de optimización. Demasiado alta puede hacer diverger el modelo, demasiado baja ralentiza el entrenamiento."
+    },
+    {
+      type: "text",
+      value: "Valores típicos:\n- SGD: 0.01-0.1\n- Adam: 0.0001-0.001\n- RMSprop: 0.001-0.01\n\nEstrategias:\n- Learning rate decay\n- Ciclos de learning rate\n- Warmup\n- Usar optimizadores adaptativos"
+    },
+    {
+      type: "code",
+      value: `# Configuración de learning rate en optimizadores
+from tensorflow.keras.optimizers import Adam
+
+optimizer = Adam(learning_rate=0.001)  # Valor típico para Adam
+
+# Learning rate scheduler
+def lr_scheduler(epoch):
+    return 0.001 * 0.9 ** epoch  # Decaimiento exponencial`
+    }
+  ],
+  children: []
+},
+{
+  id: "tamano_de_batch",
+  title: "Tamaño del Batch",
+  subtitle: "Número de muestras por actualización de gradiente",
+  content: [
+    {
+      type: "text",
+      value: "El batch size afecta la estabilidad del entrenamiento y el uso de memoria. Valores más grandes dan estimaciones más estables del gradiente pero requieren más memoria."
+    },
+    {
+      type: "text",
+      value: "Guía de selección:\n- GPU pequeña: 16-64\n- GPU grande: 64-512\n- TPU: 1028+\n\nEfectos:\n- Batch pequeños: ruido beneficioso, más épocas\n- Batch grandes: entrenamiento más rápido, menos ruido"
+    },
+    {
+      type: "code",
+      value: `# Especificación del batch size en el entrenamiento
+model.fit(
+    X_train, y_train,
+    batch_size=32,  # Valor común
+    epochs=100
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "epochs",
+  title: "Número de Épocas",
+  subtitle: "Cuántas veces iterar sobre el dataset completo",
+  content: [
+    {
+      type: "text",
+      value: "Una época representa un pase completo sobre los datos de entrenamiento. Demasiadas épocas pueden llevar a overfitting, muy pocas a underfitting."
+    },
+    {
+      type: "text",
+      value: "Estrategias:\n- Comenzar con 10-50 épocas\n- Usar early stopping\n- Monitorear pérdida en validación\n\nFactores que afectan:\n- Complejidad del modelo\n- Tamaño del dataset\n- Batch size\n- Tasa de aprendizaje"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo con early stopping para determinar épocas
+from tensorflow.keras.callbacks import EarlyStopping
+
+early_stop = EarlyStopping(monitor='val_loss', patience=5)
+model.fit(X_train, y_train, epochs=100, 
+          validation_data=(X_val, y_val),
+          callbacks=[early_stop])`
+    }
+  ],
+  children: []
+},
+{
+  id: "regularizacion",
+  title: "Técnicas de Regularización",
+  subtitle: "Métodos para prevenir overfitting",
+  content: [
+    {
+      type: "text",
+      value: "La regularización ayuda a que los modelos generalicen mejor a datos no vistos, evitando que memoricen el conjunto de entrenamiento."
+    },
+    {
+      type: "img",
+      value: "Comparación de fronteras de decisión con y sin regularización"
+    }
+  ],
+  children: [
+    "l1_lasso",
+    "l2_ridge"
+  ]
+},
+{
+  id: "l1_lasso",
+  title: "Regularización L1 (Lasso)",
+  subtitle: "Promueve la dispersión de pesos (sparsity)",
+  content: [
+    {
+      type: "text",
+      value: "Añade una penalización proporcional al valor absoluto de los pesos, llevando algunos pesos exactamente a cero (selección de características)."
+    },
+    {
+      type: "text",
+      value: "Fórmula: L = Loss + λΣ|w|\n\nCaracterísticas:\n- Crea modelos más simples\n- Útil para selección de características\n- Puede producir pesos exactamente cero\n\nValores típicos de λ: 0.001-0.1"
+    },
+    {
+      type: "code",
+      value: `# Añadir regularización L1 en Keras
+from tensorflow.keras import regularizers
+
+layer = Dense(64, activation='relu',
+              kernel_regularizer=regularizers.l1(0.01))`
+    }
+  ],
+  children: []
+},
+{
+  id: "l2_ridge",
+  title: "Regularización L2 (Ridge)",
+  subtitle: "Penaliza pesos grandes",
+  content: [
+    {
+      type: "text",
+      value: "Añade una penalización proporcional al cuadrado de los pesos, manteniendo todos los pesos pequeños pero no necesariamente cero."
+    },
+    {
+      type: "text",
+      value: "Fórmula: L = Loss + λΣw²\n\nCaracterísticas:\n- Distribuye la importancia entre características\n- Más estable que L1\n- No produce exactamente pesos cero\n\nValores típicos de λ: 0.001-0.1"
+    },
+    {
+      type: "code",
+      value: `# Añadir regularización L2 en PyTorch
+import torch.nn as nn
+
+class Net(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(784, 256)
+        # Weight decay implementa L2
+        self.optimizer = torch.optim.Adam(self.parameters(), weight_decay=1e-4)`
+    }
+  ],
+  children: []
+},
+{
+  id: "callbacks",
+  title: "Callbacks",
+  subtitle: "Funciones de control durante el entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "Los callbacks permiten monitorear y modificar el comportamiento del modelo durante el entrenamiento, automatizando tareas comunes."
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo de callbacks durante el ciclo de entrenamiento"
+    }
+  ],
+  children: [
+    "early_stopping",
+    "reduccion_dinamica_de_lr",
+    "learning_rate_scheduling"
+  ]
+},
+{
+  id: "early_stopping",
+  title: "Early Stopping",
+  subtitle: "Detener el entrenamiento cuando el modelo deja de mejorar",
+  content: [
+    {
+      type: "text",
+      value: "Monitoriza una métrica de validación y detiene el entrenamiento cuando no mejora después de cierta cantidad de épocas (paciencia)."
+    },
+    {
+      type: "text",
+      value: "Parámetros clave:\n- monitor: Métrica a observar (ej: 'val_loss')\n- patience: Épocas sin mejora antes de parar\n- restore_best_weights: Restaurar mejores pesos\n\nBeneficios:\n- Evita overfitting\n- Ahorra tiempo de cómputo\n- Automatiza la selección de épocas"
+    },
+    {
+      type: "code",
+      value: `# Implementación en Keras
+from tensorflow.keras.callbacks import EarlyStopping
+
+early_stopping = EarlyStopping(
+    monitor='val_accuracy',
+    patience=10,
+    restore_best_weights=True
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "reduccion_dinamica_de_lr",
+  title: "Reducción Dinámica de LR (ReduceLROnPlateau)",
+  subtitle: "Ajusta la tasa de aprendizaje cuando el estancamiento ocurre",
+  content: [
+    {
+      type: "text",
+      value: "Reduce el learning rate cuando una métrica ha dejado de mejorar, permitiendo un ajuste más fino de los pesos."
+    },
+    {
+      type: "text",
+      value: "Configuración típica:\n- factor: Multiplicador para reducir LR (ej: 0.1)\n- patience: Épocas sin mejora antes de reducir\n- min_lr: Límite inferior para el LR\n\nUso ideal:\n- Cuando el aprendizaje se estanca\n- Para afinar modelos en etapas finales\n- Combinado con early stopping"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo en TensorFlow
+from tensorflow.keras.callbacks import ReduceLROnPlateau
+
+reduce_lr = ReduceLROnPlateau(
+    monitor='val_loss',
+    factor=0.1,
+    patience=5,
+    min_lr=1e-6
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "learning_rate_scheduling",
+  title: "Programación del Learning Rate",
+  subtitle: "Variar sistemáticamente la tasa de aprendizaje",
+  content: [
+    {
+      type: "text",
+      value: "Cambia el learning rate según una programación predefinida (decaimiento, ciclos, etc.) para mejorar la convergencia."
+    },
+    {
+      type: "text",
+      value: "Estrategias comunes:\n- Decaimiento exponencial\n- Escalonado (step decay)\n- Warmup\n- Cyclical Learning Rates\n\nBeneficios:\n- Mayor velocidad de convergencia\n- Puede escapar de mínimos locales\n- Mejor optimización final"
+    },
+    {
+      type: "code",
+      value: `# Learning rate scheduler en PyTorch
+from torch.optim.lr_scheduler import ExponentialLR
+
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+scheduler = ExponentialLR(optimizer, gamma=0.9)
+
+# En cada época:
+scheduler.step()`
+    }
+  ],
+  children: []
+},
+{
+  id: "rnn",
+  title: "Redes Neuronales Recurrentes (RNN)",
+  subtitle: "Modelos secuenciales para datos dependientes del tiempo",
+  content: [
+    {
+      type: "text",
+      value: "Las Redes Neuronales Recurrentes (RNN) son una clase de redes neuronales diseñadas para trabajar con datos secuenciales donde el orden y el contexto temporal son importantes. A diferencia de las redes feed-forward tradicionales, las RNN mantienen un 'estado oculto' que actúa como memoria de lo que ha procesado hasta el momento."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo entre red neuronal tradicional y RNN mostrando el flujo de información recurrente"
+    },
+    {
+      type: "text",
+      value: "Casos de uso típicos incluyen procesamiento de lenguaje natural (NLP), reconocimiento de voz, series temporales y cualquier dominio donde el contexto histórico sea relevante para la predicción actual."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo básico de implementación RNN con TensorFlow.js
+const model = tf.sequential();
+model.add(tf.layers.simpleRNN({
+  units: 64,
+  returnSequences: true,
+  inputShape: [10, 32] // [timesteps, features]
+}));
+model.add(tf.layers.dense({units: 1}));
+
+model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+
+// Datos de ejemplo: secuencia de 10 pasos con 32 características cada uno
+const inputData = tf.randomNormal([1, 10, 32]);
+const output = model.predict(inputData);`
+    }
+  ],
+  children: [
+    "rnn_arquitectura",
+    "rnn_tipos",
+    "rnn_componentes",
+    "rnn_aplicaciones"
+  ]
+},
+{
+  id: "rnn_arquitectura",
+  title: "Arquitecturas Fundamentales de RNN",
+  subtitle: "Patrones de flujo de información en redes recurrentes",
+  content: [
+    {
+      type: "text",
+      value: "Las RNN pueden organizarse en diferentes arquitecturas según la relación entre entradas y salidas:"
+    },
+    {
+      type: "text",
+      value: "One-to-One: Similar a una red feed-forward tradicional. Una entrada produce una salida. No aprovecha la naturaleza secuencial de los datos."
+    },
+    {
+      type: "img",
+      value: "Diagrama one-to-one mostrando una única entrada que se transforma en una única salida sin conexiones recurrentes"
+    },
+    {
+      type: "text",
+      value: "One-to-Many: Una sola entrada genera una secuencia de salidas. Útil en generación de secuencias como generación de música a partir de un seed inicial."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo one-to-many para generación de texto
+const model = tf.sequential();
+model.add(tf.layers.repeatVector({n: 10, inputShape: [32]}));
+model.add(tf.layers.simpleRNN({units: 128, returnSequences: true}));
+model.add(tf.layers.timeDistributed({layer: tf.layers.dense({units: vocabSize})}));`
+    },
+    {
+      type: "text",
+      value: "Many-to-One: Una secuencia de entradas produce una sola salida. Común en clasificación de sentimientos o análisis de series temporales."
+    },
+    {
+      type: "text",
+      value: "Many-to-Many (Seq2Seq): Secuencia a secuencia, donde ambas entradas y salidas son secuencias. Usado en traducción automática o chatbots. Requiere frecuentemente mecanismos de atención."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo de las cuatro arquitecturas mostrando sus diferencias en el flujo de datos"
+    }
+  ],
+  children: []
+},
+{
+  id: "rnn_tipos",
+  title: "Variantes de RNN",
+  subtitle: "Evolución de las redes recurrentes para problemas específicos",
+  content: [
+    {
+      type: "text",
+      value: "Las RNN básicas sufren del problema de desvanecimiento/explosión del gradiente. Para abordar esto, se han desarrollado variantes más sofisticadas:"
+    },
+    {
+      type: "img",
+      value: "Linea de tiempo mostrando la evolución de SimpleRNN a LSTM y GRU"
+    },
+    {
+      type: "text",
+      value: "Cada tipo tiene sus fortalezas y se adapta mejor a ciertos problemas. La elección depende de la complejidad de las dependencias temporales y los recursos computacionales disponibles."
+    }
+  ],
+  children: [
+    "simple_rnn",
+    "bidirectional_rnn",
+    "ltsm",
+    "gru"
+  ]
+},
+{
+  id: "simple_rnn",
+  title: "Simple RNN (Vanilla RNN)",
+  subtitle: "La forma más básica de red recurrente",
+  content: [
+    {
+      type: "text",
+      value: "Las Simple RNN son la implementación más directa de las redes recurrentes. Mantienen un estado oculto que se actualiza en cada paso de tiempo combinando la entrada actual con el estado anterior."
+    },
+    {
+      type: "img",
+      value: "Diagrama detallado de una celda SimpleRNN mostrando las operaciones matemáticas internas"
+    },
+    {
+      type: "text",
+      value: "Ecuación del estado oculto: hₜ = tanh(Wₕₕ·hₜ₋₁ + Wₓₕ·xₜ + bₕ)"
+    },
+    {
+      type: "text",
+      value: "Limitaciones principales:"
+    },
+    {
+      type: "text",
+      value: "Problema de desvanecimiento del gradiente en secuencias largas \n Dificultad para capturar dependencias a largo plazo \n Inestabilidad en el entrenamiento"
+    },
+    {
+      type: "code",
+      value: `// Implementación manual de una SimpleRNN
+class SimpleRNNCell {
+  constructor(inputSize, hiddenSize) {
+    this.Wxh = math.random([inputSize, hiddenSize]);
+    this.Whh = math.random([hiddenSize, hiddenSize]);
+    this.bh = math.zeros([hiddenSize]);
+    this.h = math.zeros([hiddenSize]);
   }
 
+  forward(x) {
+    this.h = math.tanh(
+      math.add(
+        math.add(
+          math.multiply(x, this.Wxh),
+          math.multiply(this.h, this.Whh)
+        ),
+        this.bh
+      )
+    );
+    return this.h;
+  }
+}`
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas:"
+    },
+    {
+      type: "text",
+      value: "Usar solo para secuencias cortas (<10 pasos) \n Inicializar pesos con glorot uniform \n Aplicar regularización L2 para evitar explosión del gradiente \n Considerar usar clip de gradiente"
+    }
+  ],
+  children: []
+},
+{
+  id: "bidirectional_rnn",
+  title: "RNN Bidireccionales",
+  subtitle: "Capturando contexto pasado y futuro simultáneamente",
+  content: [
+    {
+      type: "text",
+      value: "Las RNN bidireccionales procesan la secuencia en ambas direcciones (forward y backward) y combinan ambas representaciones. Esto permite que cada paso de tiempo tenga información de todo el contexto de la secuencia."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura bidireccional mostrando los flujos forward y backward"
+    },
+    {
+      type: "text",
+      value: "Aplicaciones clave:"
+    },
+    {
+      type: "text",
+      value: 
+        "Procesamiento de lenguaje natural (etiquetado POS, NER) \n Reconocimiento de voz \n Predicción de secuencias biológicas\n "
+      
+    },
+    {
+      type: "code",
+      value: `// Implementación con Keras
+from keras.layers import Bidirectional, LSTM
 
+model = Sequential()
+model.add(Bidirectional(
+  LSTM(64, return_sequences=True),
+  input_shape=(timesteps, features)
+))
+model.add(Bidirectional(LSTM(32)))
+model.add(Dense(num_classes, activation='softmax'))`
+    },
+    {
+      type: "text",
+      value: "Las RNN bidireccionales no son adecuadas para aplicaciones en tiempo real donde solo se dispone del contexto pasado, ya que requieren toda la secuencia completa para procesar la dirección backward."
+    }
+  ],
+  children: []
+},
+{
+  id: "rnn_componentes",
+  title: "Componentes Avanzados en RNN",
+  subtitle: "Mecanismos para mejorar el rendimiento de redes recurrentes",
+  content: [
+    {
+      type: "text",
+      value: "Las RNN modernas incorporan varios componentes arquitectónicos para superar las limitaciones de las implementaciones básicas:"
+    },
+    {
+      type: "img",
+      value: "Diagrama de componentes avanzados en arquitecturas RNN modernas"
+    }
+  ],
+  children: [
+    "layer_norm",
+    "attention"
+  ]
+},
+{
+  id: "layer_norm",
+  title: "Normalización por Capa (Layer Normalization)",
+  subtitle: "Estabilizando el entrenamiento de RNN",
+  content: [
+    {
+      type: "text",
+      value: "La normalización por capa es una técnica crucial para entrenar RNN profundas de manera estable. A diferencia de la normalización por lotes (batch norm), opera en las características individuales en lugar de través del batch."
+    },
+    {
+      type: "text",
+      value: "Fórmula: LN(x) = γ * (x - μ) / √(σ² + ε) + β"
+    },
+    {
+      type: "img",
+      value: "Comparación visual entre batch norm y layer norm mostrando sus diferentes ejes de operación"
+    },
+    {
+      type: "text",
+      value: "Ventajas en RNN:"
+    },
+    {
+      type: "text",
+      value: 
+        "Funciona bien con batches pequeños \n Estable a lo largo de secuencias de diferente longitud \n No introduce dependencias entre elementos del batch \n"
+    },
+    {
+      type: "code",
+      value: `// Implementación manual de LayerNorm
+function layerNorm(x, gamma, beta, epsilon=1e-5) {
+  // x: input of shape [batch, timesteps, features]
+  const mean = x.mean(axis=-1, keepdims=true);
+  const variance = x.variance(axis=-1, keepdims=true);
+  const normalized = (x - mean) / sqrt(variance + epsilon);
+  return gamma * normalized + beta;
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "attention",
+  title: "Mecanismos de Atención",
+  subtitle: "Permitiendo a las RNN enfocarse en partes relevantes de la entrada",
+  content: [
+    {
+      type: "text",
+      value: "Los mecanismos de atención revolucionaron las RNN permitiéndoles acceder directamente a cualquier parte de la secuencia de entrada, superando el cuello de botella del estado oculto."
+    },
+    {
+      type: "img",
+      value: "Diagrama de atención mostrando cómo diferentes partes de la entrada reciben distintos pesos"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "text",
+      value: 
+        "Consulta (Query): Representación actual que necesita contexto \n Claves (Keys): Representaciones de los elementos de la secuencia \n Valores (Values): Información asociada a cada elemento \n "  },
+    {
+      type: "code",
+      value: `// Implementación simplificada de atención
+function attention(query, keys, values) {
+  const scores = tf.matMul(query, tf.transpose(keys));
+  const weights = tf.softmax(scores);
+  return tf.matMul(weights, values);
+}
 
+// Uso en una RNN con atención
+class AttentiveRNN {
+  constructor(hiddenSize) {
+    this.rnn = new SimpleRNNCell(hiddenSize);
+    this.Wq = tf.variable(tf.randomNormal([hiddenSize, hiddenSize]));
+    this.Wk = tf.variable(tf.randomNormal([hiddenSize, hiddenSize]));
+    this.Wv = tf.variable(tf.randomNormal([hiddenSize, hiddenSize]));
+  }
 
+  forward(x, context) {
+    const h = this.rnn.forward(x);
+    const query = tf.matMul(h, this.Wq);
+    const keys = tf.matMul(context, this.Wk);
+    const values = tf.matMul(context, this.Wv);
+    const attended = attention(query, keys, values);
+    return tf.concat([h, attended], -1);
+  }
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "rnn_aplicaciones",
+  title: "Aplicaciones Prácticas de RNN",
+  subtitle: "Casos de uso reales en la industria e investigación",
+  content: [
+    {
+      type: "text",
+      value: "Texto: Las RNN han sido fundamentales en NLP para tareas como generación de texto, traducción automática y análisis de sentimientos. Aunque los transformers han ganado popularidad, las RNN siguen siendo relevantes en aplicaciones con restricciones computacionales."
+    },
+    {
+      type: "code",
+      value: `// Generación de texto con RNN
+async function generateText(seed, length, model) {
+  let output = seed;
+  for (let i = 0; i < length; i++) {
+    const input = tokenize(output).slice(-sequenceLength);
+    const pred = model.predict(input);
+    const nextChar = sampleFromDistribution(pred);
+    output += nextChar;
+  }
+  return output;
+}`
+    },
+    {
+      type: "text",
+      value: "Audio: En procesamiento de audio, las RNN se usan para reconocimiento de voz, síntesis de voz y separación de fuentes. Las RNN bidireccionales son especialmente efectivas para estas tareas."
+    },
+    {
+      type: "img",
+      value: "Aplicaciones de RNN en audio mostrando espectrogramas antes y después del procesamiento"
+    },
+    {
+      type: "text",
+      value: "Otras aplicaciones importantes:"
+    },
+    {
+      type: "text",
+      value: 
+        "Predicción de series temporales (mercados financieros, IoT) \n Reconocimiento de actividad en sensores móviles \n Modelado de procesos químicos y biológicos \n Control de robots y sistemas dinámicos \n"
+      
+    }
+  ],
+  children: []
+},
+{
+  id: "cnn",
+  title: "Redes Neuronales Convolucionales (CNN)",
+  subtitle: "Arquitectura fundamental para visión por computadora",
+  content: [
+    {
+      type: "text",
+      value: "Las Redes Neuronales Convolucionales (CNN) son un tipo de red neuronal especialmente efectiva para procesar datos con estructura grid-like, como imágenes. Su diseño está inspirado en la organización de la corteza visual de los animales."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo entre una red neuronal tradicional y una CNN mostrando las capas convolucionales"
+    },
+    {
+      type: "text",
+      value: "Las CNN destacan por tres características principales: conexiones locales, compartimiento de pesos y pooling/submuestreo. Estas propiedades las hacen eficientes para reconocimiento de patrones en imágenes."
+    }
+  ],
+  children: [
+    "cnn_capas",
+    "cnn_operaciones",
+    "cnn_aplicaciones",
+    "cnn_tecnicas"
+  ]
+},
+{
+  id: "cnn_capas",
+  title: "Capas en una CNN",
+  subtitle: "Componentes arquitectónicos fundamentales",
+  content: [
+    {
+      type: "text",
+      value: "Una CNN típica está compuesta por varios tipos de capas especializadas que transforman progresivamente la entrada (píxeles) en características abstractas (como bordes, texturas o objetos completos)."
+    },
+    {
+      type: "img",
+      value: "Flujo de datos a través de las diferentes capas de una CNN mostrando la transformación de la imagen"
+    }
+  ],
+  children: [
+    "batch_normalization",
+    "pooling",
+    "flatten",
+    "conv2d"
+  ]
+},
+{
+  id: "cnn_operaciones",
+  title: "Operaciones en CNN",
+  subtitle: "Mecanismos matemáticos fundamentales",
+  content: [
+    {
+      type: "text",
+      value: "Las operaciones en CNN son las que permiten extraer características de manera eficiente y controlar la dimensionalidad de los datos a través de la red."
+    }
+  ],
+  children: [
+    "stride",
+    "padding",
+    "dilation",
+    "weight_sharing",
+    "subsampling"
+  ]
+},
+{
+  id: "stride",
+  title: "Stride (Paso)",
+  subtitle: "Control del movimiento del kernel",
+  content: [
+    {
+      type: "text",
+      value: "El stride determina cuántos píxeles se mueve el filtro convolucional sobre la imagen de entrada. Un stride mayor reduce la dimensionalidad más rápidamente."
+    },
+    {
+      type: "img",
+      value: "Comparación entre stride 1 y stride 2 mostrando cómo afecta al tamaño de salida"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de convolución con stride en TensorFlow
+const model = tf.sequential();
+model.add(tf.layers.conv2d({
+  inputShape: [28, 28, 1],
+  filters: 32,
+  kernelSize: 3,
+  strides: 2,  // Stride de 2
+  activation: 'relu'
+}));`
+    },
+    {
+      type: "text",
+      value: "Consideraciones:\n- Stride 1: Máxima preservación de información, más costoso computacionalmente\n- Stride > 1: Reduce dimensionalidad, puede perder información espacial fina\n- Buenas prácticas: Usar stride 1 en capas iniciales, stride 2 en capas posteriores"
+    }
+  ],
+  children: []
+},
+{
+  id: "padding",
+  title: "Padding (Relleno)",
+  subtitle: "Control del tamaño espacial de los feature maps",
+  content: [
+    {
+      type: "text",
+      value: "El padding consiste en añadir píxeles (generalmente de valor cero) alrededor de la imagen para controlar el tamaño de salida de la operación convolucional."
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de padding 'same' vs 'valid' mostrando el efecto en el tamaño de salida"
+    },
+    {
+      type: "text",
+      value: "Tipos principales:\n1. 'Valid': Sin padding (el kernel solo se aplica donde encaja completamente)\n2. 'Same': Padding para que el tamaño de salida sea igual al de entrada"
+    },
+    {
+      type: "code",
+      value: `// Configuración de padding en Keras
+const convLayer = tf.layers.conv2d({
+  filters: 64,
+  kernelSize: 3,
+  padding: 'same',  // Conserva dimensiones espaciales
+  activation: 'relu'
+});`
+    }
+  ],
+  children: []
+},
+{
+  id: "dilation",
+  title: "Dilated Convolutions",
+  subtitle: "Ampliación del campo receptivo sin perder resolución",
+  content: [
+    {
+      type: "text",
+      value: "Las convoluciones dilatadas introducen espacios (huecos) entre los elementos del kernel, permitiendo un mayor campo receptivo sin aumentar el número de parámetros."
+    },
+    {
+      type: "img",
+      value: "Comparación entre convolución normal y dilatada mostrando los huecos en el kernel"
+    },
+    {
+      type: "text",
+      value: "Aplicaciones clave:\n- Segmentación semántica\n- Procesamiento de imágenes de alta resolución\n- Cuando se necesita captar contexto global sin muchas capas"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de convolución dilatada
+const dilatedConv = tf.layers.conv2d({
+  filters: 128,
+  kernelSize: 3,
+  dilationRate: 2,  // Cada elemento del kernel está separado por 1 píxel
+  activation: 'relu'
+});`
+    }
+  ],
+  children: []
+},
+{
+  id: "weight_sharing",
+  title: "Weight Sharing",
+  subtitle: "Compartimiento de parámetros en convoluciones",
+  content: [
+    {
+      type: "text",
+      value: "En las CNN, el mismo conjunto de pesos (kernel) se aplica a todas las posiciones de la entrada. Esto reduce drásticamente el número de parámetros y permite la invariancia traslacional."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando cómo el mismo kernel se desliza por toda la imagen"
+    },
+    {
+      type: "text",
+      value: "Ventajas:\n1. Eficiencia computacional\n2. Requiere menos datos de entrenamiento\n3. Captura patrones independientes de su posición\n\nLimitaciones:\n- No maneja bien variaciones rotacionales o de escala (se necesitan técnicas adicionales)"
+    }
+  ],
+  children: []
+},
+{
+  id: "subsampling",
+  title: "Subsampling (Submuestreo)",
+  subtitle: "Reducción de dimensionalidad espacial",
+  content: [
+    {
+      type: "text",
+      value: "El subsampling reduce progresivamente la resolución espacial de los feature maps, haciendo la representación más manejable y dando cierta invariancia a pequeñas traslaciones."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de subsampling 2x2 mostrando cómo se reduce el tamaño de los feature maps"
+    },
+    {
+      type: "text",
+      value: "Técnicas comunes:\n1. Max Pooling: Toma el valor máximo en la región\n2. Average Pooling: Promedia los valores en la región\n3. Strided Convolutions: Alternativa moderna al pooling"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de MaxPooling en TensorFlow.js
+const poolingLayer = tf.layers.maxPooling2d({
+  poolSize: [2, 2],
+  strides: [2, 2]
+});`
+    }
+  ],
+  children: []
+},
+{
+  id: "cnn_aplicaciones",
+  title: "Aplicaciones de las CNN",
+  subtitle: "Casos de uso en visión por computadora",
+  content: [
+    {
+      type: "text",
+      value: "segmentacion: División de una imagen en regiones significativas (ej: segmentación semántica en vehículos autónomos para identificar carreteras, peatones, etc.)"
+    },
+    {
+      type: "text",
+      value: "deteccion_de_objetos: Localización y clasificación de múltiples objetos en una imagen (ej: YOLO, Faster R-CNN)"
+    },
+    {
+      type: "text",
+      value: "clasificacion: Asignación de una etiqueta categórica a una imagen completa (ej: identificar si una radiografía muestra neumonía)"
+    },
+    {
+      type: "img",
+      value: "Ejemplos visuales de diferentes aplicaciones de CNN: segmentación, detección y clasificación"
+    }
+  ],
+  children: []
+},
+{
+  id: "cnn_tecnicas",
+  title: "Técnicas Avanzadas en CNN",
+  subtitle: "Métodos para mejorar el rendimiento",
+  content: [
+    {
+      type: "text",
+      value: "Para maximizar el potencial de las CNN, especialmente con conjuntos de datos limitados, se emplean diversas técnicas avanzadas de regularización y optimización."
+    }
+  ],
+  children: [
+    "data_augmentation",
+    "transfer_learning"
+  ]
+},
+{
+  id: "data_augmentation",
+  title: "Data Augmentation",
+  subtitle: "Aumento artificial del conjunto de entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "La aumentación de datos aplica transformaciones aleatorias pero realistas a las imágenes de entrenamiento para mejorar la generalización del modelo."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de aumentación mostrando una imagen original y varias versiones aumentadas"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de data augmentation con TensorFlow
+const dataAugmentation = tf.sequential();
+dataAugmentation.add(tf.layers.randomRotation({factor: 0.2}));
+dataAugmentation.add(tf.layers.randomFlip({mode: 'horizontal'}));
+dataAugmentation.add(tf.layers.randomZoom({heightFactor: 0.1, widthFactor: 0.1}));`
+    },
+    {
+      type: "text",
+      value: "Transformaciones comunes:\n- Rotaciones (pequeños ángulos)\n- Volteos horizontales\n- Ajustes de brillo/contraste\n- Recortes aleatorios\n\nPrecauciones:\n- No aplicar transformaciones que cambien el significado de la imagen\n- Validar que las transformaciones son realistas para el dominio del problema"
+    }
+  ],
+  children: []
+},
+{
+  id: "transfer_learning",
+  title: "Transfer Learning",
+  subtitle: "Aprovechamiento de modelos pre-entrenados",
+  content: [
+    {
+      type: "text",
+      value: "El transfer learning consiste en tomar un modelo pre-entrenado en un gran dataset (como ImageNet) y adaptarlo a una nueva tarea con menos datos."
+    },
+    {
+      type: "img",
+      value: "Diagrama del proceso de transfer learning mostrando la reutilización de capas convolucionales"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de transfer learning con MobileNet
+const baseModel = await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json');
 
+// Congelar las capas convolucionales
+baseModel.layers.forEach(layer => layer.trainable = false);
 
+// Añadir nuevas capas para la tarea específica
+const newModel = tf.sequential();
+newModel.add(baseModel);
+newModel.add(tf.layers.dense({units: 256, activation: 'relu'}));
+newModel.add(tf.layers.dense({units: 10, activation: 'softmax'}));`
+    },
+    {
+      type: "text",
+      value: "Estrategias comunes:\n1. Extracción de características: Usar el modelo pre-entrenado como extractor fijo\n2. Fine-tuning: Descongelar y ajustar algunas capas finales\n\nModelos populares:\n- ResNet, EfficientNet (para alta precisión)\n- MobileNet (para dispositivos móviles)\n- Vision Transformer (enfoque basado en atención)"
+    }
+  ],
+  children: []
+},
+{
+  id: "gan",
+  title: "Redes Generativas Adversariales (GANs)",
+  subtitle: "Arquitectura para generación de datos mediante competición",
+  content: [
+    {
+      type: "text",
+      value: "Las GANs son un marco de aprendizaje automático donde dos redes neuronales (generador y discriminador) compiten entre sí, llevando a la generación de datos sintéticos de alta calidad."
+    },
+    {
+      type: "img",
+      value: "Diagrama del flujo de entrenamiento GAN mostrando la interacción entre generador y discriminador"
+    },
+    {
+      type: "text",
+      value: "Concepto clave:\n'El generador crea muestras falsas, el discriminador intenta distinguirlas de las reales. Este proceso adversarial lleva a la mejora iterativa de ambos.'"
+    },
+    {
+      type: "code",
+      value: `// Esquema básico de una GAN en TensorFlow
+const generator = buildGenerator();  // Crea datos falsos
+const discriminator = buildDiscriminator();  // Distingue real/falso
 
+// Función de pérdida combinada
+function ganLoss(realOutput, fakeOutput) {
+  const crossEntropy = tf.losses.binaryCrossentropy;
+  const realLoss = crossEntropy(tf.onesLike(realOutput), realOutput);
+  const fakeLoss = crossEntropy(tf.zerosLike(fakeOutput), fakeOutput);
+  return realLoss + fakeLoss;
+}`
+    }
+  ],
+  children: [
+    "gan_componentes",
+    "gan_funciones_de_perdida",
+    "gan_aplicaciones",
+    "gan_extensiones"
+  ]
+},
+{
+  id: "gan_componentes",
+  title: "Componentes de una GAN",
+  subtitle: "Arquitectura básica de dos redes compitiendo",
+  content: [
+    {
+      type: "text",
+      value: "generador: Transforma ruido aleatorio (z) en datos sintéticos. Su objetivo es engañar al discriminador. Típicamente una red convolucional transpuesta (upsampling)."
+    },
+    {
+      type: "text",
+      value: "discriminador: Clasificador que distingue datos reales de los generados. Similar a una CNN tradicional pero con salida binaria (real/falso)."
+    },
+    {
+      type: "img",
+      value: "Estructura detallada del generador y discriminador mostrando capas y conexiones"
+    },
+    {
+      type: "code",
+      value: `// Implementación básica del generador
+function buildGenerator(latentDim) {
+  const model = tf.sequential();
+  model.add(tf.layers.dense({units: 7*7*256, inputShape: [latentDim]}));
+  model.add(tf.layers.reshape({targetShape: [7, 7, 256]}));
+  model.add(tf.layers.conv2dTranspose({
+    filters: 128, kernelSize: 5, strides: 2, padding: 'same', activation: 'relu'
+  }));
+  // Capas adicionales...
+  return model;
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "gan_funciones_de_perdida",
+  title: "Funciones de Pérdida en GANs",
+  subtitle: "Métricas para guiar el entrenamiento adversarial",
+  content: [
+    {
+      type: "text",
+      value: "El diseño de la función de pérdida es crucial en GANs, ya que determina la estabilidad del entrenamiento y la calidad de los resultados."
+    },
+    {
+      type: "img",
+      value: "Gráfico comparativo de diferentes funciones de pérdida y su efecto en la convergencia"
+    }
+  ],
+  children: [
+    "divergencias"
+  ]
+},
+{
+  id: "divergencias",
+  title: "Divergencias en GANs",
+  subtitle: "Medidas de diferencia entre distribuciones",
+  content: [
+    {
+      type: "text",
+      value: "Las divergencias cuantifican cómo difiere la distribución generada de la real. Elecciones comunes:\n1. JS-Divergencia (GAN original)\n2. Wasserstein (WGAN)\n3. KL-Divergencia"
+    },
+    {
+      type: "img",
+      value: "Visualización de cómo diferentes divergencias afectan la distribución generada"
+    },
+    {
+      type: "code",
+      value: `// Implementación de pérdida Wasserstein (WGAN)
+function wassersteinLoss(realOutput, fakeOutput) {
+  return tf.mean(fakeOutput).sub(tf.mean(realOutput));
+}
 
+// Requiere clip de pesos en el discriminador:
+function clipDiscriminatorWeights(discriminator, clipValue) {
+  discriminator.getWeights().forEach(weights => {
+    weights.assign(tf.clipByValue(weights, -clipValue, clipValue));
+  });
+}`
+    },
+    {
+      type: "text",
+      value: "Problemas comunes:\n- Modo colapso (generador produce poca variedad)\n- Desvanecimiento del gradiente\n- Oscilaciones durante el entrenamiento\n\nSoluciones:\n- Uso de Wasserstein GAN con Gradient Penalty\n- Aplicar normalización en capas\n- Balancear los ratios de aprendizaje"
+    }
+  ],
+  children: []
+},
+{
+  id: "gan_aplicaciones",
+  title: "Aplicaciones de GANs",
+  subtitle: "Casos de uso en generación y transformación de datos",
+  content: [
+    {
+      type: "text",
+      value: "superresolucion: Aumento de resolución de imágenes (ej: SRGAN para mejorar calidad de fotos o videos)"
+    },
+    {
+      type: "text",
+      value: "estilo: Transferencia de estilo artístico entre imágenes (ej: convertir fotos a estilo pictórico)"
+    },
+    {
+      type: "text",
+      value: "restauracion: Reconstrucción de imágenes dañadas o incompletas (ej: fotoenvejecimiento, rellenado de regiones)"
+    },
+    {
+      type: "text",
+      value: "imagen_a_imagen: Traducción entre dominios visuales (ej: mapa↔foto satelital, día↔noche)"
+    },
+    {
+      type: "img",
+      value: "Ejemplos visuales de diferentes aplicaciones de GANs mostrando transformaciones"
+    }
+  ],
+  children: []
+},
+{
+  id: "gan_extensiones",
+  title: "Extensiones Avanzadas de GANs",
+  subtitle: "Variantes especializadas para tareas específicas",
+  content: [
+    {
+      type: "text",
+      value: "Las GANs han evolucionado en numerosas variantes que mejoran estabilidad, control o aplicabilidad a dominios específicos."
+    }
+  ],
+  children: [
+    "stylegan",
+    "cyclegan"
+  ]
+},
+{
+  id: "stylegan",
+  title: "StyleGAN",
+  subtitle: "Control fino sobre atributos generados",
+  content: [
+    {
+      type: "text",
+      value: "StyleGAN introduce separación entre alto-nivel (estilo) y bajo-nivel (ruido) en la generación, permitiendo control detallado de atributos como edad, expresión facial o iluminación."
+    },
+    {
+      type: "img",
+      value: "Diagrama de la arquitectura StyleGAN mostrando el mapeo de estilos y generación progresiva"
+    },
+    {
+      type: "text",
+      value: "Características clave:\n- Mapeo de espacio latente a estilos intermedios\n- Normalización adaptativa de características (AdaIN)\n- Generación progresiva (de baja a alta resolución)\n- Ruido por píxel para detalles finos"
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo del bloque de estilo en StyleGAN
+function styleBlock(x, w) {
+  // Normalización adaptativa
+  const normalized = adaIN(x, w);
+  // Aplicar ruido
+  const noise = tf.randomNormal(tf.shape(x));
+  const noisy = normalized + noise * noiseStrength;
+  return noisy;
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "cyclegan",
+  title: "CycleGAN",
+  subtitle: "Traducción no pareada entre dominios",
+  content: [
+    {
+      type: "text",
+      value: "CycleGAN permite transformaciones entre dos dominios visuales sin necesidad de pares de entrenamiento alineados (ej: convertir fotos de caballos a cebras manteniendo la estructura)."
+    },
+    {
+      type: "img",
+      value: "Diagrama del ciclo consistente en CycleGAN mostrando ambas transformaciones (A→B→A' y B→A→B')"
+    },
+    {
+      type: "text",
+      value: "Mecanismos clave:\n- Pérdida de ciclo consistente (cycle-consistency loss)\n- Dos generadores (A→B y B→A) y dos discriminadores\n- No requiere datos pareados (solo conjuntos de cada dominio)"
+    },
+    {
+      type: "code",
+      value: `// Implementación de la pérdida de ciclo
+function cycleConsistencyLoss(real, reconstructed) {
+  return tf.losses.meanAbsoluteError(real, reconstructed);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Entrenamiento combinado
+function trainStep(realA, realB) {
+  // Generar imágenes falsas
+  const fakeB = generatorAB(realA);
+  const fakeA = generatorBA(realB);
   
+  // Reconstrucción ciclo
+  const reconstructedA = generatorBA(fakeB);
+  const reconstructedB = generatorAB(fakeA);
+  
+  // Calcular pérdidas
+  const cycleLoss = cycleConsistencyLoss(realA, reconstructedA) 
+                 + cycleConsistencyLoss(realB, reconstructedB);
+  // ... otras pérdidas
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "transformers",
+  title: "Transformers",
+  subtitle: "Arquitectura basada en mecanismos de atención",
+  content: [
+    {
+      type: "text",
+      value: "Los Transformers son una arquitectura de red neuronal que revolucionó el procesamiento de secuencias mediante el uso de mecanismos de auto-atención, eliminando la necesidad de recurrencia y permitiendo un procesamiento altamente paralelizable."
+    },
+    {
+      type: "img",
+      value: "Diagrama de la arquitectura Transformer mostrando los componentes principales"
+    },
+    {
+      type: "text",
+      value: "Principales ventajas:\n- Captura de dependencias de largo alcance\n- Procesamiento paralelo de secuencias completas\n- Flexibilidad para múltiples modalidades (texto, imágenes, series temporales)"
+    },
+    {
+      type: "code",
+      value: `// Esqueleto básico de un Transformer en PyTorch
+import torch.nn as nn
+
+class Transformer(nn.Module):
+    def __init__(self, num_layers, d_model, num_heads):
+        super().__init__()
+        self.encoder = TransformerEncoder(num_layers, d_model, num_heads)
+        self.decoder = TransformerDecoder(num_layers, d_model, num_heads)
+        
+    def forward(self, src, tgt):
+        memory = self.encoder(src)
+        output = self.decoder(tgt, memory)
+        return output`
+    }
+  ],
+  children: [
+    "selfattention",
+    "embeddings_posicionales",
+    "encoderdecoder",
+    "transformers_aplicaciones",
+    "transformers_modelos"
+  ]
+},
+{
+  id: "selfattention",
+  title: "Auto-Atención (Self-Attention)",
+  subtitle: "Mecanismo para capturar relaciones contextuales",
+  content: [
+    {
+      type: "text",
+      value: "La auto-atención permite a cada posición en la secuencia interactuar con todas las demás posiciones, calculando una representación ponderada basada en la relevancia contextual."
+    },
+    {
+      type: "img",
+      value: "Diagrama del cálculo de atención mostrando Q, K, V y los pesos de atención"
+    },
+    {
+      type: "text",
+      value: "Fórmula clave:\nAttention(Q,K,V) = softmax(QKᵀ/√dₖ)V\nDonde:\n- Q: Consultas (Queries)\n- K: Claves (Keys)\n- V: Valores (Values)\n- dₖ: Dimensión de las claves"
+    },
+    {
+      type: "code",
+      value: `// Implementación de atención multi-head en TensorFlow
+class MultiHeadAttention(tf.keras.layers.Layer):
+    def __init__(self, d_model, num_heads):
+        super().__init__()
+        self.num_heads = num_heads
+        self.d_model = d_model
+        self.depth = d_model // num_heads
+        
+        self.wq = tf.keras.layers.Dense(d_model)
+        self.wk = tf.keras.layers.Dense(d_model)
+        self.wv = tf.keras.layers.Dense(d_model)
+        self.dense = tf.keras.layers.Dense(d_model)
+        
+    def split_heads(self, x, batch_size):
+        x = tf.reshape(x, (batch_size, -1, self.num_heads, self.depth))
+        return tf.transpose(x, perm=[0, 2, 1, 3])
+        
+    def call(self, q, k, v):
+        batch_size = tf.shape(q)[0]
+        
+        q = self.wq(q)  # (batch_size, seq_len, d_model)
+        k = self.wk(k)
+        v = self.wv(v)
+        
+        q = self.split_heads(q, batch_size)  # (batch_size, num_heads, seq_len_q, depth)
+        k = self.split_heads(k, batch_size)
+        v = self.split_heads(v, batch_size)
+        
+        # Cálculo de los scores de atención
+        matmul_qk = tf.matmul(q, k, transpose_b=True)  # (..., seq_len_q, seq_len_k)
+        scaled_attention_logits = matmul_qk / tf.math.sqrt(tf.cast(self.depth, tf.float32))
+        attention_weights = tf.nn.softmax(scaled_attention_logits, axis=-1)
+        output = tf.matmul(attention_weights, v)  # (..., seq_len_q, depth)
+        
+        output = tf.transpose(output, perm=[0, 2, 1, 3])  # (batch_size, seq_len_q, num_heads, depth)
+        concat_attention = tf.reshape(output, (batch_size, -1, self.d_model))
+        return self.dense(concat_attention)`
+    },
+    {
+      type: "text",
+      value: "Variantes importantes:\n1. Atención escalada (Scaled Dot-Product)\n2. Atención multi-head (vistas paralelas del espacio de atención)\n3. Atención enmascarada (para decodificación autoregresiva)"
+    }
+  ],
+  children: []
+},
+{
+  id: "embeddings_posicionales",
+  title: "Embeddings Posicionales",
+  subtitle: "Codificación de la posición en secuencias",
+  content: [
+    {
+      type: "text",
+      value: "Como los Transformers no usan recurrencia, necesitan embeddings posicionales para inyectar información sobre la posición relativa o absoluta de los tokens en la secuencia."
+    },
+    {
+      type: "img",
+      value: "Visualización de embeddings posicionales mostrando patrones sinusoidales"
+    },
+    {
+      type: "text",
+      value: "Enfoques comunes:\n1. Codificación posicional sinusoidal (original)\n2. Embeddings aprendidos (BERT, GPT)\n3. Codificaciones relativas (Transformer-XL)"
+    },
+    {
+      type: "code",
+      value: `// Implementación de codificación posicional sinusoidal
+function getPositionalEncoding(maxLen, dModel) {
+  const position = tf.range(0, maxLen).expandDims(1);
+  const divTerm = tf.exp(tf.range(0, dModel, 2).mul(-Math.log(10000.0) / dModel));
+  
+  const pe = tf.zeros([maxLen, dModel]);
+  const sinPart = tf.sin(position.mul(divTerm));
+  const cosPart = tf.cos(position.mul(divTerm));
+  
+  pe.slice([0, 0], [-1, 1]).assign(sinPart);
+  pe.slice([0, 1], [-1, 1]).assign(cosPart);
+  
+  return pe;
+}`
+    },
+    {
+      type: "text",
+      value: "Consideraciones:\n- Longitud máxima fija vs. extrapolación\n- Interacción con embeddings de token\n- Efecto en transfer learning entre tareas con diferentes longitudes"
+    }
+  ],
+  children: []
+},
+{
+  id: "encoderdecoder",
+  title: "Arquitectura Encoder-Decoder",
+  subtitle: "Estructura estándar para tareas de secuencia a secuencia",
+  content: [
+    {
+      type: "text",
+      value: "La arquitectura encoder-decoder permite procesar una secuencia de entrada y generar una secuencia de salida, siendo la base para traducción automática, resumen de texto y otras tareas de transformación."
+    },
+    {
+      type: "img",
+      value: "Flujo de datos en encoder-decoder mostrando las conexiones de atención"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:\n1. Encoder: Procesa la entrada en representaciones contextuales\n2. Decoder: Genera salida token por token usando atención al encoder\n3. Conexiones cruzadas (cross-attention)"
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo del proceso encoder-decoder
+function transformerEncoderDecoder(input, output) {
+  // Codificación
+  const inputEmbeddings = embed(input) + positionalEncoding(input.length);
+  const memory = encoder(inputEmbeddings);
+  
+  // Decodificación autoregresiva
+  let decoderOutput = outputStartToken;
+  for (let i = 0; i < maxLength; i++) {
+    const decoderEmbeddings = embed(decoderOutput) + positionalEncoding(i+1);
+    const nextToken = decoder(decoderEmbeddings, memory);
+    decoderOutput = concat(decoderOutput, nextToken);
+  }
+  return decoderOutput;
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "transformers_aplicaciones",
+  title: "Aplicaciones de Transformers",
+  subtitle: "Casos de uso en múltiples dominios",
+  content: [
+    {
+      type: "text",
+      value: "Los Transformers han demostrado ser versátiles más allá del NLP original, aplicándose exitosamente a diversas modalidades de datos."
+    }
+  ],
+  children: [
+    "nlp",
+    "time_series",
+    "vision"
+  ]
+},
+{
+  id: "nlp",
+  title: "Procesamiento de Lenguaje Natural",
+  subtitle: "Aplicaciones en texto y lenguaje",
+  content: [
+    {
+      type: "text",
+      value: "Los Transformers dominan el NLP moderno, superando a arquitecturas anteriores en prácticamente todas las tareas benchmark."
+    },
+    {
+      type: "img",
+      value: "Aplicaciones NLP: traducción, resumen, QA, generación de texto"
+    },
+    {
+      type: "text",
+      value: "Tareas principales:\n- Modelado de lenguaje (GPT)\n- Clasificación de texto\n- Traducción automática\n- Respuesta a preguntas\n- Análisis de sentimientos\n- Generación de texto creativo"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de uso de BERT para clasificación
+from transformers import BertTokenizer, BertForSequenceClassification
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
+
+inputs = tokenizer("Hello, world!", return_tensors="pt")
+outputs = model(**inputs)
+logits = outputs.logits`
+    }
+  ],
+  children: []
+},
+{
+  id: "time_series",
+  title: "Series Temporales",
+  subtitle: "Aplicación a datos secuenciales numéricos",
+  content: [
+    {
+      type: "text",
+      value: "Los Transformers se aplican a forecasting, detección de anomalías y clasificación de series temporales, capturando dependencias de largo alcance mejor que RNNs tradicionales."
+    },
+    {
+      type: "img",
+      value: "Transformer para forecasting mostrando atención en puntos clave de la serie"
+    },
+    {
+      type: "text",
+      value: "Adaptaciones clave:\n- Embeddings para valores numéricos\n- Atención a patrones estacionales\n- Mecanismos para manejar frecuencias mixtas\n- Variantes como Informer para series muy largas"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de Transformer para forecasting
+class TimeSeriesTransformer(nn.Module):
+    def __init__(self, input_dim, output_dim, num_heads):
+        super().__init__()
+        self.value_embedding = nn.Linear(1, input_dim)
+        self.positional_encoding = PositionalEncoding(input_dim)
+        self.transformer = nn.Transformer(d_model=input_dim, nhead=num_heads)
+        self.decoder = nn.Linear(input_dim, output_dim)
+        
+    def forward(self, x):
+        # x: (seq_len, batch_size, 1)
+        x = self.value_embedding(x)  # (seq_len, batch_size, input_dim)
+        x = self.positional_encoding(x)
+        x = self.transformer(x, x)  # Self-attention
+        return self.decoder(x)`
+    }
+  ],
+  children: []
+},
+{
+  id: "vision",
+  title: "Visión por Computadora",
+  subtitle: "Transformers para procesamiento de imágenes",
+  content: [
+    {
+      type: "text",
+      value: "Los Vision Transformers (ViTs) dividen imágenes en parches que tratan como tokens, logrando rendimiento competitivo con CNNs en clasificación y detección de objetos."
+    },
+    {
+      type: "img",
+      value: "Procesamiento de imágenes en ViT mostrando división en parches y atención"
+    },
+    {
+      type: "text",
+      value: "Ventajas sobre CNNs:\n- Captura de dependencias globales\n- Menor inductive bias\n- Escalabilidad a datos masivos\n\nDesafíos:\n- Requiere más datos de entrenamiento\n- Costo computacional en alta resolución"
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo de Vision Transformer
+class ViT(nn.Module):
+    def __init__(self, image_size, patch_size, num_classes):
+        super().__init__()
+        num_patches = (image_size // patch_size) ** 2
+        self.patch_embedding = nn.Linear(patch_size**2 * 3, hidden_dim)
+        self.position_embedding = nn.Parameter(torch.randn(1, num_patches + 1, hidden_dim))
+        self.cls_token = nn.Parameter(torch.randn(1, 1, hidden_dim))
+        self.transformer = TransformerEncoder(num_layers, hidden_dim, num_heads)
+        self.mlp_head = nn.Linear(hidden_dim, num_classes)
+        
+    def forward(self, x):
+        # Dividir imagen en parches
+        patches = split_into_patches(x, patch_size)
+        embeddings = self.patch_embedding(patches)
+        
+        # Añadir token [CLS] y posición
+        cls_tokens = self.cls_token.expand(x.shape[0], -1, -1)
+        embeddings = torch.cat((cls_tokens, embeddings), dim=1)
+        embeddings += self.position_embedding
+        
+        # Pasar por Transformer
+        output = self.transformer(embeddings)
+        
+        # Clasificar usando el token [CLS]
+        return self.mlp_head(output[:, 0])`
+    }
+  ],
+  children: []
+},
+{
+  id: "transformers_modelos",
+  title: "Modelos Basados en Transformers",
+  subtitle: "Arquitecturas pre-entrenadas populares",
+  content: [
+    {
+      type: "text",
+      value: "bert: Modelo bidireccional pre-entrenado con masked language modeling y next sentence prediction. Base para muchas aplicaciones de NLP."
+    },
+    {
+      type: "text",
+      value: "gpt: Modelo autoregresivo pre-entrenado con next token prediction. Excelente para generación de texto."
+    },
+    {
+      type: "text",
+      value: "t5: Modelo encoder-decoder que plantea todas las tareas NLP como text-to-text."
+    },
+    {
+      type: "text",
+      value: "vision_transformers_vit: Aplica Transformers directamente a imágenes divididas en parches, sin convoluciones."
+    },
+    {
+      type: "text",
+      value: "llama: Modelo de lenguaje de Meta optimizado para eficiencia, con variantes de 7B a 65B parámetros."
+    },
+    {
+      type: "img",
+      value: "Comparativa de modelos Transformers mostrando tamaño, arquitectura y aplicaciones"
+    }
+  ],
+  children: []
+},
+{
+  id: "estrategias_de_optimizacion_de_hiperparametros",
+  title: "Estrategias de Optimización de Hiperparámetros",
+  subtitle: "Técnicas para encontrar la mejor configuración de modelos",
+  content: [
+    {
+      type: "text",
+      value: "La optimización de hiperparámetros es crucial para maximizar el rendimiento de los modelos de machine learning. Existen diversas estrategias que equilibran eficiencia computacional y calidad de resultados."
+    },
+    {
+      type: "list",
+      value: [
+        "Búsqueda exhaustiva (Grid Search)",
+        "Muestreo aleatorio (Random Search)",
+        "Optimización bayesiana (Optuna, HyperOpt)",
+        "Herramientas especializadas (Keras Tuner)",
+        "Programación dinámica de parámetros"
+      ]
+    },
+    {
+      type: "warning",
+      value: "¡Precaución! La optimización de hiperparámetros puede ser computacionalmente costosa. Siempre comienza con un subconjunto de datos y parámetros para validar el enfoque."
+    }
+  ],
+  children: [
+    "gridsearchcv",
+    "randomizedsearchcv",
+    "keras_tuner",
+    "optuna",
+    "tecnicas_de_scheduling"
+  ]
+},
+{
+  id: "gridsearchcv",
+  title: "GridSearchCV",
+  subtitle: "Búsqueda exhaustiva en cuadrícula de parámetros",
+  content: [
+    {
+      type: "text",
+      value: "Explora todas las combinaciones posibles de hiperparámetros en una cuadrícula predefinida, usando validación cruzada para evaluar cada combinación."
+    },
+    {
+      type: "list",
+      value: [
+        "Ventajas: Explora todo el espacio de búsqueda sistemáticamente",
+        "Desventajas: Costo computacional alto con muchos parámetros",
+        "Ideal para: Espacios pequeños de parámetros (<10 combinaciones)"
+      ]
+    },
+    {
+      type: "code",
+      value: `from sklearn.model_selection import GridSearchCV
+
+params = {
+    'max_depth': [3, 5, 7],
+    'min_samples_leaf': [1, 2, 3]
+}
+
+grid_search = GridSearchCV(estimator=model, param_grid=params, cv=5)
+grid_search.fit(X_train, y_train)`
+    }
+  ],
+  children: []
+},
+{
+  id: "randomizedsearchcv",
+  title: "RandomizedSearchCV",
+  subtitle: "Muestreo aleatorio de combinaciones de parámetros",
+  content: [
+    {
+      type: "text",
+      value: "Evalúa combinaciones aleatorias de parámetros según distribuciones estadísticas, siendo más eficiente que GridSearch en espacios grandes."
+    },
+    {
+      type: "list",
+      value: [
+        "Ventajas: Más eficiente en espacios grandes",
+        "Desventajas: Puede perder combinaciones óptimas",
+        "Ideal para: Espacios con >10 dimensiones"
+      ]
+    },
+    {
+      type: "code",
+      value: `from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import uniform, truncnorm
+
+params = {
+    'learning_rate': uniform(0.01, 0.3),
+    'n_estimators': range(50, 200)
+}
+
+random_search = RandomizedSearchCV(model, params, n_iter=20, cv=3)
+random_search.fit(X_train, y_train)`
+    }
+  ],
+  children: []
+},
+{
+  id: "optuna",
+  title: "Optuna",
+  subtitle: "Optimización bayesiana automática",
+  content: [
+    {
+      type: "text",
+      value: "Framework que utiliza optimización bayesiana para guiar la búsqueda de hiperparámetros, aprendiendo de evaluaciones previas."
+    },
+    {
+      type: "list",
+      value: [
+        "Ventajas: Enfoque inteligente que aprende del historial",
+        "Desventajas: Mayor complejidad de implementación",
+        "Funcionalidades clave: Pruning, visualización, paralelización"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Optuna requiere definir cuidadosamente los rangos de parámetros. Rangos muy amplios pueden ralentizar la convergencia."
+    }
+  ],
+  children: []
+},
+{
+  id: "tecnicas_de_scheduling",
+  title: "Técnicas de Programación de Hiperparámetros",
+  subtitle: "Ajuste dinámico durante el entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "Estas técnicas modifican hiperparámetros como la tasa de aprendizaje durante el entrenamiento para mejorar convergencia y rendimiento."
+    },
+    {
+      type: "list",
+      value: [
+        "Power Scheduling: Reducción gradual basada en potencias",
+        "Exponential Decay: Decrecimiento exponencial agresivo",
+        "Piecewise Constant: Cambios abruptos en momentos fijos",
+        "Performance-based: Ajuste según métricas de validación",
+        "One Cycle: Política agresiva con ciclo de calentamiento"
+      ]
+    }
+  ],
+  children: [
+    "power_scheduling",
+    "exponential_decay",
+    "piecewise_constant",
+    "performancebased",
+    "one_cycle_scheduling"
+  ]
+},
+{
+  id: "power_scheduling",
+  title: "Power Scheduling",
+  subtitle: "Decaimiento polinómico de la tasa de aprendizaje",
+  content: [
+    {
+      type: "text",
+      value: "Reduce la tasa de aprendizaje inversamente proporcional al número de pasos de entrenamiento elevado a una potencia."
+    },
+    {
+      type: "list",
+      value: [
+        "Fórmula: lr = initial_lr / (1 + step/step_size)^factor",
+        "Ventaja: Reducción suave y controlable",
+        "Uso típico: Redes profundas con entrenamiento prolongado"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "exponential_decay",
+  title: "Exponential Decay",
+  subtitle: "Decrecimiento exponencial de parámetros",
+  content: [
+    {
+      type: "text",
+      value: "Reduce la tasa de aprendizaje multiplicando por un factor exponencial en intervalos regulares."
+    },
+    {
+      type: "list",
+      value: [
+        "Fórmula: lr = initial_lr * decay_rate^(step/decay_steps)",
+        "Ventaja: Convergencia rápida inicial",
+        "Precaución: Puede reducir demasiado rápido el learning rate"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "piecewise_constant",
+  title: "Piecewise Constant",
+  subtitle: "Cambios discretos en momentos fijos",
+  content: [
+    {
+      type: "text",
+      value: "Define intervalos fijos donde la tasa de aprendizaje permanece constante, reduciéndose abruptamente en puntos específicos."
+    },
+    {
+      type: "list",
+      value: [
+        "Ventaja: Control preciso de reducciones",
+        "Uso común: Cuando se conocen puntos clave de entrenamiento",
+        "Ejemplo: Reducir lr a la mitad cada 10 épocas"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "performancebased",
+  title: "Performance-based Scheduling",
+  subtitle: "Ajuste según métricas de validación",
+  content: [
+    {
+      type: "text",
+      value: "Modifica hiperparámetros basándose en el rendimiento en el conjunto de validación, como ReduceLROnPlateau de Keras."
+    },
+    {
+      type: "list",
+      value: [
+        "Ventaja: Adaptabilidad al comportamiento real del modelo",
+        "Métricas comunes: pérdida de validación, precisión",
+        "Parámetros típicos: factor de reducción, paciencia"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "one_cycle_scheduling",
+  title: "One Cycle Scheduling",
+  subtitle: "Política de ciclo único",
+  content: [
+    {
+      type: "text",
+      value: "Estrategia agresiva que aumenta y luego disminuye la tasa de aprendizaje en un solo ciclo, combinado con cambios en el momentum."
+    },
+    {
+      type: "list",
+      value: [
+        "Beneficios: Entrenamiento más rápido y mejor generalización",
+        "Fases: Fase de calentamiento, fase de enfriamiento",
+        "Uso ideal: Cuando se necesita rápido prototipado"
+      ]
+    },
+    {
+      type: "warning",
+      value: "One Cycle requiere monitoreo cuidadoso. Tasas demasiado altas pueden causar divergencia en el entrenamiento."
+    }
+  ],
+  children: []
+},
+{
+    id: "neuronas_artificiales_frameworks",
+    title: "Placeholder Title",
+    subtitle: "Placeholder Subtitle",
+    content: [
+      {
+        type: "text",
+        value: "Generic text content"
+      }
+    ],
+    children: [
+      "langchain",
+      "langgraph",
+      "dask"
+    ]
+  },
+
+
+   {
+    id: "dask",
+    title: "Placeholder Title",
+    subtitle: "Placeholder Subtitle",
+    content: [
+      {
+        type: "text",
+        value: "Generic text content"
+      }
+    ],
+    children: [
+
+    ]
+  },
+
+{
+    id: "topicos_de_inteligencia_artificial",
+    title: "Tópicos de Inteligencia Artificial",
+    subtitle: "Panorama completo de las principales áreas de IA",
+    content: [
+      {
+        type: "text",
+        value: "La Inteligencia Artificial abarca diversas técnicas que permiten a las máquinas realizar tareas que normalmente requieren inteligencia humana. Este campo se divide en múltiples especialidades, cada una con sus propias metodologías y aplicaciones prácticas."
+      },
+      {
+        type: "img",
+        value: "Diagrama de las principales áreas de IA mostrando sus interrelaciones"
+      },
+      {
+        type: "list",
+        value: [
+          "Procesamiento de Lenguaje Natural (NLP): Comprensión y generación de lenguaje humano",
+          "Modelos de Lenguaje: Sistemas avanzados para manejar texto",
+          "Sistemas de Recomendación: Personalización de contenido",
+          "Aprendizaje por Refuerzo: Toma de decisiones secuenciales"
+        ]
+      }
+    ],
+    children: [
+      "procesamiento_de_lenguaje_natural_2",
+      "modelos_de_lenguaje_llms",
+      "prompt_engineering",
+      "multimodalidad_y_generacion",
+      "sistemas_de_recomendacion",
+      "aprendizaje_por_refuerzo",
+      "explainable_ai",
+      "fairness__bias_en_ia",
+      "agentes_de_ia",
+      "aplicaciones_extendidas",
+      "interpretable_ai",
+      "frameworks_y_librerias"
+    ]
+  },
+  {
+    id: "procesamiento_de_lenguaje_natural_2",
+    title: "Procesamiento de Lenguaje Natural (NLP)",
+    subtitle: "Técnicas para entender y generar lenguaje humano",
+    content: [
+      {
+        type: "text",
+        value: "El NLP combina lingüística, informática y machine learning para procesar y analizar grandes cantidades de datos de lenguaje natural. Es fundamental en aplicaciones como chatbots, traducción automática y análisis de sentimientos."
+      },
+      {
+        type: "img",
+        value: "Flujo de procesamiento de texto desde raw data hasta representación vectorial"
+      },
+      {
+        type: "warning",
+        value: "El preprocesamiento de texto es crucial en NLP. Errores comunes incluyen no normalizar el texto o eliminar palabras importantes durante el stopword removal."
+      }
+    ],
+    children: [
+      "tareas_clasicas",
+      "representacion_de_texto"
+    ]
+  },
+  {
+    id: "tareas_clasicas",
+    title: "Tareas Clásicas de NLP",
+    subtitle: "Problemas fundamentales en procesamiento de lenguaje",
+    content: [
+      {
+        type: "text",
+        value: "Clasificación de texto: Asignar categorías o etiquetas a documentos completos. Ejemplo: Detección de spam, categorización de noticias."
+      },
+      {
+        type: "code",
+        value: `# Ejemplo básico de clasificación de texto con Scikit-learn
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Datos de ejemplo
+texts = ["oferta exclusiva", "reunión importante", "gana dinero rápido"]
+labels = ["spam", "no spam", "spam"]
+
+# Vectorización
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(texts)
+
+# Entrenamiento
+clf = MultinomialNB()
+clf.fit(X, labels)`
+      },
+      {
+        type: "text",
+        value: "Reconocimiento de Entidades (NER): Identificar y clasificar entidades como nombres, organizaciones, ubicaciones en texto."
+      },
+      {
+        type: "text",
+        value: "Clustering de Documentos: Agrupar documentos similares sin etiquetas previas. Útil para organización de archivos o descubrimiento de temas."
+      },
+      {
+        type: "text",
+        value: "Análisis de Sentimiento: Determinar la polaridad emocional (positivo, negativo, neutro) en texto. Ampliamente usado en redes sociales y reseñas."
+      },
+      {
+        type: "img",
+        value: "Ejemplo visual de análisis de sentimiento mostrando scores en diferentes frases"
+      }
+    ],
+    children: []
+  },
+  {
+    id: "representacion_de_texto",
+    title: "Representación de Texto",
+    subtitle: "Técnicas para convertir texto en formatos que los modelos pueden procesar",
+    content: [
+      {
+        type: "text",
+        value: "Las computadoras no entienden texto directamente, por lo que necesitamos convertirlo a representaciones numéricas. Las técnicas varían en complejidad y capacidad de capturar significado."
+      },
+      {
+        type: "text",
+        value: "Bag of Words: Representación simple que cuenta la frecuencia de palabras en un documento, ignorando orden y contexto."
+      },
+      {
+        type: "code",
+        value: `# Ejemplo de Bag of Words
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = ['El gato come pescado', 'El perro come carne']
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(corpus)
+print(vectorizer.get_feature_names_out())
+print(X.toarray())`
+      },
+      {
+        type: "text",
+        value: "TF-IDF: Mejora de Bag of Words que pondera términos por su frecuencia en el documento vs. en todo el corpus. Reduce importancia de palabras muy comunes."
+      },
+      {
+        type: "warning",
+        value: "TF-IDF no captura relaciones semánticas entre palabras. Para tareas que requieren comprensión del significado, se necesitan embeddings."
+      }
+    ],
+    children: [
+      "word_embeddings",
+      "embeddings_contextuales"
+    ]
+  },
+  {
+    id: "word_embeddings",
+    title: "Word Embeddings",
+    subtitle: "Representaciones vectoriales densas que capturan significado semántico",
+    content: [
+      {
+        type: "text",
+        value: "Los word embeddings representan palabras como vectores en un espacio dimensional donde palabras similares están cercanas. Capturan relaciones semánticas (rey - hombre + mujer ≈ reina) y sintácticas."
+      },
+      {
+        type: "img",
+        value: "Visualización 2D de embeddings mostrando clusters semánticos (animales, deportes, etc.)"
+      },
+      {
+        type: "text",
+        value: "Word2Vec: Modelo predictivo que aprende embeddings prediciendo palabras en contexto (arquitecturas Skip-gram y CBOW). Eficiente para grandes corpus."
+      },
+      {
+        type: "code",
+        value: `# Ejemplo de uso de Word2Vec con Gensim
+from gensim.models import Word2Vec
+
+sentences = [["data", "science", "is", "awesome"], 
+             ["machine", "learning", "is", "fun"]]
+
+model = Word2Vec(sentences, vector_size=100, window=5, min_count=1)
+print(model.wv["science"])  # Vector de 100 dimensiones`
+      },
+      {
+        type: "text",
+        value: "GloVe: Modelo basado en conteo que factoriza matrices de co-ocurrencia de palabras. Combina aspectos de métodos globales y locales."
+      },
+      {
+        type: "text",
+        value: "FastText: Extensión de Word2Vec que considera subpalabras (n-gramas de caracteres). Útil para idiomas con morfología compleja o palabras raras."
+      },
+      {
+        type: "warning",
+        value: "Los embeddings estáticos (Word2Vec, GloVe) asignan el mismo vector a una palabra en todos los contextos. Para significados múltiples, se necesitan embeddings contextuales."
+      }
+    ],
+    children: []
+  },
+  {
+    id: "embeddings_contextuales",
+    title: "Embeddings Contextuales",
+    subtitle: "Representaciones que varían según el contexto de la palabra",
+    content: [
+      {
+        type: "text",
+        value: "Los modelos modernos generan representaciones diferentes para la misma palabra según su contexto en la oración, capturando polisemia y dependencias sintácticas complejas."
+      },
+      {
+        type: "text",
+        value: "BERT (Bidirectional Encoder Representations from Transformers): Modelo basado en transformers que procesa texto en ambas direcciones simultáneamente. Pre-entrenado con tareas de lenguaje enmascarado y predicción de siguiente oración."
+      },
+      {
+        type: "code",
+        value: `# Ejemplo de uso de BERT con Hugging Face
+from transformers import BertTokenizer, BertModel
+import torch
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased')
+
+inputs = tokenizer("Hello world!", return_tensors="pt")
+outputs = model(**inputs)
+
+last_hidden_states = outputs.last_hidden_state  # Embeddings contextuales`
+      },
+      {
+        type: "img",
+        value: "Arquitectura de BERT mostrando las capas de transformers y atención multi-head"
+      },
+      {
+        type: "text",
+        value: "Los embeddings contextuales han revolucionado el NLP, permitiendo state-of-the-art en prácticamente todas las tareas benchmark. Sin embargo, requieren significativamente más recursos computacionales que embeddings estáticos."
+      }
+    ],
+    children: []
+  },
+  {
+  id: "modelos_de_lenguaje_llms",
+  title: "Modelos de Lenguaje a Gran Escala (LLMs)",
+  subtitle: "Arquitecturas y aplicaciones de modelos de lenguaje modernos",
+  content: [
+    {
+      type: "text",
+      value: "Los Large Language Models (LLMs) son sistemas de inteligencia artificial entrenados en vastas cantidades de datos de texto que pueden entender, generar y manipular lenguaje humano con notable fluidez. Estos modelos han revolucionado el campo del procesamiento de lenguaje natural."
+    },
+    {
+      type: "img",
+      value: "Evolución cronológica de los modelos de lenguaje desde RNNs hasta transformers modernos"
+    },
+    {
+      type: "list",
+      value: [
+        "Basados en arquitecturas Transformer con mecanismos de atención",
+        "Entrenados con cientos de GB o incluso TB de datos textuales",
+        "Contienen desde millones hasta billones de parámetros",
+        "Capacidad de few-shot y zero-shot learning"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los LLMs pueden generar contenido sesgado o inexacto. Siempre se debe verificar la información crítica y usar técnicas de mitigación de sesgos."
+    }
+  ],
+  children: [
+    "modelos_de_lenguaje_llms_modelos",
+    "modelos_de_lenguaje_llms_tareas",
+    "modelos_de_lenguaje_llms_parametros"
+  ]
+},
+{
+  id: "modelos_de_lenguaje_llms_modelos",
+  title: "Arquitecturas Principales de LLMs",
+  subtitle: "Modelos fundamentales en el ecosistema actual",
+  content: [
+    {
+      type: "text",
+      value: "T5 (Text-to-Text Transfer Transformer): Modelo unificado que convierte todas las tareas a formato texto-a-texto. Ejemplo: 'traducir inglés a francés: Hello → Bonjour'"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de uso de T5 con Hugging Face
+from transformers import T5Tokenizer, T5ForConditionalGeneration
+
+tokenizer = T5Tokenizer.from_pretrained("t5-small")
+model = T5ForConditionalGeneration.from_pretrained("t5-small")
+
+input_text = "translate English to French: Hello, how are you?"
+input_ids = tokenizer(input_text, return_tensors="pt").input_ids
+
+outputs = model.generate(input_ids)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))`
+    },
+    {
+      type: "text",
+      value: "BART: Modelo de secuencia a secuencia que combina un codificador bidireccional (como BERT) con un decodificador autoregresivo (como GPT). Excelente para tareas de generación y reconstrucción de texto."
+    },
+    {
+      type: "text",
+      value: "LLaMA: Familia de modelos eficientes de Meta, diseñados para alto rendimiento con menos parámetros. Versiones desde 7B hasta 65B parámetros."
+    },
+    {
+      type: "text",
+      value: "Falcon: Modelos de última generación desarrollados por el Technology Innovation Institute, destacando por su eficiencia computacional y rendimiento en benchmarks."
+    },
+    {
+      type: "text",
+      value: "Mistral: Modelos optimizados para inferencia rápida y eficiencia en hardware limitado, manteniendo altos niveles de rendimiento."
+    },
+    {
+      type: "text",
+      value: "GPT (Generative Pre-trained Transformer): Serie de modelos de OpenAI que popularizaron los transformers escalados. GPT-3 y GPT-4 son modelos autoregresivos puros con capacidades emergentes a gran escala."
+    },
+    {
+      type: "img",
+      value: "Comparativa de tamaños de modelos (parámetros) y rendimiento en benchmarks comunes"
+    },
+    {
+      type: "warning",
+      value: "La elección del modelo depende del uso caso: modelos más grandes no siempre son mejores para tareas específicas. Considerar latencia, coste y requisitos de hardware."
+    }
+  ],
+  children: []
+},
+{
+  id: "modelos_de_lenguaje_llms_tareas",
+  title: "Tareas Principales con LLMs",
+  subtitle: "Aplicaciones prácticas de modelos de lenguaje",
+  content: [
+    {
+      type: "text",
+      value: "Traducción: Conversión automática entre idiomas. Los LLMs modernos superan enfoques tradicionales en lenguajes con datos limitados."
+    },
+    {
+      type: "text",
+      value: "Resumen: Generación de versiones condensadas que capturan la esencia de textos largos. Dos enfoques principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Resumen extractivo: Selección de frases clave del texto original",
+        "Resumen abstractivo: Generación de nuevo texto que captura el significado"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de resumen con BART
+from transformers import pipeline
+
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+article = "Los modelos de lenguaje están revolucionando... [texto largo]..."
+summary = summarizer(article, max_length=130, min_length=30)
+print(summary[0]['summary_text'])`
+    },
+    {
+      type: "text",
+      value: "QA (Question Answering): Extracción o generación de respuestas a preguntas basadas en contexto. Puede ser:"
+    },
+    {
+      type: "list",
+      value: [
+        "Closed-book: El modelo responde usando su conocimiento interno",
+        "Open-book: El modelo usa un contexto proporcionado"
+      ]
+    },
+    {
+      type: "text",
+      value: "Generación de Texto: Creación de contenido original, desde prosa hasta código. Requiere cuidadoso ajuste de parámetros para balancear creatividad y coherencia."
+    },
+    {
+      type: "text",
+      value: "Captioning: Generación de descripciones textuales para imágenes (en modelos multimodales) o secuencias de datos."
+    },
+    {
+      type: "text",
+      value: "Clasificación por Prompt: Técnica donde se formula la clasificación como generación de texto mediante prompts ingeniosos, evitando fine-tuning."
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de zero-shot classification usando prompts con un LLM"
+    }
+  ],
+  children: []
+},
+{
+  id: "modelos_de_lenguaje_llms_parametros",
+  title: "Hiperparámetros de Generación",
+  subtitle: "Controlando el comportamiento de los LLMs",
+  content: [
+    {
+      type: "text",
+      value: "Temperatura: Controla la aleatoriedad de las predicciones. Valores más bajos (0.1-0.5) hacen el texto más determinista, valores altos (0.7-1.0) aumentan creatividad."
+    },
+    {
+      type: "text",
+      value: "Top-k: Limita la selección a las k palabras más probables en cada paso. Valores pequeños restringen el vocabulario, valores grandes permiten más diversidad."
+    },
+    {
+      type: "text",
+      value: "Top-p (Nucleus Sampling): Selecciona del conjunto más pequeño de palabras cuya probabilidad acumulada excede p. Más dinámico que top-k."
+    },
+    {
+      type: "code",
+      value: `# Configuración de parámetros de generación
+generation_config = {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "top_k": 50,
+    "max_new_tokens": 100,
+    "repetition_penalty": 1.2
+}`,
+    },
+    {
+      type: "text",
+      value: "Beam Search: Algoritmo de búsqueda que mantiene múltiples secuencias hipotéticas en cada paso, eligiendo las más probables globalmente. Útil para tareas con una respuesta óptima clara."
+    },
+    {
+      type: "text",
+      value: "Max Tokens: Límite de longitud de la salida generada. Esencial para controlar costes y evitar respuestas excesivamente largas."
+    },
+    {
+      type: "text",
+      value: "Penalización por Repetición: Desalienta la repetición de n-gramas en el texto generado. Valores típicos entre 1.0 (ninguna penalización) y 2.0 (fuerte penalización)."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparando muestreo greedy, beam search y muestreo con temperatura"
+    },
+    {
+      type: "warning",
+      value: "La configuración óptima varía por tarea. Experimentar con diferentes combinaciones es clave para obtener los mejores resultados."
+    }
+  ],
+  children: []
+},
+{
+  id: "prompt_engineering",
+  title: "Ingeniería de Prompts",
+  subtitle: "Técnicas para comunicarse efectivamente con modelos de lenguaje",
+  content: [
+    {
+      type: "text",
+      value: "La ingeniería de prompts es el arte y ciencia de diseñar entradas (prompts) que guían a los modelos de lenguaje para producir resultados óptimos. Combina comprensión técnica del modelo con principios de comunicación efectiva."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando cómo diferentes prompts producen variaciones en la salida del modelo"
+    },
+    {
+      type: "list",
+      value: [
+        "Aumenta la precisión y relevancia de las respuestas",
+        "Reduce sesgos y contenido no deseado",
+        "Permite controlar formato y estilo de salida",
+        "Facilita tareas complejas mediante descomposición"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los prompts efectivos varían entre modelos. Lo que funciona en GPT-4 puede no ser óptimo para LLaMA o Claude. Siempre probar con el modelo específico."
+    }
+  ],
+  children: [
+    "prompt_componentes",
+    "prompt_estrategias",
+    "prompt_memoria_de_conversacion"
+  ]
+},
+{
+  id: "prompt_componentes",
+  title: "Componentes de un Prompt Efectivo",
+  subtitle: "Elementos clave para estructurar instrucciones",
+  content: [
+    {
+      type: "text",
+      value: "Persona: Asignar una identidad o expertise al modelo mejora resultados. Ejemplo: 'Eres un historiador especializado en la Edad Media...'"
+    },
+    {
+      type: "text",
+      value: "Rol: Similar a persona pero más funcional. Ejemplo: 'Actúa como un tutor de Python para principiantes...'"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de prompt con rol específico
+prompt = """
+Eres un asistente médico AI especializado en cardiología. 
+Responde a preguntas de pacientes usando lenguaje claro 
+y sin jerga médica excesiva. Si la pregunta requiere 
+atención médica real, recomienda consultar a un profesional.
+
+Pregunta: ¿Qué puedo hacer para bajar mi presión arterial?
+"""`
+    },
+    {
+      type: "text",
+      value: "Contexto: Información de fondo que delimita el ámbito de respuesta. Ejemplo: 'En el contexto de desarrollo web moderno usando React 18...'"
+    },
+    {
+      type: "text",
+      value: "Audiencia: Especificar para quién es la respuesta ajusta el nivel técnico. Ejemplo: 'Explica como si tuviera 10 años...'"
+    },
+    {
+      type: "text",
+      value: "Formato: Indica cómo estructurar la salida. Ejemplo: 'Proporciona la respuesta en formato JSON con campos: resumen, pasos, advertencias'"
+    },
+    {
+      type: "text",
+      value: "Tono: Controla el estilo de comunicación. Ejemplo: 'Responde de forma profesional pero accesible...'"
+    },
+    {
+      type: "text",
+      value: "Ejemplos: Proporcionar ejemplos de entrada-salida (few-shot learning) mejora el rendimiento. Especialmente útil para tareas complejas o específicas."
+    },
+    {
+      type: "img",
+      value: "Comparación side-by-side de prompts con y sin componentes clave"
+    }
+  ],
+  children: []
+},
+{
+  id: "prompt_estrategias",
+  title: "Estrategias Avanzadas de Prompting",
+  subtitle: "Técnicas para tareas complejas",
+  content: [
+    {
+      type: "text",
+      value: "Más allá de los componentes básicos, existen estrategias sofisticadas que permiten resolver problemas complejos mediante ingeniería cuidadosa de prompts."
+    },
+    {
+      type: "img",
+      value: "Flujograma de selección de estrategias según tipo de tarea"
+    }
+  ],
+  children: [
+    "prompt_por_pasos_chaining",
+    "chainofthought",
+    "salida_estructurada",
+    "validacion_etica",
+    "evaluacion"
+  ]
+},
+{
+  id: "prompt_por_pasos_chaining",
+  title: "Prompt Chaining",
+  subtitle: "Descomposición de tareas complejas en pasos",
+  content: [
+    {
+      type: "text",
+      value: "Técnica que divide una consulta compleja en una secuencia de prompts más simples, donde la salida de uno se convierte en la entrada del siguiente."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de chaining para análisis de datos
+prompt1 = """
+Extrae las siguientes entidades del texto:
+- Nombres de empresas
+- Montos financieros
+- Fechas
+
+Texto: {texto_input}
+"""
+
+prompt2 = """
+Analiza las relaciones entre las entidades extraídas:
+{output_prompt1}
+
+Identifica posibles transacciones comerciales y genera
+un resumen en formato tabla.
+"""`,
+    },
+    {
+      type: "text",
+      value: "Ventajas:",
+    },
+    {
+      type: "list",
+      value: [
+        "Mayor precisión en cada etapa",
+        "Más fácil depuración",
+        "Permite intervención humana entre pasos",
+        "Reduce carga cognitiva del modelo"
+      ]
+    },
+    {
+      type: "warning",
+      value: "El chaining aumenta la latencia total y el costo (en APIs comerciales). Usar solo cuando la ganancia en calidad justifica el overhead."
+    }
+  ],
+  children: []
+},
+{
+  id: "chainofthought",
+  title: "Chain-of-Thought Prompting",
+  subtitle: "Inducir razonamiento paso a paso",
+  content: [
+    {
+      type: "text",
+      value: "Técnica que pide al modelo mostrar su proceso de razonamiento antes de dar la respuesta final, mejorando significativamente el rendimiento en tareas que requieren lógica o cálculo."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo estándar vs Chain-of-Thought
+# Prompt básico:
+"Si un libro cuesta $20 más que una revista y el combo cuesta $30, ¿cuánto cuesta la revista?"
+
+# Prompt con CoT:
+"Un libro cuesta $20 más que una revista. El combo de ambos cuesta $30. 
+Paso a paso, determina el precio de la revista mostrando tu razonamiento:"`,
+    },
+    {
+      type: "text",
+      value: "Variaciones avanzadas:",
+    },
+    {
+      type: "list",
+      value: [
+        "Self-Consistency: Ejecutar múltiples cadenas de pensamiento y tomar la respuesta más consistente",
+        "Least-to-Most: Guiar al modelo desde subproblemas simples hasta el complejo"
+      ]
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de accuracy mejorado con CoT en tareas matemáticas"
+    }
+  ],
+  children: []
+},
+{
+  id: "salida_estructurada",
+  title: "Generación de Salida Estructurada",
+  subtitle: "Controlar el formato de respuesta",
+  content: [
+    {
+      type: "text",
+      value: "Técnica para obtener respuestas en formatos específicos como JSON, XML, tablas o plantillas predefinidas, facilitando integración con sistemas automatizados."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de prompt para salida estructurada
+prompt = """
+Analiza el siguiente artículo y extrae:
+1. Entidades principales (personas, organizaciones)
+2. Sentimiento general (positivo/neutral/negativo)
+3. Temas clave
+
+Devuelve la respuesta en formato JSON con esta estructura:
+{
+  "entidades": [],
+  "sentimiento": "",
+  "temas": [],
+  "resumen": ""
+}
+
+Artículo: {texto_articulo}
+"""`,
+    },
+    {
+      type: "text",
+      value: "Técnicas complementarias:",
+    },
+    {
+      type: "list",
+      value: [
+        "Especificar delimitadores claros (```json, ---, etc.)",
+        "Proporcionar esquemas o ejemplos de formato",
+        "Usar herramientas como OpenAI Function Calling para JSON estructurado"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Siempre validar y sanitizar la salida estructurada. Los modelos pueden generar JSON malformado ocasionalmente."
+    }
+  ],
+  children: []
+},
+{
+  id: "validacion_etica",
+  title: "Validación Ética en Prompts",
+  subtitle: "Mitigación de riesgos y sesgos",
+  content: [
+    {
+      type: "text",
+      value: "Técnicas para incorporar consideraciones éticas directamente en los prompts, reduciendo probabilidad de contenido dañino, sesgado o incorrecto."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de prompt con salvaguardas éticas
+prompt = """
+Eres un asistente útil que sigue estos principios:
+1. No generar contenido violento o discriminatorio
+2. Verificar hechos cuando sea posible
+3. Admitir cuando no sabes algo
+4. Evitar dar consejos médicos/legales no calificados
+
+Pregunta: {user_input}
+"""`,
+    },
+    {
+      type: "text",
+      value: "Estrategias clave:",
+    },
+    {
+      type: "list",
+      value: [
+        "Lista explícita de restricciones",
+        "Sistemas de verificación en múltiples pasos",
+        "Prompting para auto-evaluación del modelo antes de responder",
+        "Templates para respuestas sensibles"
+      ]
+    },
+    {
+      type: "img",
+      value: "Flujo de validación ética en pipeline de generación"
+    }
+  ],
+  children: []
+},
+{
+  id: "evaluacion",
+  title: "Evaluación de Prompts",
+  subtitle: "Métricas y metodologías de evaluación",
+  content: [
+    {
+      type: "text",
+      value: "Proceso sistemático para medir la efectividad de diferentes estrategias de prompting, crucial para aplicaciones en producción."
+    },
+    {
+      type: "text",
+      value: "Enfoques principales:",
+    },
+    {
+      type: "list",
+      value: [
+        "Evaluación humana: Gold standard pero costosa",
+        "Evaluación automática: Métricas como BLEU, ROUGE para tareas específicas",
+        "Evaluación basada en modelos: Usar otro LLM para calificar respuestas"
+      ]
+    }
+  ],
+  children: [
+    "policy_evaluation",
+    "onoff_policy",
+    "reward_shaping"
+  ]
+},
+{
+  id: "prompt_memoria_de_conversacion",
+  title: "Gestión de Memoria en Conversaciones",
+  subtitle: "Mantener contexto en diálogos prolongados",
+  content: [
+    {
+      type: "text",
+      value: "Técnicas para manejar el estado de conversaciones extendidas, crucial para chatbots y asistentes interactivos donde el contexto histórico es esencial."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura de sistema conversacional con gestión de memoria"
+    }
+  ],
+  children: [
+    "conversation_buffer",
+    "memory_window"
+  ]
+},
+{
+  id: "conversation_buffer",
+  title: "Conversation Buffer",
+  subtitle: "Almacenamiento completo del historial",
+  content: [
+    {
+      type: "text",
+      value: "Estrategia que mantiene todo el historial de conversación como contexto para cada nuevo turno. Simple pero costoso en tokens para diálogos largos."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de estructura de buffer
+conversation_history = [
+    {"role": "user", "content": "Hola, recomiéndame un libro de ciencia ficción"},
+    {"role": "assistant", "content": "¿Te interesa clásicos o contemporáneos?"},
+    {"role": "user", "content": "Prefiero autores actuales"}
+]
+
+# Para el próximo prompt, se incluye todo el historial
+prompt = f"""
+Historial de conversación:
+{format_history(conversation_history)}
+
+Nueva entrada del usuario: {nuevo_input}
+"""`,
+    },
+    {
+      type: "warning",
+      value: "Los modelos tienen límites de contexto (ej: 8K-128K tokens). Buffers completos pueden exceder este límite en conversaciones largas."
+    }
+  ],
+  children: []
+},
+{
+  id: "memory_window",
+  title: "Memory Window",
+  subtitle: "Ventana deslizante de contexto",
+  content: [
+    {
+      type: "text",
+      value: "Estrategia que mantiene solo los últimos N intercambios o tokens, balanceando retención de contexto con eficiencia computacional."
+    },
+    {
+      type: "code",
+      value: `# Implementación básica de ventana deslizante
+def get_recent_conversation(history, window_size=5):
+    return history[-window_size:] if len(history) > window_size else history`,
+    },
+    {
+      type: "text",
+      value: "Variaciones avanzadas:",
+    },
+    {
+      type: "list",
+      value: [
+        "Ventana dinámica que ajusta tamaño basado en importancia de turnos",
+        "Hybrid approaches: Ventana reciente + resumen de conversación anterior",
+        "Retención selectiva de mensajes clave marcados por el sistema"
+      ]
+    },
+    {
+      type: "img",
+      value: "Comparación visual buffer completo vs ventana deslizante"
+    }
+  ],
+  children: []
+},
+{
+  id: "multimodalidad_y_generacion",
+  title: "Multimodalidad y Generación",
+  subtitle: "Modelos que procesan y generan múltiples tipos de datos",
+  content: [
+    {
+      type: "text",
+      value: "Los sistemas multimodales combinan y comprenden diferentes tipos de datos (texto, imágenes, audio) permitiendo aplicaciones más ricas y human-like. Esta capacidad es fundamental para crear IA que interactúe con el mundo de manera similar a los humanos."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando arquitectura multimodal con encoders para diferentes tipos de datos"
+    },
+    {
+      type: "list",
+      value: [
+        "Texto-Imagen: Generación y comprensión de imágenes a partir de texto",
+        "Texto-Audio: Sistemas de voz a texto y texto a voz",
+        "Modelos de Difusión: Generación de contenido de alta calidad mediante procesos iterativos"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los modelos multimodales requieren cantidades masivas de datos de entrenamiento y potencia computacional. Implementarlos desde cero es costoso."
+    }
+  ],
+  children: [
+    "texto__imagen",
+   "texto__audio",
+    "modelos_de_difusion"
+  ]
+},
+{
+  id: "texto__imagen",
+  title: "Modelos Texto-Imagen",
+  subtitle: "Sistemas que puentean lenguaje y visión",
+  content: [
+    {
+      type: "text",
+      value: "CLIP (Contrastive Language-Image Pretraining): Modelo de OpenAI que aprende asociaciones entre texto e imágenes mediante aprendizaje contrastivo. Permite búsqueda semántica de imágenes y clasificación zero-shot."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo usando CLIP para clasificación de imágenes
+import clip
+import torch
+from PIL import Image
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model, preprocess = clip.load("ViT-B/32", device=device)
+
+image = preprocess(Image.open("perro.jpg")).unsqueeze(0).to(device)
+text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in ["dog", "cat", "bird"]]).to(device)
+
+with torch.no_grad():
+    image_features = model.encode_image(image)
+    text_features = model.encode_text(text_inputs)
+    
+# Calcula similitudes
+logits_per_image = (image_features @ text_features.T).softmax(dim=1)
+print("Probabilidades:", logits_per_image.cpu().numpy())`
+    },
+    {
+      type: "text",
+      value: "DALL-E 2: Sistema generativo que crea imágenes realistas y arte a partir de descripciones textuales. Usa un proceso de difusión para generar imágenes de alta resolución con composición semántica avanzada."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de progresión de imagen en DALL-E 2 desde ruido hasta imagen final"
+    },
+    {
+      type: "text",
+      value: "Diffusion Models: Clase de modelos generativos que crean imágenes mediante un proceso iterativo de refinamiento, partiendo de ruido aleatorio. Incluyen Stable Diffusion, Imagen, y otros."
+    },
+    {
+      type: "text",
+      value: "BLIP (Bootstrapped Language-Image Pretraining): Framework para entrenamiento multimodal que permite tareas como generación de texto a partir de imágenes, búsqueda visual, y captioning. Combina encoders y decoders de forma flexible."
+    },
+    {
+      type: "warning",
+      value: "Los modelos generativos de imagen pueden producir contenido sesgado o no deseado. Es crucial implementar filtros y sistemas de moderación."
+    }
+  ],
+  children: []
+},
+{
+  id: "texto__audio",
+  title: "Modelos Texto-Audio",
+  subtitle: "Sistemas de procesamiento de voz y sonido",
+  content: [
+    {
+      type: "text",
+      value: "Whisper (STT - Speech to Text): Modelo de OpenAI para reconocimiento de voz que maneja múltiples idiomas y dialectos con alta precisión. Es robusto a ruido ambiental y variaciones en el habla."
+    },
+    {
+      type: "code",
+      value: `# Transcripción de audio con Whisper
+import whisper
+
+model = whisper.load_model("medium")
+result = model.transcribe("audio.mp3", language="es")
+
+print("Texto transcrito:", result["text"])
+print("Segmentos:", result["segments"])`
+    },
+    {
+      type: "text",
+      value: "TTS (Text to Speech): Sistemas que convierten texto en voz natural. Modelos modernos como VITS, Tortoise-TTS y ElevenLabs producen voces casi indistinguibles de humanas, con control sobre tono, emoción y estilo."
+    },
+    {
+      type: "img",
+      value: "Arquitectura típica de sistema TTS mostrando pipeline de texto a características acústicas a waveform"
+    },
+    {
+      type: "text",
+      value: "Aplicaciones clave:",
+    },
+    {
+      type: "list",
+      value: [
+        "Asistentes virtuales con interacción por voz",
+        "Accesibilidad para personas con discapacidades visuales",
+        "Producción de contenido multimedia automatizado",
+        "Traducción de voz en tiempo real conservando la voz original"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los sistemas TTS avanzados plantean riesgos éticos como deepfakes de voz. Es esencial implementar mecanismos de autenticación y detección."
+    }
+  ],
+  children: []
+},
+
+  {
+    id: "modelos_de_difusion",
+    title: "Modelos de Difusión en Inteligencia Artificial",
+    subtitle: "Generación de imágenes y datos mediante procesos iterativos",
+    content: [
+      {
+        type: "text",
+        value: "Los modelos de difusión son una clase de modelos generativos que aprenden a crear datos (especialmente imágenes) mediante un proceso de desnoising gradual. Funcionan añadiendo ruido a los datos de entrenamiento y luego aprendiendo a revertir este proceso."
+      },
+      {
+        type: "img",
+        value: "Diagrama del proceso de difusión mostrando la adición gradual de ruido y el proceso inverso de generación"
+      },
+      {
+        type: "text",
+        value: "Estos modelos han revolucionado la generación de imágenes, permitiendo crear contenido visual de alta calidad a partir de descripciones textuales."
+      },
+      {
+        type: "warning",
+        value: "Los modelos de difusión requieren importantes recursos computacionales para entrenamiento e inferencia, especialmente en alta resolución."
+      },
+      {
+        type: "code",
+        value: "// Ejemplo básico de uso de Stable Diffusion con Python\nfrom diffusers import StableDiffusionPipeline\nimport torch\n\npipe = StableDiffusionPipeline.from_pretrained('CompVis/stable-diffusion-v1-4', torch_dtype=torch.float16)\npipe = pipe.to('cuda')\n\nimage = pipe('a painting of an astronaut riding a horse on mars').images[0]\nimage.save('astronaut_horse.png')"
+      }
+    ],
+    children: [
+    ]
+  },
+  {
+    id: "sistemas_de_recomendacion",
+    title: "Sistemas de Recomendación",
+    subtitle: "Técnicas para sugerir elementos relevantes a los usuarios",
+    content: [
+      {
+        type: "text",
+        value: "Los sistemas de recomendación son algoritmos diseñados para sugerir elementos relevantes (productos, películas, música, etc.) a los usuarios basándose en sus preferencias y comportamiento."
+      },
+      {
+        type: "img",
+        value: "Diagrama de arquitectura típica de un sistema de recomendación mostrando interacción usuario-sistema"
+      },
+      {
+        type: "list",
+        value: [
+          "Aplicaciones comunes: e-commerce (Amazon), streaming (Netflix, Spotify), redes sociales",
+          "Beneficios principales: aumento de engagement, descubrimiento de contenido, personalización",
+          "Métricas clave: precisión, cobertura, novedad, diversidad"
+        ]
+      },
+      {
+        type: "code",
+        value: "// Ejemplo básico de sistema de recomendación colaborativo\nfrom surprise import Dataset, KNNBasic\nfrom surprise.model_selection import cross_validate\n\n# Cargar datos de ratings\ndata = Dataset.load_builtin('ml-100k')\n\n# Configurar algoritmo de filtrado colaborativo\nalgo = KNNBasic(k=40, sim_options={'user_based': True})\n\n# Evaluar con validación cruzada\ncross_validate(algo, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)"
+      }
+    ],
+    children: [
+      "sistemas_de_recomendacion_tipos",
+      "sistemas_de_recomendacion_vulnerabilidades"
+    ]
+  },
+  {
+    id: "sistemas_de_recomendacion_tipos",
+    title: "Tipos de Sistemas de Recomendación",
+    subtitle: "Enfoques fundamentales para generar recomendaciones",
+    content: [
+      {
+        type: "text",
+        value: "Existen varios paradigmas principales para construir sistemas de recomendación, cada uno con sus fortalezas y debilidades según el contexto de aplicación."
+      },
+      {
+        type: "img",
+        value: "Comparación visual de los tres tipos principales de sistemas de recomendación"
+      },
+      {
+        type: "text",
+        value: "1. Basado en Contenido: Recomienda ítems similares a aquellos que el usuario ha interactuado positivamente en el pasado, usando características de los ítems."
+      },
+      {
+        type: "text",
+        value: "2. Colaborativo: Utiliza las interacciones de muchos usuarios para encontrar patrones (usuarios similares o ítems similares) sin necesidad de información sobre los ítems."
+      },
+      {
+        type: "text",
+        value: "3. Híbrido: Combina múltiples enfoques para superar las limitaciones de cada método individual, ofreciendo generalmente mejores resultados."
+      },
+      {
+        type: "warning",
+        value: "El problema de arranque en frío (nuevos usuarios o ítems sin historial) afecta especialmente a los sistemas colaborativos puros."
+      }
+    ],
+    children: [
+    ]
+  },
+  {
+    id: "sistemas_de_recomendacion_vulnerabilidades",
+    title: "Vulnerabilidades en Sistemas de Recomendación",
+    subtitle: "Ataques y limitaciones comunes en algoritmos de recomendación",
+    content: [
+      {
+        type: "text",
+        value: "Los sistemas de recomendación pueden ser vulnerables a diversos tipos de ataques y manipulaciones que afectan su calidad y equidad."
+      },
+      {
+        type: "img",
+        value: "Diagrama mostrando diferentes tipos de ataques a sistemas de recomendación"
+      },
+      {
+        type: "text",
+        value: "Principales vulnerabilidades:"
+      },
+      {
+        type: "list",
+        value: [
+          "Ataques aleatorios: Inyección de perfiles con ratings aleatorios para afectar recomendaciones",
+          "Ataques promedio: Perfiles falsos que dan ratings cercanos al promedio para influir silenciosamente",
+          "Ataques Bandwagon: Popularizar ciertos ítems mediante ratings coordinados",
+          "Manipulación de Clickstream: Explotar el rastreo de comportamiento para sesgar recomendaciones",
+          "Inyección de perfiles: Creación masiva de usuarios falsos para manipular resultados"
+        ]
+      },
+      {
+        type: "text",
+        value: "Técnicas de defensa incluyen detección de anomalías, modelos robustos a ataques, y verificación de identidad."
+      },
+      {
+        type: "code",
+        value: "// Ejemplo de detección de perfiles sospechosos\nfunction detectSuspiciousUsers(ratings) {\n  // Buscar usuarios con muchos ratings en poco tiempo\n  const threshold = 100; // ratings por hora\n  return ratings.filter(r => \n    r.ratingsPerHour > threshold && \n    r.ratingDeviation < 0.5\n  );\n}"
+      }
+    ],
+    children: [
+    ]
+  },
+  {
+  id: "explainable_ai",
+  title: "Explainable AI (XAI)",
+  subtitle: "Técnicas para hacer comprensible la inteligencia artificial",
+  content: [
+    {
+      type: "text",
+      value: "La Explainable AI (XAI) se refiere a métodos y técnicas que hacen que los resultados de los modelos de machine learning sean comprensibles para los humanos. Esto es crucial para aumentar la confianza, cumplir con regulaciones y depurar modelos."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando el espectro de interpretabilidad en modelos de ML, desde modelos lineales hasta redes neuronales complejas"
+    },
+    {
+      type: "list",
+      value: [
+        "Importancia en sectores regulados: salud, finanzas, justicia",
+        "Requerimientos legales: GDPR, Ley de Algoritmos",
+        "Beneficios: Detección de sesgos, mejora de modelos, transparencia"
+      ]
+    },
+    {
+      type: "warning",
+      value: "No todos los métodos de explicación son igualmente confiables. Algunos pueden generar explicaciones engañosas si no se aplican correctamente."
+    }
+  ],
+  children: [
+    "basado_en_gradientes",
+    "aproximaciones_locales",
+    "toolkits",
+    "contrafactuales"
+  ]
+},
+{
+  id: "basado_en_gradientes",
+  title: "Métodos Basados en Gradientes",
+  subtitle: "Técnicas que utilizan derivadas para explicar decisiones del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Estos métodos analizan cómo cambian las predicciones del modelo con pequeñas variaciones en los inputs, utilizando información de los gradientes durante el forward/backward pass."
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo de métodos basados en gradientes mostrando cómo se propagan las señales a través de la red neuronal"
+    },
+    {
+      type: "text",
+      value: "Son especialmente útiles para modelos profundos y proporcionan explicaciones a nivel de características (feature-level)."
+    },
+    {
+      type: "code",
+      value: "# Ejemplo genérico de cálculo de gradientes en PyTorch\nimport torch\n\nmodel.eval()\ninput_tensor.requires_grad = True\noutput = model(input_tensor)\noutput.backward()\ngradients = input_tensor.grad"
+    }
+  ],
+  children: [
+    "gradcam",
+    "scorecam",
+    "cam",
+    "tcav",
+    "ace",
+    "ig",
+    "sanity_checks"
+  ]
+},
+{
+  id: "gradcam",
+  title: "Grad-CAM",
+  subtitle: "Gradient-weighted Class Activation Mapping",
+  content: [
+    {
+      type: "text",
+      value: "Grad-CAM produce explicaciones visuales para decisiones de redes convolucionales, destacando regiones importantes en imágenes para una predicción particular."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de Grad-CAM mostrando áreas calientes en una imagen que influyeron en la clasificación"
+    },
+    {
+      type: "text",
+      value: "Funciona mediante:"
+    },
+    {
+      type: "list",
+      value: [
+        "Calcular gradientes de la clase objetivo respecto a las activaciones de la última capa convolucional",
+        "Promediar los gradientes espacialmente para obtener pesos de importancia",
+        "Combinar las activaciones con los pesos para crear el mapa de calor"
+      ]
+    },
+    {
+      type: "code",
+      value: "# Implementación básica de Grad-CAM\nimport torch\nimport torch.nn.functional as F\n\ndef grad_cam(model, input_tensor, target_class):\n    activations = {}\n    gradients = {}\n    \n    # Hook para capturar activaciones y gradientes\n    def forward_hook(module, input, output):\n        activations['last_conv'] = output.detach()\n    \n    def backward_hook(module, grad_input, grad_output):\n        gradients['last_conv'] = grad_output[0].detach()\n    \n    # Registrar hooks\n    handle_forward = model.last_conv.register_forward_hook(forward_hook)\n    handle_backward = model.last_conv.register_backward_hook(backward_hook)\n    \n    # Forward pass\n    output = model(input_tensor)\n    model.zero_grad()\n    \n    # Backward pass para la clase objetivo\n    one_hot = F.one_hot(torch.tensor([target_class]), num_classes=output.shape[1])\n    output.backward(gradient=one_hot)\n    \n    # Calcular pesos\n    pooled_gradients = torch.mean(gradients['last_conv'], dim=[0, 2, 3])\n    \n    # Combinar activaciones con pesos\n    activations = activations['last_conv'].squeeze()\n    for i in range(activations.shape[0]):\n        activations[i, :, :] *= pooled_gradients[i]\n    \n    heatmap = torch.mean(activations, dim=0).numpy()\n    \n    # Limpiar hooks\n    handle_forward.remove()\n    handle_backward.remove()\n    \n    return heatmap"
+    },
+    {
+      type: "warning",
+      value: "Grad-CAM solo funciona con arquitecturas que contienen capas convolucionales y puede perder detalles espaciales finos."
+    }
+  ],
+  children: []
+},
+{
+  id: "scorecam",
+  title: "Score-CAM",
+  subtitle: "Score-weighted Class Activation Mapping",
+  content: [
+    {
+      type: "text",
+      value: "Score-CAM es una variante de CAM que elimina la dependencia de los gradientes, usando en su lugar aumentaciones de la imagen para determinar la importancia de las regiones."
+    },
+    {
+      type: "img",
+      value: "Comparación visual entre Grad-CAM y Score-CAM mostrando diferencias en los mapas de calor generados"
+    },
+    {
+      type: "text",
+      value: "Ventajas sobre Grad-CAM:"
+    },
+    {
+      type: "list",
+      value: [
+        "Más robusto a ruido en los gradientes",
+        "No depende de la retropropagación",
+        "Pesos determinados por el score real del modelo en lugar de gradientes"
+      ]
+    },
+    {
+      type: "text",
+      value: "Proceso básico:"
+    },
+    {
+      type: "list",
+      value: [
+        "Generar máscaras para diferentes regiones de la imagen",
+        "Aplicar cada máscara y obtener el score de confianza del modelo",
+        "Calcular pesos basados en estos scores",
+        "Combinar las activaciones con los pesos para el mapa final"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "cam",
+  title: "Class Activation Mapping (CAM)",
+  subtitle: "El método original para localizar regiones importantes en imágenes",
+  content: [
+    {
+      type: "text",
+      value: "CAM fue el primer método en introducir mapas de activación de clase, requiriendo una arquitectura específica con capas convolucionales seguidas directamente por una capa global average pooling y luego la capa fully-connected."
+    },
+    {
+      type: "img",
+      value: "Arquitectura requerida para CAM mostrando la secuencia conv -> GAP -> FC"
+    },
+    {
+      type: "text",
+      value: "Limitaciones principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Requiere modificar la arquitectura del modelo",
+        "Solo funciona con esa estructura específica",
+        "Menos flexible que Grad-CAM o Score-CAM"
+      ]
+    },
+    {
+      type: "text",
+      value: "A pesar de sus limitaciones, CAM sentó las bases para métodos posteriores más sofisticados."
+    }
+  ],
+  children: []
+},
+{
+  id: "tcav",
+  title: "TCAV (Testing with Concept Activation Vectors)",
+  subtitle: "Explicaciones basadas en conceptos de alto nivel",
+  content: [
+    {
+      type: "text",
+      value: "TCAV cuantifica qué tan importante es un concepto definido por el usuario (como 'rayas' o 'color rojo') para las predicciones de un modelo."
+    },
+    {
+      type: "img",
+      value: "Flujo de TCAV mostrando cómo se definen conceptos y se calculan vectores de activación"
+    },
+    {
+      type: "text",
+      value: "Pasos principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Definir el concepto con ejemplos positivos y negativos",
+        "Entrenar un clasificador lineal en el espacio de activaciones",
+        "Calcular la dirección del concepto (CAV)",
+        "Medir sensibilidad del modelo a este concepto (TCAV score)"
+      ]
+    },
+    {
+      type: "code",
+      value: "# Pseudocódigo para TCAV\n\ndef compute_tcav(model, concept_examples, random_examples, layer_name):\n    # Obtener activaciones para ambos conjuntos\n    act_concept = get_activations(model, concept_examples, layer_name)\n    act_random = get_activations(model, random_examples, layer_name)\n    \n    # Entrenar clasificador lineal\n    X = np.concatenate([act_concept, act_random])\n    y = np.array([1]*len(act_concept) + [0]*len(act_random))\n    clf = LogisticRegression().fit(X, y)\n    \n    # Obtener CAV (coeficientes del modelo)\n    cav = clf.coef_[0]\n    \n    # Calcular TCAV score\n    gradients = compute_gradients(model, cav, layer_name)\n    tcav_score = np.mean(np.sign(gradients.dot(cav)))\n    \n    return tcav_score, cav"
+    }
+  ],
+  children: []
+},
+{
+  id: "ace",
+  title: "ACE (Automated Concept-based Explanation)",
+  subtitle: "Descubrimiento automático de conceptos interpretables",
+  content: [
+    {
+      type: "text",
+      value: "ACE extiende TCAV descubriendo automáticamente conceptos relevantes en lugar de requerir que sean definidos por el usuario."
+    },
+    {
+      type: "img",
+      value: "Proceso de ACE mostrando clustering de activaciones y descubrimiento de conceptos"
+    },
+    {
+      type: "text",
+      value: "Flujo de trabajo:"
+    },
+    {
+      type: "list",
+      value: [
+        "Agrupar activaciones intermedias del modelo",
+        "Identificar clusters como conceptos potenciales",
+        "Validar conceptos con intervenciones humanas",
+        "Cuantificar importancia de cada concepto"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los conceptos descubiertos automáticamente pueden no siempre ser interpretables para humanos. Se recomienda validación humana."
+    }
+  ],
+  children: []
+},
+{
+  id: "ig",
+  title: "Integrated Gradients",
+  subtitle: "Método de atribución basado en la integral de gradientes",
+  content: [
+    {
+      type: "text",
+      value: "Integrated Gradients atribuye la predicción del modelo a sus características de entrada considerando la integral de los gradientes a lo largo del camino desde un baseline hasta el input actual."
+    },
+    {
+      type: "img",
+      value: "Visualización del camino de integración desde el baseline hasta el input"
+    },
+    {
+      type: "text",
+      value: "Propiedades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Completo: Las atribuciones suman la diferencia entre la salida en el input y el baseline",
+        "Sensible a la implementación: No asigna gradiente a características irrelevantes",
+        "Conservación de simetría: Características simétricas reciben atribuciones iguales"
+      ]
+    },
+    {
+      type: "code",
+      value: "import numpy as np\n\ndef integrated_gradients(model, input, baseline, target_class, steps=50):\n    # Interpolar entre baseline e input\n    interpolated = [baseline + (float(i)/steps)*(input-baseline) \n                   for i in range(0, steps+1)]\n    \n    # Calcular gradientes\n    gradients = []\n    for x in interpolated:\n        x_tensor = torch.tensor(x, requires_grad=True)\n        output = model(x_tensor)\n        output[0, target_class].backward()\n        grad = x_tensor.grad.numpy()\n        gradients.append(grad)\n    \n    # Promedio de gradientes\n    avg_gradients = np.mean(gradients[:-1], axis=0)\n    \n    # Calcular atribuciones\n    attributions = (input - baseline) * avg_gradients\n    \n    return attributions"
+    }
+  ],
+  children: []
+},
+{
+  id: "sanity_checks",
+  title: "Sanity Checks para Métodos de Explicación",
+  subtitle: "Validando la confiabilidad de las explicaciones",
+  content: [
+    {
+      type: "text",
+      value: "No todas las explicaciones generadas por métodos XAI son igualmente confiables. Los sanity checks ayudan a evaluar la validez de las explicaciones."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando diferentes tipos de pruebas de sanidad para métodos XAI"
+    },
+    {
+      type: "text",
+      value: "Pruebas comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Prueba de aleatorización de modelo: Las explicaciones deberían cambiar significativamente si el modelo se aleatoriza",
+        "Prueba de aleatorización de datos: Las explicaciones deberían ser diferentes para inputs aleatorios",
+        "Prueba de completitud: Para métodos como Integrated Gradients, verificar que las atribuciones sumen la diferencia de salida",
+        "Consistencia: Explicaciones deberían ser consistentes para pequeñas perturbaciones del input"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Muchos métodos populares fallan algunas pruebas de sanidad. Es crucial entender las limitaciones de cada técnica."
+    }
+  ],
+  children: []
+},
+{
+  id: "aproximaciones_locales",
+  title: "Aproximaciones Locales",
+  subtitle: "Métodos que explican predicciones individuales",
+  content: [
+    {
+      type: "text",
+      value: "Las aproximaciones locales explican predicciones individuales aproximando el modelo complejo con un modelo interpretable localmente alrededor de la predicción de interés."
+    },
+    {
+      type: "img",
+      value: "Visualización de cómo un modelo complejo es aproximado localmente por un modelo simple"
+    },
+    {
+      type: "text",
+      value: "Características principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Explicaciones específicas para cada instancia",
+        "No proporcionan una visión global del modelo",
+        "Útiles para depuración y explicación de casos particulares",
+        "Computacionalmente más eficientes que métodos globales"
+      ]
+    }
+  ],
+  children: [
+    "lime",
+    "shap"
+  ]
+},
+{
+  id: "lime",
+  title: "LIME (Local Interpretable Model-agnostic Explanations)",
+  subtitle: "Aproximación local con modelos lineales",
+  content: [
+    {
+      type: "text",
+      value: "LIME explica predicciones individuales perturbando el input y observando cómo cambian las predicciones, luego ajustando un modelo lineal simple a estas perturbaciones."
+    },
+    {
+      type: "img",
+      value: "Diagrama del proceso LIME mostrando perturbaciones y ajuste del modelo local"
+    },
+    {
+      type: "text",
+      value: "Pasos clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Generar muestras perturbadas alrededor de la instancia a explicar",
+        "Obtener predicciones del modelo complejo para estas muestras",
+        "Ponderar muestras por su proximidad a la instancia original",
+        "Entrenar modelo interpretable (generalmente lineal) en las muestras ponderadas"
+      ]
+    },
+    {
+      type: "code",
+      value: "from lime import lime_tabular\n\n# Crear explicador\nexplainer = lime_tabular.LimeTabularExplainer(\n    training_data=X_train.values,\n    feature_names=feature_names,\n    class_names=['class0', 'class1'],\n    mode='classification'\n)\n\n# Generar explicación para una instancia\nexp = explainer.explain_instance(\n    X_test.iloc[0].values, \n    model.predict_proba, \n    num_features=5\n)\n\nexp.show_in_notebook()"
+    },
+    {
+      type: "warning",
+      value: "LIME puede ser sensible a la elección del kernel de proximidad y al número de muestras generadas."
+    }
+  ],
+  children: []
+},
+{
+  id: "shap",
+  title: "SHAP (SHapley Additive exPlanations)",
+  subtitle: "Explicaciones basadas en teoría de juegos",
+  content: [
+    {
+      type: "text",
+      value: "SHAP utiliza valores Shapley de la teoría de juegos para asignar importancia a cada característica de manera que se satisfagan propiedades matemáticas deseables."
+    },
+    {
+      type: "img",
+      value: "Diagrama de valores SHAP mostrando contribuciones de características para una predicción"
+    },
+    {
+      type: "text",
+      value: "Propiedades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Eficiencia: La suma de las contribuciones es igual a la salida del modelo menos el valor esperado",
+        "Simetría: Características idénticas reciben la misma atribución",
+        "Linealidad: Para modelos lineales, SHAP coincide con los coeficientes",
+        "Consistencia: Si un modelo cambia para hacer una característica más importante, su atribución SHAP no disminuye"
+      ]
+    },
+    {
+      type: "code",
+      value: "import shap\n\n# Crear explicador (versión para árboles)\nexplainer = shap.TreeExplainer(model)\n\n# Calcular valores SHAP para un conjunto de datos\nshap_values = explainer.shap_values(X_test)\n\n# Visualizar para una instancia\nshap.force_plot(explainer.expected_value, shap_values[0,:], X_test.iloc[0,:])"
+    },
+    {
+      type: "text",
+      value: "Variantes de SHAP:"
+    },
+    {
+      type: "list",
+      value: [
+        "KernelSHAP: Versión model-agnóstica (similar a LIME pero con propiedades SHAP)",
+        "TreeSHAP: Optimizado para modelos basados en árboles",
+        "DeepSHAP: Para redes neuronales, aproxima SHAP con propagación de reglas"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "toolkits",
+  title: "Toolkits para XAI",
+  subtitle: "Bibliotecas y frameworks para explicabilidad",
+  content: [
+    {
+      type: "text",
+      value: "Existen múltiples bibliotecas que implementan métodos de explicabilidad, facilitando su aplicación y comparación."
+    },
+    {
+      type: "img",
+      value: "Comparación de toolkits populares de XAI mostrando sus características principales"
+    },
+    {
+      type: "text",
+      value: "Criterios para elegir un toolkit:"
+    },
+    {
+      type: "list",
+      value: [
+        "Tipos de modelos soportados",
+        "Variedad de métodos implementados",
+        "Facilidad de integración con tu stack tecnológico",
+        "Capacidades de visualización",
+        "Soporte para diferentes tipos de datos (tablas, imágenes, texto)"
+      ]
+    }
+  ],
+  children: [
+    "captum",
+    "interpretml",
+    "ibm_aix360",
+    "omnixai"
+  ]
+},
+{
+  id: "captum",
+  title: "Captum",
+  subtitle: "Explicabilidad para PyTorch",
+  content: [
+    {
+      type: "text",
+      value: "Captum es una biblioteca de PyTorch que proporciona herramientas para entender qué características contribuyen a las predicciones de modelos."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura de Captum mostrando sus módulos principales"
+    },
+    {
+      type: "text",
+      value: "Características principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Integración nativa con PyTorch",
+        "Soporte para atribución de características, capas y neuronas",
+        "Implementa métodos como Integrated Gradients, DeepLIFT, Guided Grad-CAM",
+        "Visualizaciones integradas"
+      ]
+    },
+    {
+      type: "code",
+      value: "import torch\nfrom captum.attr import IntegratedGradients\n\n# Inicializar el método\nig = IntegratedGradients(model)\n\n# Calcular atribuciones\ninput_tensor = torch.tensor(X_test[0:1], dtype=torch.float32)\nbaseline = torch.zeros_like(input_tensor)\nattr = ig.attribute(input_tensor, baseline, target=1)\n\n# Visualizar\nfrom captum.attr import visualization as viz\nviz.visualize_image_attr(attr.numpy(), \n                        original_image=input_tensor.numpy(),\n                        method='blended_heat_map')"
+    }
+  ],
+  children: []
+},
+{
+  id: "interpretml",
+  title: "InterpretML",
+  subtitle: "Kit de herramientas para modelos interpretables",
+  content: [
+    {
+      type: "text",
+      value: "InterpretML es un paquete de Python que contiene una variedad de métodos para entrenar modelos interpretables y explicar modelos existentes."
+    },
+    {
+      type: "img",
+      value: "Dashboard de InterpretML mostrando visualizaciones interactivas"
+    },
+    {
+      type: "text",
+      value: "Funcionalidades destacadas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Implementa modelos interpretables como Explainable Boosting Machines (EBM)",
+        "Soporta métodos post-hoc como SHAP y LIME",
+        "Interfaz unificada para diferentes técnicas",
+        "Dashboard interactivo para explorar explicaciones"
+      ]
+    },
+    {
+      type: "code",
+      value: "from interpret import show\nfrom interpret.data import ClassHistogram\nfrom interpret.glassbox import ExplainableBoostingClassifier\n\n# Entrenar modelo interpretable\nebm = ExplainableBoostingClassifier()\nebm.fit(X_train, y_train)\n\n# Generar explicaciones\nebm_global = ebm.explain_global()\nebm_local = ebm.explain_local(X_test[:5], y_test[:5])\n\n# Visualizar\nshow([ebm_global, ebm_local])"
+    }
+  ],
+  children: []
+},
+{
+  id: "ibm_aix360",
+  title: "IBM AI Explainability 360",
+  subtitle: "Kit de herramientas completo para explicabilidad",
+  content: [
+    {
+      type: "text",
+      value: "El IBM AI Explainability 360 Toolkit es una biblioteca comprehensiva que incluye algoritmos tanto para explicabilidad intrínseca como post-hoc."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de AIX360 mostrando sus componentes principales"
+    },
+    {
+      type: "text",
+      value: "Algoritmos incluidos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Boolean Decision Rules via Column Generation (BRCG)",
+        "Generalized Linear Rule Models (GLRM)",
+        "Protodash (selección de prototipos)",
+        "Contrastive Explanations Method (CEM)",
+        "Disentangled Inferred Prior Variational AutoEncoder (DIP-VAE)"
+      ]
+    },
+    {
+      type: "warning",
+      value: "AIX360 tiene una curva de aprendizaje más pronunciada que otras alternativas debido a su amplitud y sofisticación."
+    }
+  ],
+  children: []
+},
+{
+  id: "omnixai",
+  title: "OmniXAI",
+  subtitle: "Explicabilidad para múltiples tipos de datos y tareas",
+  content: [
+    {
+      type: "text",
+      value: "OmniXAI es una biblioteca de propósito general para explicabilidad que soporta tablas, imágenes, texto y datos temporales."
+    },
+    {
+      type: "img",
+      value: "Diagrama de OmniXAI mostrando su soporte para diferentes modalidades"
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Soporte unificado para diferentes tipos de datos",
+        "Interfaz consistente para múltiples métodos",
+        "Visualizaciones interactivas",
+        "Integración con TensorFlow, PyTorch, Scikit-learn"
+      ]
+    },
+    {
+      type: "code",
+      value: "from omnixai.explainers.tabular import TabularExplainer\nfrom omnixai.visualization.dashboard import Dashboard\n\n# Crear explicador\nexplainer = TabularExplainer(\n    explainers=['lime', 'shap', 'pdp'],\n    data=X_train,\n    model=model,\n    mode='classification'\n)\n\n# Generar explicaciones\nexplanations = explainer.explain(X_test)\n\n# Lanzar dashboard interactivo\ndashboard = Dashboard(\n    explanations=explanations,\n    title='Explicaciones del modelo'\n)\ndashboard.show()"
+    }
+  ],
+  children: []
+},
+{
+  id: "contrafactuales",
+  title: "Explicaciones Contrafactuales",
+  subtitle: "¿Qué necesitaría cambiar para obtener un resultado diferente?",
+  content: [
+    {
+      type: "text",
+      value: "Las explicaciones contrafactuales responden a la pregunta: '¿Qué cambios mínimos en las características de entrada llevarían a una predicción diferente?'"
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de explicación contrafactual mostrando cambios mínimos necesarios"
+    },
+    {
+      type: "text",
+      value: "Beneficios principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Explicaciones intuitivas y accionables",
+        "Particularmente útiles en decisiones que afectan a personas (préstamos, contrataciones)",
+        "Cumplimiento con regulaciones como el 'derecho a una explicación'"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Generar contrafactuales válidos puede ser computacionalmente costoso y requiere validación cuidadosa."
+    }
+  ],
+  children: [
+    "dice",
+    "male"
+  ]
+},
+{
+  id: "dice",
+  title: "DICE (Diverse Counterfactual Explanations)",
+  subtitle: "Generación de contrafactuales diversos",
+  content: [
+    {
+      type: "text",
+      value: "DICE genera múltiples explicaciones contrafactuales diversas para una misma instancia, proporcionando diferentes opciones de cómo cambiar el resultado."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de DICE mostrando múltiples contrafactuales para una decisión de préstamo"
+    },
+    {
+      type: "text",
+      value: "Características clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Genera contrafactuales diversos (no solo el más cercano)",
+        "Soporta restricciones de plausibilidad",
+        "Optimiza para proximidad, diversidad y plausibilidad",
+        "Funciona con modelos black-box"
+      ]
+    },
+    {
+      type: "code",
+      value: "from dice_ml import Dice\n\n# Crear objeto Dice\nd = Dice(data_df, model)\n\n# Generar contrafactuales\nquery_instance = X_test.iloc[0:1]\ncf = d.generate_counterfactuals(\n    query_instance, \n    total_CFs=3, \n    desired_class='opposite'\n)\n\n# Visualizar\ncf.visualize_as_dataframe()"
+    }
+  ],
+  children: []
+},
+{
+  id: "male",
+  title: "MALE (Model-Agnostic Local Explanations)",
+  subtitle: "Explicaciones contrafactuales locales",
+  content: [
+    {
+      type: "text",
+      value: "MALE genera explicaciones contrafactuales optimizando directamente para cambios mínimos en el espacio de entrada que resulten en el cambio deseado de predicción."
+    },
+    {
+      type: "img",
+      value: "Proceso de optimización de MALE para encontrar contrafactuales"
+    },
+    {
+      type: "text",
+      value: "Ventajas sobre otros métodos:"
+    },
+    {
+      type: "list",
+      value: [
+        "No requiere acceso a los datos de entrenamiento",
+        "Más eficiente computacionalmente que métodos basados en búsqueda",
+        "Permite incorporar restricciones de plausibilidad",
+        "Optimización diferenciable para modelos donde se pueden calcular gradientes"
+      ]
+    },
+    {
+      type: "warning",
+      value: "MALE puede quedar atrapado en mínimos locales, por lo que se recomienda ejecutarlo múltiples veces con diferentes inicializaciones."
+    }
+  ],
+  children: []
+},
+{
+  id: "fairness__bias_en_ia",
+  title: "Fairness y Bias en Inteligencia Artificial",
+  subtitle: "Detección, medición y mitigación de sesgos en modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "El estudio de fairness y bias en IA busca garantizar que los sistemas de aprendizaje automático tomen decisiones justas y no discriminatorias, especialmente cuando afectan a grupos vulnerables o en contextos sensibles como contratación, préstamos o justicia."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando el ciclo completo de fairness en IA: desde datos hasta decisiones, pasando por evaluación y mitigación"
+    },
+    {
+      type: "text",
+      value: "Áreas críticas donde el bias puede tener mayores consecuencias:"
+    },
+    {
+      type: "list",
+      value: [
+        "Sistemas de reclutamiento y HR tech",
+        "Aprobación de créditos y scoring financiero",
+        "Sistemas predictivos en justicia criminal",
+        "Diagnósticos médicos asistidos por IA",
+        "Recomendación de contenido en redes sociales"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Todo modelo de ML tiene algún tipo de sesgo. El objetivo no es eliminarlo completamente sino entenderlo, medirlo y asegurar que no cause daños discriminatorios."
+    }
+  ],
+  children: [
+    "bias_tipos_de_sesgos",
+    "bias_metricas",
+    "bias_mitigacion",
+    "bias_herramientas"
+  ]
+},
+{
+  id: "bias_tipos_de_sesgos",
+  title: "Tipos de Sesgos en IA",
+  subtitle: "Clasificación y características de los sesgos en sistemas de aprendizaje automático",
+  content: [
+    {
+      type: "text",
+      value: "Los sesgos en IA pueden originarse en diferentes etapas del ciclo de vida de un modelo, desde la recolección de datos hasta la implementación en producción. Entender su naturaleza es crucial para diseñar estrategias efectivas de mitigación."
+    },
+    {
+      type: "img",
+      value: "Taxonomía de sesgos mostrando su origen en el pipeline de ML: datos, algoritmo, implementación y feedback loops"
+    },
+    {
+      type: "text",
+      value: "Clasificación general de sesgos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Sesgos en datos: Reflejan desigualdades históricas o muestreo no representativo",
+        "Sesgos algorítmicos: Introducidos por el diseño del modelo o función de pérdida",
+        "Sesgos de implementación: Surgen al desplegar el modelo en contextos diferentes a los de entrenamiento",
+        "Sesgos de retroalimentación: Cuando las predicciones del modelo afectan futuros datos de entrenamiento"
+      ]
+    }
+  ],
+  children: [
+    "decision",
+    "estadisticos"
+  ]
+},
+{
+  id: "decision",
+  title: "Sesgos de Decisión",
+  subtitle: "Sesgos introducidos por elecciones humanas en el desarrollo del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Los sesgos de decisión son aquellos introducidos consciente o inconscientemente por los desarrolladores y stakeholders durante el diseño e implementación del sistema de IA."
+    },
+    {
+      type: "img",
+      value: "Diagrama mostrando puntos clave donde se introducen sesgos de decisión en el pipeline de ML"
+    },
+    {
+      type: "text",
+      value: "Ejemplos comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Selección de características: Omitir variables relevantes para fairness",
+        "Definición de labels: Etiquetado que refleja prejuicios humanos",
+        "Elección de métricas: Optimizar solo por precisión sin considerar equidad",
+        "Segmentación de usuarios: Tratar grupos demográficos como casos extremos"
+      ]
+    },
+    {
+      type: "code",
+      value: "# Ejemplo: Cómo la selección de características puede introducir sesgo\n# Supongamos que omitimos el código postal para evitar discriminación geográfica\n# Pero esto podría esconder correlaciones con raza/etnia\nfeatures = ['income', 'credit_score', 'employment_years']  # Se omitió 'zip_code'\n# Mejor práctica: Incluir pero controlar con técnicas de mitigación"
+    },
+    {
+      type: "warning",
+      value: "Los sesgos de decisión son particularmente peligrosos porque son difíciles de detectar automáticamente y requieren revisión humana constante."
+    }
+  ],
+  children: []
+},
+{
+  id: "estadisticos",
+  title: "Sesgos Estadísticos",
+  subtitle: "Sesgos originados en propiedades matemáticas de los datos o algoritmos",
+  content: [
+    {
+      type: "text",
+      value: "Los sesgos estadísticos surgen de desequilibrios o propiedades matemáticas en los datos de entrenamiento o en el comportamiento del algoritmo, independientemente de las intenciones del equipo de desarrollo."
+    },
+    {
+      type: "img",
+      value: "Visualización de diferentes tipos de sesgos estadísticos en distribuciones de datos"
+    },
+    {
+      type: "text",
+      value: "Tipos principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Sesgo de muestreo: Cuando los datos no representan adecuadamente la población",
+        "Sesgo de prevalencia: Desbalance en las clases objetivo",
+        "Sesgo de variables proxy: Cuando características correlacionadas con atributos sensibles perpetúan discriminación",
+        "Sesgo de medición: Errores sistemáticos en cómo se midieron o registraron los datos"
+      ]
+    },
+    {
+      type: "code",
+      value: "import pandas as pd\n\n# Ejemplo: Detección de sesgo de prevalencia\ndata = pd.read_csv('loan_data.csv')\nprint(data['approval_status'].value_counts(normalize=True))\n\n# Output puede mostrar desbalance:\n# approved: 0.72\n# rejected: 0.28\n# Esto podría indicar sesgo si el desbalance no refleja la realidad"
+    }
+  ],
+  children: []
+},
+{
+  id: "bias_metricas",
+  title: "Métricas de Fairness",
+  subtitle: "Mediciones cuantitativas para evaluar equidad en modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "Existen múltiples métricas para cuantificar el fairness de un modelo, cada una con sus ventajas y limitaciones. La elección depende del contexto de aplicación y los valores éticos prioritarios."
+    },
+    {
+      type: "img",
+      value: "Comparación visual de diferentes métricas de fairness y sus trade-offs"
+    },
+    {
+      type: "text",
+      value: "Consideraciones al elegir métricas:"
+    },
+    {
+      type: "list",
+      value: [
+        "¿Qué definición de fairness es más relevante para el caso de uso?",
+        "¿Qué grupos protegidos deben considerarse?",
+        "¿Qué trade-offs entre fairness y precisión son aceptables?",
+        "¿Cumple con regulaciones aplicables (como EU AI Act)?"
+      ]
+    },
+    {
+      type: "warning",
+      value: "No existe una métrica única perfecta. Es recomendable monitorear múltiples métricas y entender sus implicaciones."
+    }
+  ],
+  children: [
+    "spd",
+    "eod",
+    "aod",
+    "disparate_impact",
+    "calibration"
+  ]
+},
+{
+  id: "spd",
+  title: "Statistical Parity Difference (SPD)",
+  subtitle: "Diferencia en tasas de predicción positiva entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "El SPD mide la diferencia entre la probabilidad de obtener una predicción favorable para grupos privilegiados y desfavorecidos, sin considerar el ground truth."
+    },
+    {
+      type: "img",
+      value: "Gráfico mostrando cálculo de SPD como diferencia entre proporciones de predicciones positivas"
+    },
+    {
+      type: "text",
+      value: "Fórmula: SPD = P(Ŷ=1|D=privilegiado) - P(Ŷ=1|D=desfavorecido)"
+    },
+    {
+      type: "text",
+      value: "Interpretación:"
+    },
+    {
+      type: "list",
+      value: [
+        "SPD = 0: Paridad estadística perfecta",
+        "SPD > 0: El grupo privilegiado recibe más predicciones positivas",
+        "SPD < 0: El grupo desfavorecido recibe más predicciones positivas"
+      ]
+    },
+    {
+      type: "code",
+      value: "def calculate_spd(y_pred, sensitive_attributes):\n    \"\"\"\n    y_pred: array de predicciones (0/1)\n    sensitive_attributes: array indicando grupo (0=desfavorecido, 1=privilegiado)\n    \"\"\"\n    privileged_rate = y_pred[sensitive_attributes == 1].mean()\n    disadvantaged_rate = y_pred[sensitive_attributes == 0].mean()\n    return privileged_rate - disadvantaged_rate"
+    },
+    {
+      type: "warning",
+      value: "SPD no considera si las predicciones son correctas. Un modelo podría lograr SPD=0 siendo injusto si los errores se distribuyen desigualmente."
+    }
+  ],
+  children: []
+},
+{
+  id: "eod",
+  title: "Equal Opportunity Difference (EOD)",
+  subtitle: "Diferencia en tasas de verdaderos positivos entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "El EOD compara la igualdad de oportunidades midiendo la diferencia en recall (true positive rate) entre grupos protegidos y no protegidos."
+    },
+    {
+      type: "img",
+      value: "Matriz de confusión comparada entre grupos mostrando cálculo de EOD"
+    },
+    {
+      type: "text",
+      value: "Fórmula: EOD = TPR(privilegiado) - TPR(desfavorecido)"
+    },
+    {
+      type: "text",
+      value: "Ventajas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Sensible a errores que afectan desproporcionadamente a grupos desfavorecidos",
+        "Apropiado cuando los falsos negativos tienen consecuencias graves (ej. diagnósticos médicos)",
+        "Alineado con el principio de igualdad de oportunidades"
+      ]
+    },
+    {
+      type: "code",
+      value: "from sklearn.metrics import recall_score\n\ndef calculate_eod(y_true, y_pred, sensitive_attributes):\n    tpr_privileged = recall_score(\n        y_true[sensitive_attributes == 1], \n        y_pred[sensitive_attributes == 1]\n    )\n    tpr_disadvantaged = recall_score(\n        y_true[sensitive_attributes == 0], \n        y_pred[sensitive_attributes == 0]\n    )\n    return tpr_privileged - tpr_disadvantaged"
+    }
+  ],
+  children: []
+},
+{
+  id: "aod",
+  title: "Average Odds Difference (AOD)",
+  subtitle: "Promedio de diferencias en FPR y TPR entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "El AOD es la media de dos diferencias: la de falsos positivos (FPR) y la de verdaderos positivos (TPR) entre grupos privilegiados y desfavorecidos."
+    },
+    {
+      type: "img",
+      value: "Visualización de cómo se calcula AOD promediando FPR difference y TPR difference"
+    },
+    {
+      type: "text",
+      value: "Fórmula: AOD = [(FPR_priv - FPR_disadv) + (TPR_priv - TPR_disadv)] / 2"
+    },
+    {
+      type: "text",
+      value: "Casos de uso:"
+    },
+    {
+      type: "list",
+      value: [
+        "Cuando tanto falsos positivos como falsos negativos son importantes",
+        "En sistemas donde se busca balance entre precision y recall",
+        "Contextos donde la igualdad de odds es un requisito legal"
+      ]
+    },
+    {
+      type: "warning",
+      value: "AOD=0 no garantiza justicia individual, solo equidad a nivel grupal. Puede enmascarar compensaciones entre grupos."
+    }
+  ],
+  children: []
+},
+{
+  id: "disparate_impact",
+  title: "Disparate Impact Ratio",
+  subtitle: "Ratio de tasas de predicción positiva entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "El disparate impact ratio (también llamado impacto adverso) mide la discriminación como el ratio entre la tasa de predicciones positivas para el grupo desfavorecido vs. el privilegiado."
+    },
+    {
+      type: "img",
+      value: "Ilustración del cálculo de disparate impact como ratio de proporciones"
+    },
+    {
+      type: "text",
+      value: "Fórmula: DI = P(Ŷ=1|D=desfavorecido) / P(Ŷ=1|D=privilegiado)"
+    },
+    {
+      type: "text",
+      value: "Umbrales legales comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "DI < 0.8: Evidencia prima facie de discriminación (Regla del 80% en EE.UU.)",
+        "DI ≈ 1: Indica paridad estadística",
+        "DI > 1: El grupo desfavorecido recibe más predicciones positivas"
+      ]
+    },
+    {
+      type: "code",
+      value: "def disparate_impact_ratio(y_pred, sensitive_attributes):\n    \"\"\"\n    Calcula el disparate impact ratio\n    Valores < 1 indican desventaja para el grupo desfavorecido\n    \"\"\"\n    p_disadvantaged = y_pred[sensitive_attributes == 0].mean()\n    p_privileged = y_pred[sensitive_attributes == 1].mean()\n    \n    # Evitar división por cero\n    if p_privileged == 0:\n        return float('inf')\n        \n    return p_disadvantaged / p_privileged"
+    },
+    {
+      type: "warning",
+      value: "DI solo considera resultados positivos sin evaluar su corrección. Puede ser engañoso en datasets con distribuciones muy diferentes entre grupos."
+    }
+  ],
+  children: []
+},
+{
+  id: "calibration",
+  title: "Calibration by Group",
+  subtitle: "Equidad en la calibración de probabilidades entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "La calibración por grupo evalúa si las probabilidades predichas reflejan las tasas reales de ocurrencia para cada subgrupo demográfico."
+    },
+    {
+      type: "img",
+      value: "Curvas de calibración comparadas entre diferentes grupos demográficos"
+    },
+    {
+      type: "text",
+      value: "Un modelo está bien calibrado por grupo si para todo p ∈ [0,1]: P(Y=1|Ŷ=p,D=d) = p, para cada grupo d."
+    },
+    {
+      type: "text",
+      value: "Importancia:"
+    },
+    {
+      type: "list",
+      value: [
+        "Especialmente relevante en modelos que producen scores de riesgo",
+        "Crítico en aplicaciones médicas y de justicia penal",
+        "Garantiza que las probabilidades sean interpretables de igual forma para todos los grupos"
+      ]
+    },
+    {
+      type: "code",
+      value: "from sklearn.calibration import calibration_curve\nimport matplotlib.pyplot as plt\n\ndef plot_calibration_by_group(y_true, y_prob, group):\n    groups = np.unique(group)\n    plt.figure(figsize=(10, 6))\n    \n    for g in groups:\n        mask = (group == g)\n        prob_true, prob_pred = calibration_curve(\n            y_true[mask], y_prob[mask], n_bins=10\n        )\n        plt.plot(prob_pred, prob_true, marker='o', label=f'Group {g}')\n    \n    plt.plot([0, 1], [0, 1], linestyle='--', color='gray')\n    plt.xlabel('Predicted Probability')\n    plt.ylabel('True Probability')\n    plt.legend()\n    plt.title('Calibration by Group')\n    plt.show()"
+    },
+    {
+      type: "warning",
+      value: "Es posible tener calibración perfecta por grupo y al mismo tiempo tener disparidades en otras métricas de fairness. La calibración debe evaluarse junto con otras medidas."
+    }
+  ],
+  children: []
+},
+{
+  id: "bias_mitigacion",
+  title: "Técnicas de Mitigación de Sesgos",
+  subtitle: "Estrategias para reducir discriminación en modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "La mitigación de sesgos puede aplicarse en diferentes etapas del pipeline de machine learning, cada enfoque con sus ventajas y limitaciones. La elección depende del contexto, requisitos de equidad y restricciones técnicas."
+    },
+    {
+      type: "img",
+      value: "Diagrama de pipeline de ML mostrando puntos de intervención para mitigación: preprocesamiento, inprocesamiento y postprocesamiento"
+    },
+    {
+      type: "text",
+      value: "Consideraciones al elegir estrategia:"
+    },
+    {
+      type: "list",
+      value: [
+        "Acceso a datos sensibles (¿pueden usarse durante entrenamiento?)",
+        "Flexibilidad del modelo (¿puede modificarse su función de pérdida?)",
+        "Requisitos de equidad (paridad estadística, igualdad de oportunidades, etc.)",
+        "Overhead computacional aceptable"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Ningún método elimina completamente los sesgos. La mitigación debe acompañarse de monitoreo continuo en producción."
+    }
+  ],
+  children: [
+    "preprocessing",
+    "inprocessing",
+    "postprocessing"
+  ]
+},
+{
+  id: "preprocessing",
+  title: "Preprocesamiento de Datos",
+  subtitle: "Técnicas que modifican los datos antes del entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "Los métodos de preprocesamiento transforman los datos de entrenamiento para reducir sesgos antes de que el modelo los aprenda. Son independientes del algoritmo y funcionan bien con modelos existentes."
+    },
+    {
+      type: "img",
+      value: "Flujo de preprocesamiento mostrando transformación de datos antes del entrenamiento"
+    },
+    {
+      type: "text",
+      value: "Ventajas principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "No requieren modificar el algoritmo de ML",
+        "Aplicables incluso con modelos black-box",
+        "Pueden combinarse con otras técnicas",
+        "Relativamente simples de implementar"
+      ]
+    },
+    {
+      type: "code",
+      value: "# Ejemplo genérico de pipeline de preprocesamiento\nfrom sklearn.pipeline import Pipeline\nfrom fairness_preprocessors import Reweighing, DisparateImpactRemover\n\npipeline = Pipeline([\n    ('reweighing', Reweighing()),\n    ('bias_remover', DisparateImpactRemover()),\n    # ... otros pasos de preprocesamiento\n    # ... luego el modelo\n])"
+    }
+  ],
+  children: [
+    "unawareness",
+    "reweighing",
+    "learning_fair_representations"
+  ]
+},
+{
+  id: "unawareness",
+  title: "Unawareness (Remoción de Atributos Sensibles)",
+  subtitle: "Eliminar variables protegidas para evitar discriminación directa",
+  content: [
+    {
+      type: "text",
+      value: "La técnica más simple de preprocesamiento consiste en eliminar explícitamente los atributos sensibles (género, raza, etc.) del conjunto de datos."
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de dataset antes y después de remover columnas sensibles"
+    },
+    {
+      type: "text",
+      value: "Limitaciones importantes:"
+    },
+    {
+      type: "list",
+      value: [
+        "No elimina sesgos si existen variables proxy (ej: código postal correlacionado con raza)",
+        "Puede reducir precisión al eliminar información predictiva legítima",
+        "Impide monitorear disparidades por grupo protegido"
+      ]
+    },
+    {
+      type: "code",
+      value: "# Ejemplo de implementación básica\nimport pandas as pd\n\n# Atributos sensibles a remover\nprotected_attributes = ['gender', 'race', 'zip_code']\n\ndef remove_sensitive_features(df):\n    return df.drop(columns=protected_attributes, errors='ignore')\n\n# Aplicar a los datos\ndata = pd.read_csv('application_data.csv')\nclean_data = remove_sensitive_features(data)"
+    },
+    {
+      type: "warning",
+      value: "La simple remoción de atributos sensibles rara vez es suficiente para garantizar fairness. Se recomienda combinarla con otras técnicas."
+    }
+  ],
+  children: []
+},
+{
+  id: "reweighing",
+  title: "Reweighing",
+  subtitle: "Ajuste de pesos de muestras para balancear grupos",
+  content: [
+    {
+      type: "text",
+      value: "Reweighing asigna pesos diferentes a las instancias de entrenamiento para compensar distribuciones desiguales entre grupos protegidos y no protegidos."
+    },
+    {
+      type: "img",
+      value: "Visualización de cómo se ajustan los pesos para diferentes combinaciones de grupo/clase"
+    },
+    {
+      type: "text",
+      value: "Fórmula de pesos:"
+    },
+    {
+      type: "text",
+      value: "w(x) = [P(S=s)P(Y=y)] / [P(S=s,Y=y)]"
+    },
+    {
+      type: "text",
+      value: "Donde S es el grupo protegido e Y la clase objetivo."
+    },
+    {
+      type: "code",
+      value: "import numpy as np\n\ndef calculate_weights(y, sensitive_attr):\n    \"\"\"\n    Calcula pesos para balancear grupos y clases\n    y: etiquetas (0/1)\n    sensitive_attr: atributo protegido (0/1)\n    \"\"\"\n    weights = np.ones_like(y, dtype=float)\n    \n    for s in [0, 1]:  # Grupos protegidos\n        for lbl in [0, 1]:  # Clases\n            mask = (y == lbl) & (sensitive_attr == s)\n            p_s = np.mean(sensitive_attr == s)\n            p_y = np.mean(y == lbl)\n            p_sy = np.mean(mask)\n            \n            if p_sy > 0:\n                weights[mask] = (p_s * p_y) / p_sy\n                \n    return weights"
+    },
+    {
+      type: "text",
+      value: "Uso con scikit-learn:"
+    },
+    {
+      type: "code",
+      value: "from sklearn.linear_model import LogisticRegression\n\n# Calcular pesos\nweights = calculate_weights(y_train, sensitive_train)\n\n# Entrenar modelo con pesos\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train, sample_weight=weights)"
+    }
+  ],
+  children: []
+},
+{
+  id: "learning_fair_representations",
+  title: "Learning Fair Representations",
+  subtitle: "Técnicas para aprender representaciones de datos libres de sesgo",
+  content: [
+    {
+      type: "text",
+      value: "Learning Fair Representations (LFR) es un enfoque de preprocesamiento que transforma los datos originales en una nueva representación que maximiza la utilidad para la tarea de predicción mientras minimiza la información sobre atributos sensibles."
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo del proceso LFR mostrando la transformación de datos originales a representación justa"
+    },
+    {
+      type: "text",
+      value: "El proceso consta de tres pasos clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Mapear los datos originales a una representación intermedia",
+        "Aplicar restricciones de equidad durante el aprendizaje",
+        "Mapear la representación intermedia a predicciones"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo conceptual en pseudocódigo
+def learn_fair_representation(X, S, y):
+    # X: características, S: atributo sensible, y: etiqueta
+    encoder = train_encoder(X, S, y, fairness_constraints)
+    X_fair = encoder.transform(X)
+    return X_fair`
+    },
+    {
+      type: "warning",
+      value: "LFR puede reducir la precisión del modelo ya que elimina información potencialmente útil pero sesgada. Es crucial evaluar el trade-off entre equidad y rendimiento."
+    }
+  ],
+  children: []
+},
+{
+  id: "inprocessing",
+  title: "Técnicas de Inprocessing",
+  subtitle: "Métodos que incorporan equidad durante el entrenamiento del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Las técnicas de inprocessing modifican los algoritmos de aprendizaje para incorporar directamente criterios de equidad durante el proceso de entrenamiento. A diferencia del preprocesamiento o postprocesamiento, estos métodos ajustan el propio algoritmo de aprendizaje."
+    },
+    {
+      type: "img",
+      value: "Comparación entre preprocesamiento, inprocessing y postprocesamiento mostrando en qué etapa actúa cada enfoque"
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Pueden lograr mejores equilibrios entre equidad y precisión",
+        "No requieren transformación previa o posterior de los datos",
+        "Permiten incorporar múltiples métricas de equidad"
+      ]
+    }
+  ],
+  children: [
+    "costsensitive",
+    "fair_constraints",
+    "adversarial_debiasing"
+  ]
+},
+{
+  id: "costsensitive",
+  title: "Aprendizaje Cost-Sensitive",
+  subtitle: "Incorporación de costos diferenciales para clases o grupos protegidos",
+  content: [
+    {
+      type: "text",
+      value: "Este enfoque asigna diferentes costos a los errores de clasificación para diferentes grupos, penalizando más los errores en grupos desfavorecidos."
+    },
+    {
+      type: "text",
+      value: "Cómo funciona:"
+    },
+    {
+      type: "list",
+      value: [
+        "Se definen matrices de costos asimétricas",
+        "El algoritmo optimiza incluyendo estos costos diferenciales",
+        "Particularmente útil cuando los datos están desbalanceados"
+      ]
+    },
+    {
+      type: "code",
+      value: `from sklearn.linear_model import LogisticRegression
+
+# Matriz de costos personalizada
+cost_matrix = {
+    'privileged': {0: 1, 1: 1},  # Costo normal
+    'unprivileged': {0: 2, 1: 1}  # Mayor costo para falsos negativos
+}
+
+model = LogisticRegression(class_weight=cost_matrix)
+model.fit(X_train, y_train)`
+    },
+    {
+      type: "warning",
+      value: "La selección de costos es subjetiva y puede requerir iteración. Monitorizar siempre el impacto tanto en equidad como en rendimiento."
+    }
+  ],
+  children: []
+},
+{
+  id: "fair_constraints",
+  title: "Optimización con Restricciones de Equidad",
+  subtitle: "Inclusión de restricciones matemáticas durante el entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "Este método formula el problema de aprendizaje como un problema de optimización con restricciones explícitas de equidad."
+    },
+    {
+      type: "img",
+      value: "Visualización de un espacio de parámetros con restricciones de equidad mostrando la región factible"
+    },
+    {
+      type: "text",
+      value: "Tipos comunes de restricciones:"
+    },
+    {
+      type: "list",
+      value: [
+        "Paridad demográfica: P(Ŷ=1|S=0) = P(Ŷ=1|S=1)",
+        "Igualdad de oportunidades: TPR igual entre grupos",
+        "Igualdad de odds: TPR y FPR iguales entre grupos"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Pseudocódigo para formulación de optimización
+minimize loss(θ)
+subject to:
+    |P(Ŷ=1|S=0) - P(Ŷ=1|S=1)| ≤ ε  # Restricción de paridad
+    accuracy(θ) ≥ threshold`
+    },
+    {
+      type: "text",
+      value: "Ventajas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Control explícito sobre las métricas de equidad",
+        "Flexibilidad para incorporar múltiples restricciones",
+        "Formulación matemática rigurosa"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "adversarial_debiasing",
+  title: "Debiasing Adversarial",
+  subtitle: "Uso de redes antagónicas para eliminar sesgos",
+  content: [
+    {
+      type: "text",
+      value: "Técnica que utiliza un framework adversarial donde un predictor principal aprende a realizar la tarea principal mientras un adversario intenta predecir el atributo sensible a partir de las predicciones."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de red adversarial mostrando el predictor principal y el discriminador"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Predictor principal: Realiza la tarea de predicción objetivo",
+        "Adversario: Intenta predecir el atributo protegido",
+        "Pérdida adversarial: Penaliza al predictor principal por información que permite predecir el atributo sensible"
+      ]
+    },
+    {
+      type: "code",
+      value: `import tensorflow as tf
+
+# Arquitectura simplificada
+main_model = tf.keras.Sequential([...])  # Predictor principal
+adversary = tf.keras.Sequential([...])   # Adversario
+
+# Función de pérdida combinada
+total_loss = main_loss - λ * adversary_loss  # λ controla el trade-off`
+    },
+    {
+      type: "warning",
+      value: "El entrenamiento adversarial puede ser inestable. Requiere cuidadoso ajuste de hiperparámetros y posiblemente técnicas de regularización."
+    }
+  ],
+  children: []
+},
+{
+  id: "postprocessing",
+  title: "Técnicas de Postprocessing",
+  subtitle: "Ajuste de predicciones después del entrenamiento para mejorar equidad",
+  content: [
+    {
+      type: "text",
+      value: "Las técnicas de postprocessing modifican las predicciones de un modelo ya entrenado para satisfacer criterios de equidad, sin alterar el modelo subyacente."
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo de postprocessing mostrando el ajuste de umbrales o transformación de predicciones"
+    },
+    {
+      type: "text",
+      value: "Cuándo usar postprocessing:"
+    },
+    {
+      type: "list",
+      value: [
+        "Cuando no se puede modificar el modelo de aprendizaje",
+        "Para cumplir rápidamente con regulaciones de equidad",
+        "Como solución temporal mientras se desarrollan modelos más justos"
+      ]
+    }
+  ],
+  children: [
+    "equalized_odds",
+    "reject_option"
+  ]
+},
+{
+  id: "equalized_odds",
+  title: "Ajuste para Equalized Odds",
+  subtitle: "Método para igualar tasas de verdaderos y falsos positivos entre grupos",
+  content: [
+    {
+      type: "text",
+      value: "Equalized Odds postprocessing ajusta las predicciones para garantizar que los ratios de verdaderos positivos (TPR) y falsos positivos (FPR) sean iguales across grupos protegidos."
+    },
+    {
+      type: "text",
+      value: "Implementación típica:"
+    },
+    {
+      type: "list",
+      value: [
+        "Calibrar umbrales de decisión por grupo",
+        "Aplicar transformaciones probabilísticas",
+        "Optimizar para minimizar cambios en la precisión"
+      ]
+    },
+    {
+      type: "code",
+      value: `from fairlearn.postprocessing import ThresholdOptimizer
+
+postprocessor = ThresholdOptimizer(
+    estimator=model,
+    constraints="equalized_odds",
+    prefit=True
+)
+postprocessor.fit(X_test, y_test, sensitive_features=S_test)
+fair_predictions = postprocessor.predict(X_new, sensitive_features=S_new)`
+    },
+    {
+      type: "warning",
+      value: "Este método requiere acceso a los atributos sensibles en tiempo de inferencia, lo que puede no ser siempre posible o deseable."
+    }
+  ],
+  children: []
+},
+{
+  id: "reject_option",
+  title: "Reject Option Classification",
+  subtitle: "Sistema de rechazo para casos cercanos al límite de decisión",
+  content: [
+    {
+      type: "text",
+      value: "Técnica que identifica instancias cerca del límite de decisión del clasificador y las asigna a la clase favorable para grupos desfavorecidos, mejorando la equidad."
+    },
+    {
+      type: "img",
+      value: "Diagrama de límite de decisión mostrando la región de rechazo y reasignación"
+    },
+    {
+      type: "text",
+      value: "Pasos clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Identificar región de rechazo (ej. donde 0.4 < P(y=1) < 0.6)",
+        "Para instancias en esta región:",
+        "   - Si pertenece a grupo privilegiado: asignar clase desfavorable",
+        "   - Si pertenece a grupo no privilegiado: asignar clase favorable"
+      ]
+    },
+    {
+      type: "text",
+      value: "Ventajas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Simple de implementar sobre cualquier clasificador existente",
+        "No requiere retraining del modelo",
+        "Efectivo para mejorar métricas de equidad"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "bias_herramientas",
+  title: "Herramientas para Equidad en ML",
+  subtitle: "Librerías y frameworks para implementar algoritmos justos",
+  content: [
+    {
+      type: "text",
+      value: "Existen varias herramientas open-source que facilitan la implementación de técnicas de machine learning justo, desde detección de sesgos hasta mitigación y evaluación."
+    },
+    {
+      type: "img",
+      value: "Comparativo de herramientas mostrando IBM AIF360, Fairlearn, What-If Tool y LightGBM"
+    },
+    {
+      type: "text",
+      value: "Criterios para elegir herramienta:"
+    },
+    {
+      type: "list",
+      value: [
+        "Tipos de sesgo que puede detectar/mitigar",
+        "Métricas de equidad implementadas",
+        "Integración con tu stack tecnológico",
+        "Facilidad de uso y documentación"
+      ]
+    }
+  ],
+  children: [
+    "ibm_aif360",
+    "fairlearn",
+    "whatif_tool",
+    "lightgbm"
+  ]
+},
+{
+  id: "ibm_aif360",
+  title: "IBM AI Fairness 360 (AIF360)",
+  subtitle: "Kit de herramientas completo para equidad en ML",
+  content: [
+    {
+      type: "text",
+      value: "AIF360 es un conjunto comprehensivo de métricas, algoritmos y visualizaciones para detectar y mitigar sesgos en modelos de machine learning."
+    },
+    {
+      type: "text",
+      value: "Características principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "70+ métricas de equidad",
+        "Algoritmos de mitigación en todas las etapas (pre, in, post processing)",
+        "Interfaz unificada para múltiples técnicas",
+        "Soporte para Python"
+      ]
+    },
+    {
+      type: "code",
+      value: `from aif360.sklearn.metrics import statistical_parity_difference
+
+# Calcular métrica de equidad
+spd = statistical_parity_difference(y_true, y_pred, 
+                                  sensitive_features=S)
+print(f"Statistical Parity Difference: {spd:.3f}")`
+    },
+    {
+      type: "warning",
+      value: "AIF360 tiene una curva de aprendizaje pronunciada debido a su amplia funcionalidad. Recomendado para usuarios con experiencia en equidad algorítmica."
+    }
+  ],
+  children: []
+},
+{
+  id: "fairlearn",
+  title: "Fairlearn",
+  subtitle: "Herramienta de Microsoft para ML justo",
+  content: [
+    {
+      type: "text",
+      value: "Fairlearn es un paquete Python que permite evaluar la equidad de modelos de ML y mitigar sesgos injustos."
+    },
+    {
+      type: "text",
+      value: "Funcionalidades destacadas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Dashboard interactivo para evaluación de equidad",
+        "Algoritmos de mitigación como GridSearch reducido",
+        "Integración con scikit-learn",
+        "Métricas de equidad para múltiples grupos"
+      ]
+    },
+    {
+      type: "code",
+      value: `from fairlearn.widget import FairlearnDashboard
+
+# Visualización interactiva
+FairlearnDashboard(
+    sensitive_features=S_test,
+    sensitive_feature_names=['gender'],
+    y_true=y_test,
+    y_pred={ 'model': model.predict(X_test) }
+)`
+    },
+    {
+      type: "text",
+      value: "Ventajas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Interfaz amigable para análisis exploratorio",
+        "Buen equilibrio entre simplicidad y funcionalidad",
+        "Activo desarrollo y soporte"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "whatif_tool",
+  title: "What-If Tool (WIT)",
+  subtitle: "Visualización interactiva para análisis de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Desarrollado por Google, WIT permite analizar modelos de ML sin código a través de una interfaz visual, incluyendo evaluación de equidad."
+    },
+    {
+      type: "img",
+      value: "Captura de pantalla del What-If Tool mostrando análisis de equidad"
+    },
+    {
+      type: "text",
+      value: "Características únicas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Interfaz gráfica interactiva",
+        "Análisis de contrafactuales",
+        "Visualización de límites de decisión",
+        "Pruebas de equidad con diferentes thresholds"
+      ]
+    },
+    {
+      type: "text",
+      value: "Ideal para:"
+    },
+    {
+      type: "list",
+      value: [
+        "Comunicar resultados a partes interesadas no técnicas",
+        "Exploración rápida de sesgos potenciales",
+        "Prototipado y análisis inicial de modelos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "lightgbm",
+  title: "LightGBM con Equidad",
+  subtitle: "Uso de boosting con restricciones de equidad",
+  content: [
+    {
+      type: "text",
+      value: "LightGBM puede ser extendido para incorporar consideraciones de equidad mediante parámetros personalizados y funciones de pérdida modificadas."
+    },
+    {
+      type: "text",
+      value: "Enfoques comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Funciones de pérdida personalizadas que penalizan disparidades",
+        "Pesos diferenciales por grupo sensible",
+        "Postprocessing de las predicciones"
+      ]
+    },
+    {
+      type: "code",
+      value: `import lightgbm as lgb
+
+# Definir función de pérdida con penalización de equidad
+def fair_loss(y_true, y_pred):
+    grad = ...  # Gradiente estándar + término de equidad
+    hess = ...  # Hessiano estándar + término de equidad
+    return grad, hess
+
+model = lgb.LGBMClassifier(objective=fair_loss)
+model.fit(X_train, y_train)`
+    },
+    {
+      type: "warning",
+      value: "Implementar equidad directamente en LightGBM requiere buen entendimiento tanto del algoritmo como de las métricas de equidad. Para muchos casos, es preferible usar wrappers como los de Fairlearn."
+    }
+  ],
+  children: []
+},
+{
+  id: "agentes_de_ia",
+  title: "Agentes de Inteligencia Artificial",
+  subtitle: "Sistemas autónomos que perciben y actúan en entornos",
+  content: [
+    {
+      type: "text",
+      value: "Los agentes de IA son entidades computacionales que perciben su entorno a través de sensores y actúan sobre él mediante actuadores, con el objetivo de alcanzar metas específicas. Estos agentes pueden variar desde simples sistemas de reglas hasta complejas arquitecturas cognitivas."
+    },
+    {
+      type: "img",
+      value: "Diagrama conceptual de un agente de IA mostrando percepción, procesamiento y acción"
+    },
+    {
+      type: "text",
+      value: "Componentes fundamentales de todo agente:"
+    },
+    {
+      type: "list",
+      value: [
+        "Módulo de percepción (input)",
+        "Sistema de procesamiento/razonamiento",
+        "Módulo de acción (output)",
+        "Mecanismo de retroalimentación"
+      ]
+    },
+    {
+      type: "warning",
+      value: "No confundir agentes con modelos de ML tradicionales. Los agentes tienen capacidad de acción autónoma y persiguen objetivos de forma activa."
+    }
+  ],
+  children: [
+    "agente_interaccion",
+    "agente_arquitecturas",
+    "agente_funcionalidades",
+    "agente_frameworks"
+  ]
+},
+{
+  id: "agente_interaccion",
+  title: "Tipos de Interacción entre Agentes",
+  subtitle: "Single-agent vs Multi-agent Systems",
+  content: [
+    {
+      type: "text",
+      value: "Los sistemas de agentes se clasifican según su patrón de interacción en dos categorías fundamentales:"
+    },
+    {
+      type: "text",
+      value: "1. Sistemas Single-Agent:"
+    },
+    {
+      type: "list",
+      value: [
+        "Agente único operando en un entorno",
+        "Toma decisiones independientes",
+        "Ejemplo: Asistente personal virtual",
+        "Ventaja: Simplicidad de diseño",
+        "Desafío: Limitaciones en tareas complejas"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo conceptual de single-agent
+class PersonalAssistant:
+    def __init__(self):
+        self.memory = MemoryModule()
+        self.planner = PlannerModule()
+        
+    def perceive(self, input):
+        return process_input(input)
+        
+    def act(self, decision):
+        execute_action(decision)`
+    },
+    {
+      type: "text",
+      value: "2. Sistemas Multi-Agent (MAS):"
+    },
+    {
+      type: "list",
+      value: [
+        "Múltiples agentes interactuando",
+        "Pueden cooperar o competir",
+        "Ejemplo: Sistema de trading algorítmico",
+        "Ventaja: Resolución distribuida de problemas",
+        "Desafío: Coordinación y comunicación"
+      ]
+    },
+    {
+      type: "img",
+      value: "Arquitectura de sistema multi-agente mostrando comunicación y coordinación"
+    },
+    {
+      type: "warning",
+      value: "En sistemas multi-agente, emergen propiedades globales no presentes en agentes individuales (inteligencia de enjambre, comportamientos colectivos)."
+    }
+  ],
+  children: []
+},
+{
+  id: "agente_arquitecturas",
+  title: "Arquitecturas de Agentes",
+  subtitle: "Diseños estructurales para sistemas agentivos",
+  content: [
+    {
+      type: "text",
+      value: "Las arquitecturas de agentes determinan cómo se organizan los componentes internos para procesar información y tomar decisiones. Los principales patrones arquitectónicos incluyen:"
+    },
+    {
+      type: "text",
+      value: "1. Arquitectura de Planificación:"
+    },
+    {
+      type: "list",
+      value: [
+        "Basada en búsqueda y planificación clásica",
+        "Genera secuencias de acciones para alcanzar metas",
+        "Ideal para entornos deterministas",
+        "Limitación: Poco flexible en entornos dinámicos"
+      ]
+    },
+    {
+      type: "text",
+      value: "2. Arquitectura Jerárquica:"
+    },
+    {
+      type: "list",
+      value: [
+        "Organizada en niveles de abstracción",
+        "Alto nivel: Metas estratégicas",
+        "Bajo nivel: Ejecución táctica",
+        "Ventaja: Manejo de complejidad",
+        "Ejemplo: Agentes para videojuegos AAA"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura jerárquica mostrando capas de control"
+    },
+    {
+      type: "text",
+      value: "3. Arquitectura Modular:"
+    },
+    {
+      type: "list",
+      value: [
+        "Componentes especializados independientes",
+        "Módulos intercambiables",
+        "Fácil mantenimiento y actualización",
+        "Ejemplo: Asistente con módulos separados para NLP, búsqueda, etc."
+      ]
+    },
+    {
+      type: "text",
+      value: "4. Arquitectura Event-Driven:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reacciona a eventos en tiempo real",
+        "Baja latencia en respuestas",
+        "Escalable para entornos dinámicos",
+        "Uso común: Sistemas de trading, IoT"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo para agente event-driven
+class EventDrivenAgent {
+  constructor() {
+    this.eventHandlers = {
+      'urgent': this.handleUrgent,
+      'normal': this.handleNormal
+    };
+  }
+
+  onEvent(event) {
+    const handler = this.eventHandlers[event.type];
+    handler(event.data);
+  }
+}`
+    }
+  ],
+  children: []
+},
+{
+  id: "agente_funcionalidades",
+  title: "Funcionalidades Avanzadas de Agentes",
+  subtitle: "Componentes clave para agentes inteligentes",
+  content: [
+    {
+      type: "text",
+      value: "Los agentes modernos incorporan diversas capacidades avanzadas que les permiten operar efectivamente en entornos complejos. Estas funcionalidades pueden combinarse según los requerimientos del sistema."
+    },
+    {
+      type: "img",
+      value: "Diagrama de componentes funcionales de un agente avanzado"
+    },
+    {
+      type: "text",
+      value: "Principales funcionalidades:"
+    },
+    {
+      type: "list",
+      value: [
+        "Memoria para retención de contexto",
+        "Planificación para secuenciación de acciones",
+        "Integración con herramientas externas",
+        "Uso de embeddings para comprensión semántica",
+        "Mecanismos de handoff para transferencia controlada"
+      ]
+    }
+  ],
+  children: [
+    "memoria",
+    "planner",
+    "herramientas",
+    "embeddings",
+    "handoffs"
+  ]
+},
+{
+  id: "memoria",
+  title: "Sistemas de Memoria para Agentes",
+  subtitle: "Retención y recuperación de contexto",
+  content: [
+    {
+      type: "text",
+      value: "Los sistemas de memoria permiten a los agentes mantener contexto entre interacciones, esencial para conversaciones prolongadas y toma de decisiones informada."
+    },
+    {
+      type: "text",
+      value: "Tipos de memoria en agentes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Memoria a corto plazo: Contexto inmediato (ej: ventana de contexto LLM)",
+        "Memoria a largo plazo: Almacenamiento persistente (vectores, bases de datos)",
+        "Memoria episódica: Registro de interacciones pasadas",
+        "Memoria procedimental: Almacenamiento de habilidades aprendidas"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de implementación de memoria vectorial
+from langchain.vectorstores import FAISS
+from langchain.embeddings import OpenAIEmbeddings
+
+class AgentMemory:
+    def __init__(self):
+        self.vector_db = FAISS(OpenAIEmbeddings())
+        self.chat_history = []
+        
+    def remember(self, text: str):
+        self.vector_db.add_texts([text])
+        
+    def recall(self, query: str) -> list:
+        return self.vector_db.similarity_search(query)`
+    },
+    {
+      type: "warning",
+      value: "El diseño de sistemas de memoria debe considerar privacidad y gestión de datos sensibles, especialmente en aplicaciones que manejan información personal."
+    }
+  ],
+  children: []
+},
+{
+  id: "planner",
+  title: "Sistemas de Planificación",
+  subtitle: "Generación y ejecución de planes de acción",
+  content: [
+    {
+      type: "text",
+      value: "Los módulos de planificación permiten a los agentes descomponer metas complejas en secuencias accionables de pasos intermedios."
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo de planificación mostrando descomposición jerárquica de tareas"
+    },
+    {
+      type: "text",
+      value: "Enfoques modernos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Planificación clásica (STRIPS, PDDL)",
+        "Planificación basada en modelos de lenguaje",
+        "Planificación reactiva (replanificación dinámica)",
+        "Planificación jerárquica (HTN)"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de planificador simple
+class TaskPlanner {
+  generatePlan(goal) {
+    const steps = [];
+    // Lógica de descomposición
+    if (goal === 'organizar_reunion') {
+      steps.push('buscar_disponibilidad');
+      steps.push('enviar_invitaciones');
+      steps.push('confirmar_asistentes');
+    }
+    return new Plan(steps);
+  }
+}`
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Implementar mecanismos de replanificación",
+        "Incluir verificaciones de viabilidad",
+        "Priorizar flexibilidad sobre optimalidad en entornos dinámicos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "embeddings",
+  title: "Uso de Embeddings en Agentes",
+  subtitle: "Representación semántica para comprensión contextual",
+  content: [
+    {
+      type: "text",
+      value: "Los embeddings permiten a los agentes trabajar con representaciones vectoriales de información, facilitando comparaciones semánticas y recuperación de conocimiento relevante."
+    },
+    {
+      type: "text",
+      value: "Aplicaciones clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Búsqueda semántica en bases de conocimiento",
+        "Clustering de información relacionada",
+        "Detección de similitud entre intenciones",
+        "Personalización basada en patrones históricos"
+      ]
+    },
+    {
+      type: "img",
+      value: "Visualización 2D de embeddings mostrando agrupamiento semántico"
+    },
+    {
+      type: "code",
+      value: `from sentence_transformers import SentenceTransformer
+
+class SemanticProcessor:
+    def __init__(self):
+        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        
+    def get_embedding(self, text):
+        return self.model.encode(text)
+        
+    def semantic_similarity(self, text1, text2):
+        emb1 = self.get_embedding(text1)
+        emb2 = self.get_embedding(text2)
+        return cosine_similarity(emb1, emb2)`
+    },
+    {
+      type: "warning",
+      value: "Los embeddings pueden capturar y amplificar sesgos presentes en los datos de entrenamiento. Es crucial implementar técnicas de mitigación."
+    }
+  ],
+  children: []
+},
+{
+  id: "handoffs",
+  title: "Mecanismos de Handoff",
+  subtitle: "Transferencia controlada entre agentes o sistemas",
+  content: [
+    {
+      type: "text",
+      value: "Los handoffs permiten la transferencia fluida de control entre agentes o componentes, esencial en sistemas complejos con especialización de funciones."
+    },
+    {
+      type: "text",
+      value: "Patrones comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Handoff humano-agente: Escalado a operador humano",
+        "Handoff agente-agente: Transferencia entre agentes especializados",
+        "Handoff vertical: De agente generalista a especialista",
+        "Handoff horizontal: Entre agentes del mismo nivel"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo de handoff mostrando puntos de transferencia"
+    },
+    {
+      type: "text",
+      value: "Consideraciones críticas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Consistencia de contexto durante la transferencia",
+        "Sincronización de estados internos",
+        "Mecanismos de rollback ante fallos",
+        "Registro completo para auditoría"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "agente_frameworks",
+  title: "Frameworks para Desarrollo de Agentes",
+  subtitle: "Herramientas modernas para construir sistemas agentivos",
+  content: [
+    {
+      type: "text",
+      value: "Existen diversos frameworks que facilitan el desarrollo de agentes inteligentes, proporcionando abstracciones para manejar conversaciones, estados, herramientas y flujos de trabajo complejos."
+    },
+    {
+      type: "img",
+      value: "Comparativa de frameworks para desarrollo de agentes"
+    },
+    {
+      type: "text",
+      value: "Criterios de selección:"
+    },
+    {
+      type: "list",
+      value: [
+        "Soporte para arquitecturas complejas",
+        "Integración con modelos de lenguaje",
+        "Capacidades de orquestación",
+        "Herramientas de monitoreo y debugging",
+        "Comunidad activa y documentación"
+      ]
+    }
+  ],
+  children: [
+    "langgraph",
+    "autogpt",
+    "semantic_kernel"
+  ]
+},
+{
+  id: "langgraph",
+  title: "LangGraph",
+  subtitle: "Framework para construir agentes con flujos de estado",
+  content: [
+    {
+      type: "text",
+      value: "LangGraph extiende LangChain permitiendo la construcción de agentes con flujos de trabajo complejos y estado persistente, ideal para aplicaciones que requieren ciclos de retroalimentación."
+    },
+    {
+      type: "text",
+      value: "Características principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Modelado de flujos como grafos",
+        "Manejo explícito de estado",
+        "Soporte para ejecución paralela",
+        "Integración con herramientas LangChain",
+        "Facilita arquitecturas multi-agente"
+      ]
+    },
+    {
+      type: "code",
+      value: `from langgraph.graph import Graph
+from langgraph.prebuilt import chat_agent_executor
+
+# Definir flujo del agente
+workflow = Graph()
+workflow.add_node("agent", chat_agent_executor)
+workflow.add_node("tools", execute_tools)
+workflow.add_edge("agent", "tools")
+workflow.add_edge("tools", "agent")
+workflow.set_entry_point("agent")
+
+# Compilar y ejecutar
+agent = workflow.compile()
+agent.invoke({"input": "Hola, necesito ayuda..."})`
+    },
+    {
+      type: "warning",
+      value: "LangGraph tiene una curva de aprendizaje más pronunciada que LangChain básico. Recomendado para casos donde se necesite control granular sobre el flujo de ejecución."
+    }
+  ],
+  children: []
+},
+{
+  id: "autogpt",
+  title: "AutoGPT",
+  subtitle: "Agente autónomo de propósito general",
+  content: [
+    {
+      type: "text",
+      value: "AutoGPT es un agente experimental que combina LLMs con capacidades de bucle autónomo, permitiéndole perseguir metas complejas con mínima intervención humana."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de AutoGPT mostrando el ciclo de percepción-decisión-acción"
+    },
+    {
+      type: "text",
+      value: "Mecanismos clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Auto-prompting recursivo",
+        "Gestión autónoma de sub-tareas",
+        "Integración con navegador web y herramientas",
+        "Memoria persistente en archivos",
+        "Mecanismo de autoverificación"
+      ]
+    },
+    {
+      type: "text",
+      value: "Casos de uso típicos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Investigación automatizada",
+        "Generación de contenido complejo",
+        "Automatización de flujos de trabajo",
+        "Prototipado rápido de ideas"
+      ]
+    },
+    {
+      type: "warning",
+      value: "AutoGPT puede generar bucles infinitos o acciones no deseadas. Siempre supervisar ejecuciones y establecer límites claros (presupuesto, tiempo, etc.)."
+    }
+  ],
+  children: []
+},
+{
+  id: "semantic_kernel",
+  title: "Semantic Kernel",
+  subtitle: "SDK de Microsoft para agentes y aplicaciones AI",
+  content: [
+    {
+      type: "text",
+      value: "Semantic Kernel es un SDK ligero que permite integrar modelos de lenguaje con lenguajes de programación tradicionales, facilitando la creación de agentes inteligentes."
+    },
+    {
+      type: "text",
+      value: "Ventajas competitivas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Integración nativa con .NET y Python",
+        "Soporte para plugins y habilidades reutilizables",
+        "Planificador basado en intenciones",
+        "Optimizado para Azure AI services",
+        "Patrón de diseño claro y extensible"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo en C#
+using Microsoft.SemanticKernel;
+
+var kernel = Kernel.CreateBuilder()
+    .AddAzureOpenAIChatCompletion(
+        modelId: "gpt-4",
+        endpoint: "...",
+        apiKey: "...")
+    .Build();
+
+// Registrar plugin
+kernel.ImportPluginFromObject(new MathPlugin(), "math");
+
+// Ejecutar skill
+var result = await kernel.InvokePromptAsync(
+    "Calcula el área de un círculo con radio {radius} usando el plugin math");
+Console.WriteLine(result);`
+    },
+    {
+      type: "text",
+      value: "Ideal para:"
+    },
+    {
+      type: "list",
+      value: [
+        "Aplicaciones empresariales en stack Microsoft",
+        "Sistemas que requieren integración con código tradicional",
+        "Desarrolladores que prefieren fuertes tipados"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "aplicaciones_extendidas",
+  title: "Realidad Extendida (XR)",
+  subtitle: "Tecnologías que fusionan el mundo físico y digital",
+  content: [
+    {
+      type: "text",
+      value: "La Realidad Extendida (XR) es un término paraguas que engloba tecnologías inmersivas que combinan entornos reales y virtuales, incluyendo Realidad Virtual (VR), Realidad Aumentada (AR) y Realidad Mixta (MR). Estas tecnologías están transformando industrias desde el entretenimiento hasta la medicina."
+    },
+    {
+      type: "img",
+      value: "Espectro de Realidad Extendida mostrando la progresión desde entornos completamente reales hasta completamente virtuales"
+    },
+    {
+      type: "text",
+      value: "Principales características comparativas:"
+    },
+    {
+      type: "list",
+      value: [
+        "VR: Entorno completamente digital",
+        "AR: Superposición digital sobre el mundo real",
+        "MR: Interacción bidireccional entre objetos reales y virtuales"
+      ]
+    },
+    {
+      type: "warning",
+      value: "La elección de tecnología XR depende del caso de uso. No existe una solución universal - cada formato tiene sus ventajas y limitaciones específicas."
+    }
+  ],
+  children: [
+    "vr",
+    "ar",
+    "mr"
+  ]
+},
+{
+  id: "vr",
+  title: "Realidad Virtual (VR)",
+  subtitle: "Inmersión completa en entornos digitales",
+  content: [
+    {
+      type: "text",
+      value: "La Realidad Virtual crea experiencias inmersivas mediante el reemplazo completo del entorno físico por uno generado por computadora, requiriendo normalmente visores especializados como Oculus Rift o HTC Vive."
+    },
+    {
+      type: "img",
+      value: "Diagrama de sistema VR mostrando headset, controladores y sistema de tracking"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Head-Mounted Display (HMD) con pantallas estereoscópicas",
+        "Sistema de seguimiento de movimiento (6DoF)",
+        "Controladores hápticos",
+        "Audio espacial 3D",
+        "Motores de renderizado (Unity, Unreal Engine)"
+      ]
+    },
+    {
+      type: "text",
+      value: "Aplicaciones destacadas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenamiento industrial (simuladores de vuelo, cirugía)",
+        "Terapias de exposición para fobias",
+        "Diseño arquitectónico inmersivo",
+        "Educación interactiva",
+        "Entretenimiento (videojuegos, películas 360°)"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo básico de configuración VR en Unity
+using UnityEngine;
+using UnityEngine.XR;
+
+public class BasicVRSetup : MonoBehaviour {
+    void Start() {
+        XRSettings.enabled = true;
+        InputTracking.Recenter();
+    }
+    
+    void Update() {
+        // Lógica de interacción VR
+        if (Input.GetButtonDown("XRI_Right_TriggerButton")) {
+            // Acción al presionar trigger
+        }
+    }
+}`
+    },
+    {
+      type: "warning",
+      value: "El 'cybersickness' (mareo por movimiento en VR) afecta a un porcentaje significativo de usuarios. Es crucial optimizar frame rates (mínimo 90fps) y reducir latencia (<20ms)."
+    }
+  ],
+  children: []
+},
+{
+  id: "ar",
+  title: "Realidad Aumentada (AR)",
+  subtitle: "Superposición de contenido digital en el mundo real",
+  content: [
+    {
+      type: "text",
+      value: "La Realidad Aumentada enriquece la percepción del entorno físico mediante la superposición de información digital, accesible comúnmente a través de smartphones (como Pokémon GO) o gafas especializadas (Microsoft HoloLens)."
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo AR mostrando detección de marcadores, tracking y renderizado de objetos virtuales"
+    },
+    {
+      type: "text",
+      value: "Técnicas fundamentales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Marker-based AR (detección de patrones visuales)",
+        "Markerless AR (usando SLAM para tracking)",
+        "Projection-based AR (proyección directa sobre superficies)",
+        "Location-based AR (geolocalización)"
+      ]
+    },
+    {
+      type: "text",
+      value: "Frameworks populares:"
+    },
+    {
+      type: "list",
+      value: [
+        "ARKit (Apple iOS)",
+        "ARCore (Google Android)",
+        "Vuforia (multi-plataforma)",
+        "WebXR (para navegadores)"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo básico en ARCore (Android)
+public class BasicARActivity extends AppCompatActivity {
+    private ArFragment arFragment;
+    private AnchorNode anchorNode;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        arFragment = (ArFragment) getSupportFragmentManager()
+            .findFragmentById(R.id.arFragment);
+            
+        arFragment.setOnTapArPlaneListener(
+            (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
+                // Colocar objeto 3D al tocar superficie
+                Anchor anchor = hitResult.createAnchor();
+                anchorNode = new AnchorNode(anchor);
+                anchorNode.setParent(arFragment.getArSceneView().getScene());
+                
+                TransformableNode node = new TransformableNode(...);
+                node.setParent(anchorNode);
+                node.setRenderable(My3DModel);
+                node.select();
+            });
+    }
+}`
+    },
+    {
+      type: "text",
+      value: "Retos técnicos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Oclusión realista de objetos virtuales",
+        "Iluminación consistente entre real y virtual",
+        "Tracking robusto en diversas condiciones",
+        "Optimización para dispositivos móviles"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "mr",
+  title: "Realidad Mixta (MR)",
+  subtitle: "Fusión interactiva de mundos reales y virtuales",
+  content: [
+    {
+      type: "text",
+      value: "La Realidad Mixta combina lo mejor de VR y AR, permitiendo que objetos físicos y digitales coexistan e interactúen en tiempo real. Requiere dispositivos como Microsoft HoloLens o Magic Leap que implementan 'display passthrough'."
+    },
+    {
+      type: "img",
+      value: "Diagrama de interacción MR mostrando objetos virtuales respondiendo a obstáculos físicos"
+    },
+    {
+      type: "text",
+      value: "Características distintivas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Persistencia de objetos virtuales en espacio físico",
+        "Interacción bidireccional (virtual afecta real y viceversa)",
+        "Comprensión avanzada del entorno (mesh 3D, planos)",
+        "Colaboración multi-usuario en espacios compartidos"
+      ]
+    },
+    {
+      type: "text",
+      value: "Casos de uso avanzados:"
+    },
+    {
+      type: "list",
+      value: [
+        "Prototipado industrial colaborativo",
+        "Visualización científica de datos espaciales",
+        "Telepresencia holográfica",
+        "Entrenamiento militar/medico con simulación física"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Pseudocódigo para interacción MR en HoloLens
+void OnSceneLoaded(MixedRealitySceneUnderstanding scene) {
+    // Procesar malla del entorno real
+    var floor = scene.FindFloor();
+    var walls = scene.FindWalls();
+    
+    // Colocar objeto virtual que respeta física real
+    var virtualObj = new Hologram("3DModel");
+    virtualObj.AlignToSurface(floor);
+    virtualObj.EnablePhysicsCollisions(walls);
+    
+    // Gestión de interacción
+    virtualObj.OnTapped += (args) => {
+        args.Handled = true;
+        virtualObj.Animate("Interact");
+    };
+}`
+    },
+    {
+      type: "warning",
+      value: "El desarrollo MR requiere considerar el 'espacio de juego' físico del usuario. Los diseños deben adaptarse a diversos tamaños de ambiente y condiciones de iluminación."
+    },
+    {
+      type: "text",
+      value: "Tendencias futuras:"
+    },
+    {
+      type: "list",
+      value: [
+        "Gafas MR con campo de visión ampliado (>100°)",
+        "Integración con IA para comprensión contextual",
+        "Sensores hápticos avanzados",
+        "Reducción de tamaño y peso de dispositivos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "interpretable_ai",
+  title: "Interpretable AI: Modelos Explicables en Ciencia de Datos",
+  subtitle: "Técnicas para construir modelos de machine learning interpretables",
+  content: [
+    {
+      type: "text",
+      value: "En el mundo actual dominado por la IA, la interpretabilidad se ha convertido en un requisito crítico. Los modelos interpretables permiten entender cómo toman decisiones, lo cual es esencial en áreas sensibles como medicina, finanzas o justicia."
+    },
+    {
+      type: "img",
+      value: "Diagrama comparativo entre modelos black-box y modelos interpretables, mostrando el trade-off entre precisión e interpretabilidad"
+    },
+    {
+      type: "text",
+      value: "Existen múltiples enfoques para lograr interpretabilidad:"
+    },
+    {
+      type: "list",
+      value: [
+        "Modelos intrínsecamente interpretables (como los que veremos en este módulo)",
+        "Técnicas post-hoc para explicar modelos complejos (SHAP, LIME)",
+        "Visualizaciones y análisis de componentes"
+      ]
+    },
+    {
+      type: "warning",
+      value: "La interpretabilidad no es binaria: existe en un espectro. El nivel requerido depende del contexto regulatorio, el impacto potencial y la audiencia."
+    }
+  ],
+  children: [
+    "glms",
+    "gams",
+    "rulefit",
+    "ebm",
+    "gaminet"
+  ]
+},
+{
+  id: "glms",
+  title: "Modelos Lineales Generalizados (GLMs)",
+  subtitle: "Extensión de la regresión lineal para diversos tipos de datos",
+  content: [
+    {
+      type: "text",
+      value: "Los GLMs extienden los modelos lineales tradicionales para trabajar con distribuciones no normales, manteniendo la interpretabilidad lineal."
+    },
+    {
+      type: "img",
+      value: "Esquema mostrando la relación entre variables predictoras, función de enlace y variable respuesta en GLMs"
+    },
+    {
+      type: "text",
+      value: "Componentes clave de un GLM:"
+    },
+    {
+      type: "list",
+      value: [
+        "Función de enlace: conecta el predictor lineal con la media de la variable respuesta",
+        "Familia de distribuciones: binomial, Poisson, gamma, etc.",
+        "Predictor lineal: η = Xβ (igual que en regresión lineal)"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo en R usando glm()
+modelo_glm <- glm(
+  formula = target ~ .,
+  family = binomial(link = "logit"),  # Regresión logística
+  data = datos
+)
+summary(modelo_glm)  # Muestra coeficientes interpretables`
+    },
+    {
+      type: "text",
+      value: "Casos de uso comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Clasificación binaria (regresión logística)",
+        "Modelado de conteos (regresión Poisson)",
+        "Datos con distribución gamma (como seguros o ingresos)"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los GLMs asumen independencia lineal de características. Para relaciones no lineales, considera GAMs o transformaciones de variables."
+    }
+  ],
+  children: []
+},
+{
+  id: "gams",
+  title: "Modelos Aditivos Generalizados (GAMs)",
+  subtitle: "Extensión no paramétrica de GLMs que captura relaciones no lineales",
+  content: [
+    {
+      type: "text",
+      value: "Los GAMs relajan el supuesto de linealidad de los GLMs, permitiendo que cada característica contribuya a través de una función suave (spline), manteniendo la aditividad."
+    },
+    {
+      type: "img",
+      value: "Comparación visual entre un GLM lineal y un GAM con funciones spline para cada característica"
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Capturan relaciones no lineales sin perder interpretabilidad",
+        "Visualización intuitiva de efectos parciales",
+        "Menos propensos a overfitting que modelos completamente no paramétricos"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo en Python usando pyGAM
+from pygam import LogisticGAM, s
+
+gam = LogisticGAM(
+  terms=s(0) + s(1) + s(2),  # Splines para cada característica
+  fit_intercept=True
+).fit(X, y)
+
+# Visualización de efectos parciales
+for i, term in enumerate(gam.terms):
+    if term.isintercept:
+        continue
+    plt.plot(gam.partial_dependence(term=i))
+    plt.title(f"Efecto parcial para X[{i}]")`
+    },
+    {
+      type: "text",
+      value: "Consideraciones importantes:"
+    },
+    {
+      type: "list",
+      value: [
+        "La elección de la suavidad (smoothing) es crucial",
+        "Computacionalmente más costosos que GLMs",
+        "Dificultad para capturar interacciones entre variables"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "rulefit",
+  title: "RuleFit: Modelos basados en reglas",
+  subtitle: "Combinación de árboles de decisión y modelos lineales para interpretabilidad",
+  content: [
+    {
+      type: "text",
+      value: "RuleFit genera un conjunto de reglas a partir de un ensemble de árboles (como Random Forest), luego las incluye en un modelo lineal ponderado junto con las variables originales."
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo del proceso RuleFit: de árboles a reglas a modelo lineal"
+    },
+    {
+      type: "text",
+      value: "Por qué usar RuleFit:"
+    },
+    {
+      type: "list",
+      value: [
+        "Captura interacciones complejas mediante reglas",
+        "Mantiene interpretabilidad al usar representación lineal",
+        "Combina lo mejor de árboles y modelos lineales"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo usando el paquete rulefit en Python
+from rulefit import RuleFit
+
+# Entrenamiento del modelo
+rulefit = RuleFit(
+  rfmode='regress',  # También puede ser 'classify'
+  max_rules=100,
+  tree_size=4
+)
+rulefit.fit(X_train, y_train)
+
+# Reglas más importantes
+rules = rulefit.get_rules()
+rules = rules[rules.coef != 0].sort_values("importance", ascending=False)`
+    },
+    {
+      type: "warning",
+      value: "RuleFit puede generar muchas reglas. Es crucial filtrar las más importantes para mantener la interpretabilidad."
+    }
+  ],
+  children: []
+},
+{
+  id: "ebm",
+  title: "Explainable Boosting Machines (EBM)",
+  subtitle: "Modelos aditivos modernos con detección automática de interacciones",
+  content: [
+    {
+      type: "text",
+      value: "Desarrollado por Microsoft Research, EBM es una implementación de GAM que usa boosting de manera inteligente, con detección automática de interacciones entre pares de variables."
+    },
+    {
+      type: "img",
+      value: "Visualización de los componentes de un EBM mostrando efectos principales e interacciones"
+    },
+    {
+      type: "text",
+      value: "Características distintivas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenamiento cíclico para evitar overfitting",
+        "Detección automática de interacciones relevantes",
+        "Exactitud comparable a Random Forest pero totalmente interpretable"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo usando interpretml
+from interpret.glassbox import ExplainableBoostingClassifier
+
+ebm = ExplainableBoostingClassifier(
+  interactions=2,  # Permite interacciones de hasta 2 variables
+  outer_bags=10,
+  inner_bags=5
+)
+
+ebm.fit(X_train, y_train)
+
+# Visualización global
+ebm_global = ebm.explain_global()
+show(ebm_global)
+
+# Visualización para una instancia específica
+ebm_local = ebm.explain_local(X_test[:5], y_test[:5])
+show(ebm_local)`
+    },
+    {
+      type: "text",
+      value: "Ventajas prácticas:"
+    },
+    {
+      type: "list",
+      value: [
+        "No requiere tuning extensivo de hiperparámetros",
+        "Proporciona visualizaciones listas para stakeholders",
+        "Implementación eficiente para datasets medianos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "gaminet",
+  title: "GAMINet: Redes Neuronales Interpretables",
+  subtitle: "Arquitectura híbrida que combina GAMs y redes neuronales",
+  content: [
+    {
+      type: "text",
+      value: "GAMINet es un enfoque innovador que mantiene la estructura aditiva de los GAMs pero utiliza componentes neuronales para aprender representaciones más ricas de cada característica."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de GAMINet mostrando las redes individuales para cada característica y cómo se combinan aditivamente"
+    },
+    {
+      type: "text",
+      value: "Por qué es revolucionario:"
+    },
+    {
+      type: "list",
+      value: [
+        "Mantiene interpretabilidad a nivel de característica",
+        "Captura patrones complejos mediante redes neuronales",
+        "Estructura que evita interacciones no deseadas"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo conceptual (implementación varía)
+from tensorflow import keras
+
+# Definición de subredes para cada característica
+input_layers = [keras.Input(shape=(1,)) for _ in range(n_features)]
+subnetworks = [
+  keras.Sequential([
+    keras.layers.Dense(16, activation='relu'),
+    keras.layers.Dense(1)  # Salida unidimensional
+  ])(input) for input in input_layers
+]
+
+# Combinación aditiva
+output = keras.layers.Add()(subnetworks)
+model = keras.Model(inputs=input_layers, outputs=output)
+
+# Entrenamiento con interpretabilidad forzada
+model.compile(optimizer='adam', loss='mse')
+model.fit(
+  [X_train[:, i] for i in range(n_features)],
+  y_train,
+  epochs=50,
+  validation_split=0.2
+)`
+    },
+    {
+      type: "text",
+      value: "Consideraciones clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Requiere más datos que GAMs tradicionales",
+        "Computacionalmente más intensivo",
+        "Implementaciones estables aún emergiendo"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Aunque GAMINet es interpretable a nivel de características, las transformaciones internas de las subredes pueden ser difíciles de explicar completamente."
+    }
+  ],
+  children: []
+},
+{
+  id: "mlops_y_automatizacion",
+  title: "MLOps y Automatización de Machine Learning",
+  subtitle: "Estrategias para implementar y mantener sistemas de ML en producción",
+  content: [
+    {
+      type: "text",
+      value: "MLOps es la disciplina que combina Machine Learning, DevOps y Data Engineering para llevar modelos de ML a producción de manera eficiente y mantenerlos operativos."
+    },
+    {
+      type: "img",
+      value: "Diagrama del ciclo de vida de MLOps mostrando desarrollo, despliegue y monitoreo continuo"
+    },
+    {
+      type: "text",
+      value: "Beneficios clave de implementar MLOps:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reducción del tiempo entre experimentación y producción",
+        "Mayor reproducibilidad de los modelos",
+        "Detección temprana de concept drift",
+        "Escalabilidad de soluciones de ML"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Sin MLOps, más del 80% de los proyectos de ML nunca llegan a producción o fallan poco después del despliegue."
+    }
+  ],
+  children: [
+    "niveles_de_mlops",
+    "roles_involucrados",
+    "arquitecturas_de_datos",
+    "componentes_criticos",
+    "metricas_y_validaciones",
+    "pipelines_funcionales",
+    "herramientas_aws",
+    "automl",
+    "componentes_del_sistema",
+    "herramientas_por_funcion"
+  ]
+},
+{
+  id: "niveles_de_mlops",
+  title: "Niveles de Madurez en MLOps",
+  subtitle: "Evolución desde procesos manuales hasta automatización completa",
+  content: [
+    {
+      type: "text",
+      value: "La implementación de MLOps sigue una progresión de madurez que va desde procesos completamente manuales hasta sistemas completamente automatizados con CI/CD/CT (Continuous Training)."
+    },
+    {
+      type: "img",
+      value: "Pirámide de madurez de MLOps mostrando los 4 niveles con sus características principales"
+    },
+    {
+      type: "text",
+      value: "Factores que determinan el nivel adecuado:"
+    },
+    {
+      type: "list",
+      value: [
+        "Frecuencia de actualización de modelos requerida",
+        "Volumen y velocidad de los datos",
+        "Impacto empresarial de los modelos",
+        "Recursos del equipo disponible"
+      ]
+    }
+  ],
+  children: [
+    "nivel_0",
+    "nivel_1",
+    "nivel_2",
+    "nivel_3"
+  ]
+},
+{
+  id: "nivel_0",
+  title: "Nivel 0: Procesos Manuales",
+  subtitle: "Implementación básica sin automatización",
+  content: [
+    {
+      type: "text",
+      value: "Características principales del nivel más básico de MLOps:"
+    },
+    {
+      type: "list",
+      value: [
+        "Todo el proceso es manual: desarrollo, entrenamiento y despliegue",
+        "No hay CI/CD pipeline",
+        "Monitoreo mínimo o inexistente",
+        "Separación clara entre equipos de ciencia de datos e ingeniería"
+      ]
+    },
+    {
+      type: "img",
+      value: "Flujo manual típico con científicos de datos pasando modelos a ingenieros para implementación"
+    },
+    {
+      type: "text",
+      value: "Cuándo usar este nivel:"
+    },
+    {
+      type: "list",
+      value: [
+        "Pocos despliegues de modelos al año",
+        "Equipos pequeños o startups en etapas iniciales",
+        "Modelos con bajo impacto empresarial"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Este enfoque no escala y es propenso a errores humanos en la transición de desarrollo a producción."
+    }
+  ],
+  children: []
+},
+{
+  id: "nivel_1",
+  title: "Nivel 1: Automatización del Pipeline de ML",
+  subtitle: "Automatización del flujo de entrenamiento de modelos",
+  content: [
+    {
+      type: "text",
+      value: "En este nivel se introduce automatización en el proceso de entrenamiento y despliegue de modelos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Pipeline de entrenamiento automático",
+        "Desencadenamiento manual del pipeline",
+        "Monitoreo básico del modelo en producción",
+        "CI/CD para el código de implementación"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de pipeline básico con Airflow
+with DAG('ml_pipeline', schedule_interval=None) as dag:
+    preprocess_task = PythonOperator(
+        task_id='preprocess',
+        python_callable=preprocess_data
+    )
+    
+    train_task = PythonOperator(
+        task_id='train',
+        python_callable=train_model
+    )
+    
+    evaluate_task = PythonOperator(
+        task_id='evaluate',
+        python_callable=evaluate_model
+    )
+    
+    preprocess_task >> train_task >> evaluate_task`
+    },
+    {
+      type: "text",
+      value: "Ventajas sobre el nivel 0:"
+    },
+    {
+      type: "list",
+      value: [
+        "Mayor reproducibilidad de los modelos",
+        "Reducción de errores en el proceso de entrenamiento",
+        "Documentación implícita del flujo de trabajo"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "nivel_2",
+  title: "Nivel 2: CI/CD Pipeline Automatizado",
+  subtitle: "Automatización completa del ciclo de vida del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Este nivel introduce integración y despliegue continuo para los pipelines de ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "CI/CD para el código del modelo y el pipeline",
+        "Automatización de pruebas de modelo",
+        "Registro automático de modelos y datos",
+        "Monitoreo activo del modelo en producción"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de CI/CD pipeline mostrando triggers automáticos para retrenamiento"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Sistema de control de versiones para código y datos",
+        "Registro de modelos (Model Registry)",
+        "Sistema de orquestación de pipelines",
+        "Herramientas de monitoreo de modelos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "nivel_3",
+  title: "Nivel 3: Operaciones Automatizadas",
+  subtitle: "Sistemas auto-gestionados con Continuous Training",
+  content: [
+    {
+      type: "text",
+      value: "El nivel más avanzado introduce capacidades de auto-gestión y optimización continua:"
+    },
+    {
+      type: "list",
+      value: [
+        "Continuous Training (retrenamiento automático basado en triggers)",
+        "Auto-healing para problemas de rendimiento",
+        "A/B testing y canary deployments automatizados",
+        "Optimización automática de hiperparámetros en producción"
+      ]
+    },
+    {
+      type: "img",
+      value: "Arquitectura de auto-reparación mostrando detección de drift y retrenamiento automático"
+    },
+    {
+      type: "text",
+      value: "Requisitos para implementar:"
+    },
+    {
+      type: "list",
+      value: [
+        "Infraestructura cloud o híbrida escalable",
+        "Sistema robusto de monitoreo y alertas",
+        "Procesos de gobernanza bien definidos",
+        "Equipo multidisciplinario especializado"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Este nivel requiere inversión significativa y solo es necesario para modelos críticos con datos que cambian rápidamente."
+    }
+  ],
+  children: []
+},
+{
+  id: "roles_involucrados",
+  title: "Roles en un Equipo de MLOps",
+  subtitle: "Responsabilidades y colaboración entre especialistas",
+  content: [
+    {
+      type: "text",
+      value: "Implementar MLOps efectivamente requiere la colaboración de varios roles especializados:"
+    },
+    {
+      type: "img",
+      value: "Diagrama de Venn mostrando la intersección de habilidades entre roles"
+    },
+    {
+      type: "text",
+      value: "La colaboración efectiva entre estos roles es crucial para:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reducir la deuda técnica en ML",
+        "Acelerar el time-to-market de los modelos",
+        "Garantizar la calidad y confiabilidad de los sistemas de ML en producción"
+      ]
+    }
+  ],
+  children: [
+    "data_scientist",
+    "machine_learning_engineer",
+    "data_engineer",
+    "mlops_engineer"
+  ]
+},
+{
+  id: "data_scientist",
+  title: "Científico de Datos",
+  subtitle: "Enfoque en desarrollo y experimentación con modelos",
+  content: [
+    {
+      type: "text",
+      value: "Responsabilidades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Desarrollo y experimentación con modelos",
+        "Feature engineering y selección de algoritmos",
+        "Evaluación de rendimiento de modelos",
+        "Prototipado rápido de soluciones"
+      ]
+    },
+    {
+      type: "text",
+      value: "Habilidades técnicas requeridas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Python/R avanzado",
+        "Frameworks de ML (scikit-learn, TensorFlow, PyTorch)",
+        "Análisis estadístico",
+        "Visualización de datos"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los científicos de datos deben entender las limitaciones de producción para crear modelos más fácilmente implementables."
+    }
+  ],
+  children: []
+},
+{
+  id: "machine_learning_engineer",
+  title: "Ingeniero de Machine Learning",
+  subtitle: "Puente entre ciencia de datos e ingeniería de software",
+  content: [
+    {
+      type: "text",
+      value: "Responsabilidades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Optimización de modelos para producción",
+        "Diseño de APIs para servir modelos",
+        "Integración con sistemas existentes",
+        "Automatización de pipelines de entrenamiento"
+      ]
+    },
+    {
+      type: "text",
+      value: "Habilidades técnicas requeridas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Ingeniería de software (OOP, diseño de sistemas)",
+        "Frameworks de despliegue (MLflow, Kubeflow)",
+        "Computación distribuida",
+        "Conocimiento de infraestructura cloud"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "data_engineer",
+  title: "Ingeniero de Datos",
+  subtitle: "Infraestructura y pipelines de datos",
+  content: [
+    {
+      type: "text",
+      value: "Responsabilidades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Diseño y mantenimiento de data pipelines",
+        "Optimización de almacenes de datos",
+        "Garantía de calidad de datos",
+        "Gobernanza y seguridad de datos"
+      ]
+    },
+    {
+      type: "text",
+      value: "Habilidades técnicas requeridas:"
+    },
+    {
+      type: "list",
+      value: [
+        "SQL avanzado y tecnologías ETL",
+        "Big Data (Spark, Hadoop)",
+        "Arquitecturas de datos en la nube",
+        "Stream processing (Kafka, Flink)"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "mlops_engineer",
+  title: "Ingeniero de MLOps",
+  subtitle: "Especialista en operacionalización de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Responsabilidades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Diseño e implementación de infraestructura MLOps",
+        "Monitoreo y mantenimiento de modelos en producción",
+        "Automatización de CI/CD/CT pipelines",
+        "Optimización de costos de infraestructura ML"
+      ]
+    },
+    {
+      type: "text",
+      value: "Habilidades técnicas requeridas:"
+    },
+    {
+      type: "list",
+      value: [
+        "DevOps y herramientas cloud",
+        "Contenedores y orquestación (Docker, Kubernetes)",
+        "Sistemas de monitoreo (Prometheus, Grafana)",
+        "Seguridad y compliance en ML"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Este rol requiere conocimiento tanto de ML como de ingeniería de software y sistemas distribuidos."
+    }
+  ],
+  children: []
+},
+{
+  id: "arquitecturas_de_datos",
+  title: "Arquitecturas de Datos para MLOps",
+  subtitle: "Patrones para manejar datos en sistemas de ML",
+  content: [
+    {
+      type: "text",
+      value: "La arquitectura de datos es fundamental para sistemas MLOps escalables y confiables:"
+    },
+    {
+      type: "img",
+      value: "Comparación de arquitecturas de datos mostrando sus diferencias en procesamiento batch y streaming"
+    },
+    {
+      type: "text",
+      value: "Criterios para seleccionar arquitectura:"
+    },
+    {
+      type: "list",
+      value: [
+        "Volumen y velocidad de los datos",
+        "Requisitos de latencia para predicciones",
+        "Necesidad de reprocesamiento histórico",
+        "Recursos de infraestructura disponibles"
+      ]
+    }
+  ],
+  children: [
+    "lambda_architecture",
+    "kappa_architecture",
+    "medallion_architecture"
+  ]
+},
+{
+  id: "lambda_architecture",
+  title: "Arquitectura Lambda",
+  subtitle: "Procesamiento dual batch y streaming",
+  content: [
+    {
+      type: "text",
+      value: "La arquitectura Lambda combina dos capas para manejar datos en tiempo real e históricos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Capa batch: Procesamiento completo de todos los datos históricos",
+        "Capa speed: Procesamiento en tiempo real de los datos más recientes",
+        "Capa serving: Combina resultados de ambas capas para consultas"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura Lambda mostrando las tres capas y su interacción"
+    },
+    {
+      type: "text",
+      value: "Ventajas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Tolerancia a fallos (la capa batch corrige errores de la capa speed)",
+        "Capacidad de reprocesamiento completo",
+        "Baja latencia para datos recientes"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Esta arquitectura puede ser compleja de mantener debido a la necesidad de desarrollar y sincronizar dos pipelines diferentes."
+    }
+  ],
+  children: []
+},
+{
+  id: "kappa_architecture",
+  title: "Arquitectura Kappa",
+  subtitle: "Sistema unificado basado en streaming",
+  content: [
+    {
+      type: "text",
+      value: "La arquitectura Kappa simplifica el diseño procesando todo como stream:"
+    },
+    {
+      type: "list",
+      value: [
+        "Single pipeline: Todo el procesamiento ocurre en el stream",
+        "Reprocesamiento: Se logra reiniciando el stream desde el inicio",
+        "Almacenamiento: Log de eventos inmutable como fuente de verdad"
+      ]
+    },
+    {
+      type: "code",
+      value: `// Ejemplo conceptual con Kafka Streams
+KStream<String, Event> stream = builder.stream("input-topic");
+
+// Procesamiento en tiempo real
+stream.filter((k, v) -> v.isValid())
+      .mapValues(v -> transform(v))
+      .to("output-topic");
+
+// Reprocesamiento (mismo código)
+KStream<String, Event> reprocess = builder.stream("input-topic", 
+    Consumed.with(Serdes.String(), eventSerde)
+    .withOffsetResetPolicy(Topology.AutoOffsetReset.EARLIEST);`
+    },
+    {
+      type: "text",
+      value: "Cuándo preferir Kappa:"
+    },
+    {
+      type: "list",
+      value: [
+        "Cuando los requisitos de latencia son extremos",
+        "Para sistemas donde la simplicidad es prioridad",
+        "Cuando el reprocesamiento es poco frecuente"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "medallion_architecture",
+  title: "Arquitectura Medallion",
+  subtitle: "Enfoque por capas para calidad incremental de datos",
+  content: [
+    {
+      type: "text",
+      value: "Popularizada por Databricks, esta arquitectura organiza los datos en capas de calidad creciente:"
+    },
+    {
+      type: "list",
+      value: [
+        "Bronze: Datos crudos sin transformar",
+        "Silver: Datos limpios y validados",
+        "Gold: Datos enriquecidos listos para consumo"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de flujo de datos a través de las capas bronze, silver y gold"
+    },
+    {
+      type: "text",
+      value: "Beneficios para MLOps:"
+    },
+    {
+      type: "list",
+      value: [
+        "Trazabilidad completa de los datos",
+        "Reutilización de datos transformados",
+        "Separación clara de responsabilidades",
+        "Optimización de costos por capa"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "componentes_criticos",
+  title: "Componentes Críticos en Sistemas MLOps",
+  subtitle: "Elementos esenciales para operacionalizar modelos de ML efectivamente",
+  content: [
+    {
+      type: "text",
+      value: "Los sistemas MLOps robustos requieren varios componentes interconectados que garantizan la calidad, confiabilidad y mantenibilidad de los modelos en producción."
+    },
+    {
+      type: "img",
+      value: "Diagrama arquitectónico mostrando todos los componentes críticos de MLOps y sus interrelaciones"
+    },
+    {
+      type: "text",
+      value: "Estos componentes resuelven desafíos fundamentales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Mantenimiento continuo de modelos",
+        "Garantía de calidad de datos y modelos",
+        "Trazabilidad y reproducibilidad",
+        "Cumplimiento regulatorio",
+        "Eficiencia operacional"
+      ]
+    }
+  ],
+  children: [
+    "reentrenamiento_y_actualizacion",
+    "artefactos_de_modelo_artifacts",
+    "pasos_del_pipeline_modularidad",
+    "interpretabilidad_explainability",
+    "data_drift_y_concept_drift",
+    "calidad_del_dato",
+    "recoleccion_y_versionado_de_datos",
+    "rivacidad_de_datos",
+    "abt"
+  ]
+},
+{
+  id: "reentrenamiento_y_actualizacion",
+  title: "Reentrenamiento y Actualización de Modelos",
+  subtitle: "Estrategias para mantener modelos relevantes con datos cambiantes",
+  content: [
+    {
+      type: "text",
+      value: "El reentrenamiento periódico es esencial para mantener el rendimiento del modelo a lo largo del tiempo:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reentrenamiento programado: en intervalos fijos (ej. semanal)",
+        "Reentrenamiento por trigger: cuando se detecta drift o degradación",
+        "Online learning: actualización continua con nuevos datos"
+      ]
+    },
+    {
+      type: "img",
+      value: "Flujo de decisión para reentrenamiento mostrando condiciones y acciones"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de trigger para reentrenamiento
+def check_for_retrain(current_accuracy, threshold=0.05, last_train_date):
+    time_since_train = (datetime.now() - last_train_date).days
+    if current_accuracy < (1 - threshold) * baseline_accuracy:
+        return "accuracy_drop"
+    elif time_since_train >= 30:
+        return "scheduled_retrain"
+    else:
+        return "no_action"`
+    },
+    {
+      type: "warning",
+      value: "El reentrenamiento automático requiere validación rigurosa para evitar introducir sesgos o degradaciones."
+    }
+  ],
+  children: []
+},
+{
+  id: "artefactos_de_modelo_artifacts",
+  title: "Artefactos de Modelo",
+  subtitle: "Elementos necesarios para empaquetar y reproducir modelos",
+  content: [
+    {
+      type: "text",
+      value: "Un modelo en producción requiere múltiples artefactos interrelacionados:"
+    },
+    {
+      type: "list",
+      value: [
+        "Modelo serializado (pickle, ONNX, etc.)",
+        "Metadatos (hiperparámetros, métricas)",
+        "Entorno de ejecución (Docker image, conda env)",
+        "Código de pre/post-procesamiento",
+        "Documentación y versionado"
+      ]
+    },
+    {
+      type: "img",
+      value: "Estructura de directorios típica para artefactos de modelo mostrando relaciones entre componentes"
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas para gestión de artefactos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Usar Model Registry (MLflow, TF Serving)",
+        "Versionar todos los componentes",
+        "Firmar digitalmente artefactos",
+        "Documentar dependencias exactas"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "pasos_del_pipeline_modularidad",
+  title: "Pasos del Pipeline y Modularidad",
+  subtitle: "Diseño de pipelines ML mantenibles y reutilizables",
+  content: [
+    {
+      type: "text",
+      value: "Los pipelines de ML deben diseñarse como componentes modulares independientes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Preprocesamiento (limpieza, transformación)",
+        "Feature engineering",
+        "Entrenamiento/Validación",
+        "Evaluación",
+        "Despliegue"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de pipeline modular mostrando interfaces claras entre componentes"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de pipeline modular con scikit-learn
+from sklearn.pipeline import Pipeline
+
+preprocessor = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')),
+    ('scaler', StandardScaler())
+])
+
+full_pipeline = Pipeline(steps=[
+    ('preprocessing', preprocessor),
+    ('feature_selection', SelectKBest(score_func=f_classif, k=10)),
+    ('classifier', RandomForestClassifier())
+])`
+    },
+    {
+      type: "text",
+      value: "Ventajas de la modularidad:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reutilización de componentes",
+        "Pruebas unitarias más fáciles",
+        "Escalabilidad independiente",
+        "Actualizaciones parciales"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "interpretabilidad_explainability",
+  title: "Interpretabilidad y Explainability",
+  subtitle: "Técnicas para entender y explicar modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "La interpretabilidad es crucial para depuración, confianza y cumplimiento regulatorio:"
+    },
+    {
+      type: "list",
+      value: [
+        "Métodos intrínsecos: modelos interpretables por diseño (árboles, regresiones)",
+        "Métodos post-hoc: SHAP, LIME, saliency maps",
+        "Explicaciones globales vs locales"
+      ]
+    },
+    {
+      type: "img",
+      value: "Comparación visual de explicaciones SHAP globales y locales"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de explicación con SHAP
+import shap
+
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_test)
+
+# Visualización para una instancia
+shap.force_plot(explainer.expected_value, shap_values[0,:], X_test.iloc[0,:])`
+    },
+    {
+      type: "warning",
+      value: "En entornos regulados (banca, salud), la interpretabilidad es requisito legal, no solo técnica."
+    }
+  ],
+  children: []
+},
+{
+  id: "data_drift_y_concept_drift",
+  title: "Data Drift y Concept Drift",
+  subtitle: "Detección y manejo de cambios en datos y relaciones",
+  content: [
+    {
+      type: "text",
+      value: "Tipos de drift que afectan modelos en producción:"
+    },
+    {
+      type: "list",
+      value: [
+        "Data drift: Cambio en distribución de características (P(X) cambia)",
+        "Concept drift: Cambio en relación características-objetivo (P(Y|X) cambia)",
+        "Covariate shift: Cambio en características sin cambiar relación objetivo"
+      ]
+    },
+    {
+      type: "img",
+      value: "Gráficos comparativos mostrando diferentes tipos de drift en distribuciones de datos"
+    },
+    {
+      type: "text",
+      value: "Técnicas de detección:"
+    },
+    {
+      type: "list",
+      value: [
+        "Pruebas estadísticas (KS, Chi-cuadrado)",
+        "Modelos de dominio (discriminadores)",
+        "Monitoreo de métricas en ventanas temporales"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "calidad_del_dato",
+  title: "Calidad del Dato",
+  subtitle: "Garantía de calidad para datos de entrenamiento y producción",
+  content: [
+    {
+      type: "text",
+      value: "Dimensiones clave de calidad de datos en ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Completitud (valores faltantes)",
+        "Consistencia (formatos, rangos)",
+        "Actualidad (frescura de datos)",
+        "Precisión (valores correctos)",
+        "Relevancia (para el problema)"
+      ]
+    },
+    {
+      type: "img",
+      value: "Dashboard de calidad de datos mostrando métricas por dimensión"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de chequeo de calidad con Pandera
+import pandera as pa
+
+schema = pa.DataFrameSchema({
+    "age": pa.Column(int, checks=[pa.Check.ge(0), pa.Check.le(120)]),
+    "income": pa.Column(float, checks=pa.Check.ge(0), nullable=True),
+    "gender": pa.Column(str, checks=pa.Check.isin(["M", "F", "Other"]))
+})
+
+schema.validate(df)`
+    }
+  ],
+  children: []
+},
+{
+  id: "recoleccion_y_versionado_de_datos",
+  title: "Recolección y Versionado de Datos",
+  subtitle: "Gestión sistemática de datasets para ML",
+  content: [
+    {
+      type: "text",
+      value: "Estrategias efectivas para manejo de datos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Data versioning (DVC, Delta Lake)",
+        "Lineage tracking (procedencia de datos)",
+        "Metadatos descriptivos (schema, estadísticas)",
+        "Muestreo representativo"
+      ]
+    },
+    {
+      type: "img",
+      value: "Flujo de versionado de datos mostrando snapshots y metadatos asociados"
+    },
+    {
+      type: "text",
+      value: "Herramientas recomendadas:"
+    },
+    {
+      type: "list",
+      value: [
+        "DVC para versionado de datasets pequeños/medianos",
+        "Delta Lake/LakeFS para data lakes",
+        "Great Expectations para validación"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "rivacidad_de_datos",
+  title: "Privacidad de Datos",
+  subtitle: "Protección de información sensible en sistemas ML",
+  content: [
+    {
+      type: "text",
+      value: "Consideraciones clave para privacidad:"
+    },
+    {
+      type: "list",
+      value: [
+        "Anonimización/Pseudonimización",
+        "Técnicas de privacidad diferencial",
+        "Cumplimiento de regulaciones (GDPR, CCPA)",
+        "Federated learning para datos sensibles"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de técnicas de anonimización mostrando k-anonymity, l-diversity"
+    },
+    {
+      type: "warning",
+      value: "Los modelos pueden memorizar datos sensibles incluso sin acceso directo a ellos (riesgo de membership inference attacks)."
+    }
+  ],
+  children: []
+},
+{
+  id: "abt",
+  title: "Analytical Base Tables (ABT)",
+  subtitle: "Tablas analíticas para entrenamiento de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Las ABTs son tablas estructuradas específicamente para entrenar modelos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Una fila por observación/entidad",
+        "Columnas como características (features)",
+        "Target variable claramente definida",
+        "Split temporal adecuado (train/test)"
+      ]
+    },
+    {
+      type: "img",
+      value: "Ejemplo visual de ABT mostrando estructura típica con features y target"
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas para ABTs:"
+    },
+    {
+      type: "list",
+      value: [
+        "Documentar origen de cada feature",
+        "Garantizar no leakage de datos",
+        "Incluir metadatos temporales",
+        "Versionar ABTs junto con modelos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "metricas_y_validaciones",
+  title: "Métricas y Validaciones en ML",
+  subtitle: "Evaluación rigurosa de modelos más allá del accuracy",
+  content: [
+    {
+      type: "text",
+      value: "La evaluación efectiva de modelos requiere múltiples métricas y técnicas de validación:"
+    },
+    {
+      type: "img",
+      value: "Dashboard típico de monitoreo de modelos mostrando múltiples métricas"
+    },
+    {
+      type: "text",
+      value: "Consideraciones clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Métricas alineadas con objetivos de negocio",
+        "Validación temporal (no solo aleatoria)",
+        "Pruebas de stress (edge cases)",
+        "Monitoreo continuo en producción"
+      ]
+    }
+  ],
+  children: [
+    "validacion_outoftime_oot",
+    "auc",
+    "gini",
+    "colinealidad",
+    "matriz_de_transicion",
+    "validacion_por_ventana_movil"
+  ]
+},
+{
+  id: "validacion_outoftime_oot",
+  title: "Validación Out-of-Time (OOT)",
+  subtitle: "Evaluación en períodos temporales distintos al entrenamiento",
+  content: [
+    {
+      type: "text",
+      value: "La validación OOT es crucial para modelos con datos temporales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenar en período T1-T2",
+        "Validar en período T3-T4 posterior",
+        "Detectar pérdida de performance por cambios temporales",
+        "Estimador más realista de performance en producción"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de splits temporales mostrando entrenamiento vs validación OOT"
+    },
+    {
+      type: "warning",
+      value: "En datos con estacionalidad fuerte, el período OOT debe cubrir ciclos completos para ser representativo."
+    }
+  ],
+  children: []
+},
+{
+  id: "auc",
+  title: "AUC (Area Under ROC Curve)",
+  subtitle: "Métrica para evaluación de clasificadores binarios",
+  content: [
+    {
+      type: "text",
+      value: "AUC mide la capacidad del modelo de distinguir entre clases positivas y negativas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Rango de 0 a 1 (1 es perfecto, 0.5 es aleatorio)",
+        "Robusta a desbalance de clases",
+        "Interpretación: probabilidad de que un positivo aleatorio tenga mayor score que un negativo aleatorio"
+      ]
+    },
+    {
+      type: "img",
+      value: "Curva ROC mostrando diferentes valores de AUC comparados"
+    },
+    {
+      type: "code",
+      value: `# Cálculo de AUC en Python
+from sklearn.metrics import roc_auc_score
+
+y_true = [0, 1, 1, 0, 1]
+y_scores = [0.1, 0.9, 0.8, 0.3, 0.7]
+
+auc = roc_auc_score(y_true, y_scores)
+print(f"AUC: {auc:.3f}")`
+    }
+  ],
+  children: []
+},
+{
+  id: "gini",
+  title: "Coeficiente Gini",
+  subtitle: "Métrica de discriminación para modelos de clasificación",
+  content: [
+    {
+      type: "text",
+      value: "El coeficiente Gini es una transformación del AUC común en risk modeling:"
+    },
+    {
+      type: "list",
+      value: [
+        "Gini = 2*AUC - 1",
+        "Rango de 0 a 1 (1 es perfecto, 0 es aleatorio)",
+        "Interpretación: capacidad de ordenar casos positivos antes que negativos",
+        "Común en banca y seguros"
+      ]
+    },
+    {
+      type: "img",
+      value: "Relación visual entre curva ROC y coeficiente Gini"
+    },
+    {
+      type: "warning",
+      value: "Gini puede ser engañoso en datasets muy desbalanceados - siempre reportar junto con otras métricas."
+    }
+  ],
+  children: []
+},
+{
+  id: "colinealidad",
+  title: "Detección de Colinealidad",
+  subtitle: "Identificación de predictores correlacionados",
+  content: [
+    {
+      type: "text",
+      value: "La colinealidad afecta la estabilidad e interpretabilidad de modelos lineales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Causa inestabilidad en coeficientes",
+        "Reduce poder interpretativo",
+        "Aumenta varianza en estimaciones"
+      ]
+    },
+    {
+      type: "img",
+      value: "Matriz de correlación mostrando variables altamente correlacionadas"
+    },
+    {
+      type: "code",
+      value: `# Cálculo de VIF para detectar colinealidad
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+vif_data = pd.DataFrame()
+vif_data["feature"] = X.columns
+vif_data["VIF"] = [variance_inflation_factor(X.values, i) 
+                  for i in range(len(X.columns))]
+                  
+print(vif_data[vif_data["VIF"] > 5])  # Umbral común`
+    }
+  ],
+  children: []
+},
+{
+  id: "validacion_por_ventana_movil",
+  title: "Validación por Ventana Móvil",
+  subtitle: "Técnica para modelos con dependencia temporal",
+  content: [
+    {
+      type: "text",
+      value: "La validación por ventana móvil simula el despliegue real en datos temporales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenar en ventana W1, validar en W1+Δ",
+        "Mover ventana y repetir",
+        "Promediar métricas de todas las ventanas",
+        "Captura cambios temporales en relaciones"
+      ]
+    },
+    {
+      type: "img",
+      value: "Diagrama de ventana móvil mostrando múltiples splits temporales"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo con TimeSeriesSplit
+from sklearn.model_selection import TimeSeriesSplit
+
+tscv = TimeSeriesSplit(n_splits=5)
+for train_index, test_index in tscv.split(X):
+    X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+    y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+    # Entrenar y evaluar modelo`
+    }
+  ],
+  children: []
+},
+{
+  id: "pipelines_funcionales",
+  title: "Pipelines Funcionales en Ciencia de Datos",
+  subtitle: "Flujos de trabajo end-to-end para modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "Un pipeline funcional es un conjunto de procesos automatizados que transforman datos crudos en predicciones valiosas, manteniendo consistencia entre desarrollo y producción."
+    },
+    {
+      type: "img",
+      value: "Diagrama de un pipeline completo con etapas de preprocesamiento, entrenamiento, inferencia y monitoreo"
+    },
+    {
+      type: "text",
+      value: "Las etapas clave son:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenamiento: Desarrollo y optimización del modelo",
+        "Inferencia: Generación de predicciones en producción",
+        "Monitoreo: Seguimiento del desempeño en tiempo real",
+        "Reentrenamiento: Actualización periódica del modelo"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Sin pipelines robustos, los modelos sufren de 'deuda de ML' donde el desempeño decae rápidamente en producción."
+    }
+  ],
+  children: []
+},
+{
+  id: "herramientas_aws",
+  title: "Herramientas AWS para Data Science",
+  subtitle: "Ecosistema de servicios para pipelines de ML",
+  content: [
+    {
+      type: "text",
+      value: "AWS ofrece un conjunto integrado de servicios para cada etapa del ciclo de vida de un proyecto de ciencia de datos:"
+    },
+    {
+      type: "img",
+      value: "Arquitectura de referencia con servicios AWS para ingestión, procesamiento, modelado y despliegue"
+    },
+    {
+      type: "text",
+      value: "Principales categorías:"
+    },
+    {
+      type: "list",
+      value: [
+        "Almacenamiento (S3, Glacier)",
+        "Procesamiento (Glue, EMR)",
+        "Machine Learning (SageMaker)",
+        "Orquestación (Step Functions)",
+        "Infraestructura como código (CloudFormation, CDK)"
+      ]
+    }
+  ],
+  children: [
+    "aws_glue",
+    "amazon_s3",
+    "sagemaker",
+    "athena",
+    "step_functions",
+    "codepipeline",
+    "aws_cloudformation",
+    "aws_cdk",
+    "terraform"
+  ]
+},
+{
+  id: "aws_glue",
+  title: "AWS Glue",
+  subtitle: "Servicio ETL completamente administrado",
+  content: [
+    {
+      type: "text",
+      value: "AWS Glue es un servicio serverless para preparar y transformar datos a escala, con capacidades de descubrimiento de datos integradas."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de job de Glue en Python
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+
+glueContext = GlueContext(SparkContext.getOrCreate())
+datasource = glueContext.create_dynamic_frame.from_catalog(
+    database="sales_db",
+    table_name="retail_transactions"
+)
+
+# Transformación simple: filtrar registros
+filtered_data = Filter.apply(
+    frame=datasource,
+    f=lambda x: x["amount"] > 100
+)
+
+glueContext.write_dynamic_frame.from_options(
+    frame=filtered_data,
+    connection_type="s3",
+    connection_options={"path": "s3://processed-data-bucket"},
+    format="parquet"
+)`
+    },
+    {
+      type: "text",
+      value: "Casos de uso típicos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Limpieza y normalización de datos",
+        "Preparación de datasets para entrenamiento",
+        "Integración de múltiples fuentes de datos",
+        "Conversión entre formatos (CSV, JSON, Parquet)"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Glue tiene un costo mínimo de 10 minutos por job, no es económico para transformaciones pequeñas o infrecuentes."
+    }
+  ],
+  children: []
+},
+{
+  id: "amazon_s3",
+  title: "Amazon S3",
+  subtitle: "Almacenamiento de objetos escalable",
+  content: [
+    {
+      type: "text",
+      value: "Amazon Simple Storage Service (S3) es el servicio fundamental para almacenar y recuperar cualquier cantidad de datos en cualquier momento."
+    },
+    {
+      type: "img",
+      value: "Estructura de buckets y objetos en S3 con diferentes clases de almacenamiento"
+    },
+    {
+      type: "text",
+      value: "Mejores prácticas para ciencia de datos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Organizar datos en buckets lógicos (raw, processed, models)",
+        "Usar prefijos para estructura tipo directorio",
+        "Implementar lifecycle policies para ahorro de costos",
+        "Habilitar versionado para trazabilidad"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de interacción con S3 desde Python (boto3)
+import boto3
+
+s3 = boto3.client('s3')
+
+# Subir archivo de datos
+s3.upload_file(
+    'local_data.csv',
+    'mi-bucket-datos',
+    'raw/sales/2023/07/data.csv'
+)
+
+# Listar contenidos
+response = s3.list_objects_v2(
+    Bucket='mi-bucket-datos',
+    Prefix='processed/'
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "sagemaker",
+  title: "Amazon SageMaker",
+  subtitle: "Plataforma completa para machine learning",
+  content: [
+    {
+      type: "text",
+      value: "SageMaker simplifica el proceso de construir, entrenar y desplegar modelos de machine learning a escala."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de SageMaker mostrando notebooks, entrenamiento distribuido y endpoints de inferencia"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Notebooks para exploración interactiva",
+        "Entrenamiento administrado con algoritmos built-in o custom",
+        "Autopilot para AutoML",
+        "Endpoints para inferencia en tiempo real",
+        "Feature Store para gestión de características"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de entrenamiento con SageMaker Python SDK
+from sagemaker.sklearn.estimator import SKLearn
+
+estimator = SKLearn(
+    entry_script='train.py',
+    role='AmazonSageMaker-ExecutionRole',
+    instance_type='ml.m5.large',
+    framework_version='0.23-1'
+)
+
+estimator.fit({'train': 's3://bucket/train', 'test': 's3://bucket/test'})`
+    }
+  ],
+  children: []
+},
+{
+  id: "athena",
+  title: "Amazon Athena",
+  subtitle: "Servicio de consulta interactiva sobre S3",
+  content: [
+    {
+      type: "text",
+      value: "Athena permite analizar datos directamente en S3 usando SQL estándar, sin necesidad de cargar datos en bases de datos tradicionales."
+    },
+    {
+      type: "text",
+      value: "Ventajas para ciencia de datos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Consulta rápida de datasets grandes en formato columnar (Parquet, ORC)",
+        "Integración con Glue Data Catalog para metadatos",
+        "Pago por consulta sin infraestructura que administrar",
+        "Resultados almacenables nuevamente en S3 para análisis posteriores"
+      ]
+    },
+    {
+      type: "code",
+      value: `-- Ejemplo de consulta SQL en Athena
+SELECT 
+    product_category,
+    AVG(unit_price) as avg_price,
+    COUNT(*) as transactions
+FROM retail_transactions
+WHERE transaction_date BETWEEN DATE '2023-01-01' AND DATE '2023-03-31'
+GROUP BY product_category
+ORDER BY avg_price DESC
+LIMIT 10;`
+    }
+  ],
+  children: []
+},
+{
+  id: "step_functions",
+  title: "AWS Step Functions",
+  subtitle: "Orquestación de workflows serverless",
+  content: [
+    {
+      type: "text",
+      value: "Step Functions permite coordinar componentes distribuidos como servicios AWS y código personalizado en flujos de trabajo visuales."
+    },
+    {
+      type: "img",
+      value: "Diagrama de state machine mostrando un pipeline de ML con pasos secuenciales y manejo de errores"
+    },
+    {
+      type: "text",
+      value: "Aplicaciones en ciencia de datos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Automatización de pipelines de entrenamiento",
+        "Orquestación de jobs ETL",
+        "Flujos de inferencia en batch",
+        "Reentrenamiento periódico con condiciones"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Diseña tus state machines considerando límites de tiempo (1 año máximo) y tamaño de payload (256KB)."
+    }
+  ],
+  children: []
+},
+{
+  id: "codepipeline",
+  title: "AWS CodePipeline",
+  subtitle: "Integración y entrega continuas para ML",
+  content: [
+    {
+      type: "text",
+      value: "CodePipeline automatiza el proceso de release para infraestructura y modelos de ML, permitiendo actualizaciones rápidas y confiables."
+    },
+    {
+      type: "text",
+      value: "Etapas típicas en un pipeline de ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Source: Trigger desde repositorio de código",
+        "Build: Compilación de paquetes y contenedores",
+        "Test: Validación del modelo (precisión, rendimiento)",
+        "Deploy: Implementación gradual a producción"
+      ]
+    },
+    {
+      type: "img",
+      value: "Pipeline CI/CD mostrando integración con SageMaker y pruebas automatizadas"
+    }
+  ],
+  children: []
+},
+{
+  id: "aws_cloudformation",
+  title: "AWS CloudFormation",
+  subtitle: "Infraestructura como código con plantillas",
+  content: [
+    {
+      type: "text",
+      value: "CloudFormation permite modelar y configurar recursos AWS mediante plantillas declarativas en JSON o YAML."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de plantilla YAML para entorno de ciencia de datos
+Resources:
+  DataScienceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ml-data-\${AWS::AccountId}
+      LifecycleConfiguration:
+        Rules:
+          - Id: ArchiveOldData
+            Status: Enabled
+            Prefix: "raw/"
+            ExpirationInDays: 365
+
+  SageMakerNotebook:
+    Type: AWS::SageMaker::NotebookInstance
+    Properties:
+      InstanceType: ml.t3.medium
+      RoleArn: !GetAtt ExecutionRole.Arn`
+    },
+    {
+      type: "text",
+      value: "Beneficios clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Versionado de infraestructura",
+        "Replicación consistente de entornos",
+        "Gestión de dependencias entre recursos",
+        "Rollback automático en caso de fallos"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "aws_cdk",
+  title: "AWS CDK (Cloud Development Kit)",
+  subtitle: "Modelado de infraestructura con lenguajes de programación",
+  content: [
+    {
+      type: "text",
+      value: "El AWS CDK permite definir infraestructura cloud usando lenguajes familiares como TypeScript, Python o Java, compilando a CloudFormation."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de CDK en Python para pipeline de ML
+from aws_cdk import (
+    aws_s3 as s3,
+    aws_sagemaker as sagemaker
+)
+
+class MlPipelineStack(Stack):
+    def __init__(self, scope: Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
+        
+        # Bucket para datos de entrenamiento
+        data_bucket = s3.Bucket(
+            self, "TrainingDataBucket",
+            encryption=s3.BucketEncryption.S3_MANAGED
+        )
+        
+        # Notebook de SageMaker
+        notebook = sagemaker.CfnNotebookInstance(
+            self, "DataScienceNotebook",
+            instance_type="ml.t3.medium",
+            role_arn=role.role_arn,
+            notebook_instance_name="ml-exploration"
+        )`
+    },
+    {
+      type: "text",
+      value: "Ventajas sobre CloudFormation tradicional:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reutilización de código mediante constructos",
+        "Verificación de tipos y autocompletado",
+        "Abstracción de patrones complejos",
+        "Testing de infraestructura"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "terraform",
+  title: "Terraform con AWS",
+  subtitle: "Provisionamiento multi-nube declarativo",
+  content: [
+    {
+      type: "text",
+      value: "Terraform de HashiCorp es una herramienta de infraestructura como código que soporta múltiples proveedores cloud, incluyendo AWS."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de configuración Terraform para recursos de ML
+resource "aws_s3_bucket" "model_artifacts" {
+  bucket = "model-artifacts-\${var.environment}"
+  acl    = "private"
+
+  tags = {
+    Project = "FraudDetection"
+  }
+}
+
+resource "aws_sagemaker_model" "xgboost" {
+  name               = "fraud-detection-xgboost"
+  execution_role_arn = aws_iam_role.sagemaker.arn
+
+  primary_container {
+    image = "\${var.ecr_repo}:xgboost-latest"
+    model_data_url = "s3://\${aws_s3_bucket.model_artifacts.bucket}/models/xgboost.tar.gz"
+  }
+}`
+    },
+    {
+      type: "text",
+      value: "Comparación con herramientas AWS nativas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Multi-cloud: Mismo lenguaje para AWS, Azure, GCP",
+        "Planificación: Vista previa de cambios antes de aplicar",
+        "Estado: Mantiene estado actual de la infraestructura",
+        "Módulos: Biblioteca de componentes reutilizables"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "automl",
+  title: "AutoML en AWS",
+  subtitle: "Automatización del desarrollo de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Las soluciones AutoML democratizan el machine learning automatizando tareas como selección de algoritmos, ingeniería de características y ajuste de hiperparámetros."
+    },
+    {
+      type: "img",
+      value: "Flujo de trabajo de SageMaker Autopilot mostrando análisis de datos, feature engineering y entrenamiento de modelos"
+    },
+    {
+      type: "text",
+      value: "Opciones en AWS:"
+    },
+    {
+      type: "list",
+      value: [
+        "SageMaker Autopilot: Entrena y optimiza modelos automáticamente",
+        "SageMaker JumpStart: Modelos preentrenados y soluciones",
+        "Personalizado: Usando SageMaker Experiments para búsqueda de hiperparámetros"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de SageMaker Autopilot
+import boto3
+sm = boto3.client('sagemaker')
+
+response = sm.create_auto_ml_job(
+    AutoMLJobName='fraud-detection-automl',
+    InputDataConfig=[{
+        'DataSource': {
+            'S3DataSource': {
+                'S3DataType': 'S3Prefix',
+                'S3Uri': 's3://bucket/train.csv'
+            }
+        },
+        'TargetAttributeName': 'is_fraud'
+    }],
+    OutputDataConfig={
+        'S3OutputPath': 's3://bucket/output'
+    },
+    RoleArn='arn:aws:iam::123456789012:role/ServiceRole'
+)`
+    }
+  ],
+  children: []
+},
+{
+  id: "componentes_del_sistema",
+  title: "Componentes Clave de un Sistema de Machine Learning",
+  subtitle: "Arquitectura End-to-End para ML en Producción",
+  content: [
+    {
+      type: "text",
+      value: "Un sistema de ML en producción requiere múltiples componentes integrados que van más allá del modelo en sí. Esta arquitectura asegura escalabilidad, confiabilidad y mantenibilidad."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura completa mostrando todos los componentes interconectados"
+    },
+    {
+      type: "text",
+      value: "Principales subsistemas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entorno de experimentación: Desarrollo iterativo de modelos",
+        "Servicios de entrenamiento: Pipeline de modelado automatizado",
+        "Servicios de inferencia: Predicciones en tiempo real/batch",
+        "Almacenamiento: Datos, modelos y artefactos",
+        "Registro: Contenedores, modelos y versionado",
+        "CI/CD: Automatización del ciclo de vida",
+        "Monitoreo: Desempeño y drift en producción"
+      ]
+    }
+  ],
+  children: [
+    "entorno_de_experimentacion",
+    "servicio_de_entrenamiento",
+    "servicio_de_inferencia",
+    "almacenamiento_de_datos",
+    "registro_de_contenedores",
+    "cicd_y_testing",
+    "versionamiento_de_codigo_y_modelos",
+    "control_de_data_skew__overfitting",
+    "manejo_de_imbalance_smote_sampling",
+    "monitoreo_y_trazabilidad"
+  ]
+},
+{
+  id: "entorno_de_experimentacion",
+  title: "Entorno de Experimentación",
+  subtitle: "Ambiente para desarrollo iterativo de modelos",
+  content: [
+    {
+      type: "text",
+      value: "El entorno de experimentación es donde los data scientists exploran datos, prueban algoritmos y desarrollan modelos antes de llevarlos a producción."
+    },
+    {
+      type: "img",
+      value: "Jupyter Notebook con visualizaciones y código de experimentación"
+    },
+    {
+      type: "text",
+      value: "Características esenciales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Notebooks interactivos (Jupyter, Colab)",
+        "Acceso a datos de entrenamiento",
+        "Recursos computacionales escalables (GPUs/TPUs)",
+        "Entornos aislados y reproducibles (Docker)",
+        "Integración con herramientas de tracking (MLflow)"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de configuración de entorno con Conda
+name: ml-experiment
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - scikit-learn
+  - jupyterlab
+  - matplotlib
+  - seaborn
+  - pip:
+    - mlflow
+    - xgboost`
+    },
+    {
+      type: "warning",
+      value: "Nunca experimentes directamente en producción. Usa ambientes aislados para evitar contaminación de datos."
+    }
+  ],
+  children: []
+},
+{
+  id: "servicio_de_entrenamiento",
+  title: "Servicio de Entrenamiento",
+  subtitle: "Infraestructura para entrenamiento automatizado de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Los servicios de entrenamiento automatizan el proceso de crear y optimizar modelos a escala, permitiendo reentrenamiento periódico y experimentación paralela."
+    },
+    {
+      type: "img",
+      value: "Arquitectura distribuida de entrenamiento mostrando workers y parameter server"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Orquestación de jobs (Airflow, Kubeflow)",
+        "Distribución de carga (Horovod, TensorFlow Distributed)",
+        "Selección de instancias (CPU/GPU optimizadas)",
+        "Tracking de experimentos (MLflow, Weights & Biases)",
+        "Almacenamiento de artefactos (modelos, métricas)"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de entrenamiento distribuido con TensorFlow
+strategy = tf.distribute.MirroredStrategy()
+
+with strategy.scope():
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(10)
+    ])
+    model.compile(
+        optimizer='adam',
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=['accuracy']
+    )
+
+model.fit(train_dataset, epochs=10, validation_data=val_dataset)`
+    }
+  ],
+  children: []
+},
+{
+  id: "servicio_de_inferencia",
+  title: "Servicio de Inferencia",
+  subtitle: "Sistema para servir predicciones en producción",
+  content: [
+    {
+      type: "text",
+      value: "Los servicios de inferencia exponen modelos entrenados como APIs escalables que pueden manejar solicitudes en tiempo real (online) o procesamiento por lotes (batch)."
+    },
+    {
+      type: "img",
+      value: "Diagrama de servicio de inferencia con balanceador de carga, réplicas de modelo y cola de mensajes"
+    },
+    {
+      type: "text",
+      value: "Patrones comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Endpoints REST/gRPC (TensorFlow Serving, FastAPI)",
+        "Inferencia batch (Spark, AWS Batch)",
+        "Edge inference (TensorFlow Lite, ONNX Runtime)",
+        "Canary deployments para lanzamientos graduales",
+        "Auto-scaling basado en carga"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de endpoint FastAPI para inferencia
+from fastapi import FastAPI
+import joblib
+
+app = FastAPI()
+model = joblib.load('model.pkl')
+
+@app.post("/predict")
+async def predict(data: dict):
+    features = preprocess(data['features'])
+    prediction = model.predict([features])
+    return {"prediction": float(prediction[0])}`
+    },
+    {
+      type: "warning",
+      value: "Monitoriza latencia y throughput de tus endpoints. El escalado inadecuado puede generar cuellos de botella."
+    }
+  ],
+  children: []
+},
+{
+  id: "almacenamiento_de_datos",
+  title: "Almacenamiento de Datos",
+  subtitle: "Sistemas para gestión de datos en el ciclo de vida de ML",
+  content: [
+    {
+      type: "text",
+      value: "El almacenamiento adecuado es crítico para datasets de entrenamiento, características procesadas, modelos y artefactos de experimentación."
+    },
+    {
+      type: "img",
+      value: "Pirámide de almacenamiento mostrando raw data, processed data, features y modelos"
+    },
+    {
+      type: "text",
+      value: "Consideraciones clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Formato óptimo (Parquet, TFRecords)",
+        "Particionamiento para consultas eficientes",
+        "Control de versionado de datasets",
+        "Seguridad y control de acceso",
+        "Coste vs. performance (hot/cold storage)"
+      ]
+    }
+  ],
+  children: [
+    "aws_s3",
+    "gcs",
+    "azure_blob",
+    "minio"
+  ]
+},
+{
+  id: "registro_de_contenedores",
+  title: "Registro de Contenedores",
+  subtitle: "Gestión de imágenes Docker para entornos reproducibles",
+  content: [
+    {
+      type: "text",
+      value: "Los registros de contenedores almacenan y versionan imágenes Docker que empaquetan código, dependencias y entorno de ejecución para garantizar reproducibilidad."
+    },
+    {
+      type: "text",
+      value: "Flujo típico:"
+    },
+    {
+      type: "list",
+      value: [
+        "Construir imagen con Dockerfile",
+        "Etiquetar con versión/semántica",
+        "Subir a registro privado/público",
+        "Desplegar en entornos de ejecución"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de Dockerfile para servicio de ML
+FROM python:3.8-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Variables de entorno para configuración
+ENV MODEL_PATH=/models/classifier
+ENV PORT=8000
+
+EXPOSE $PORT
+CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "app:app"]`
+    },
+    {
+      type: "warning",
+      value: "Nunca almacenes credenciales en imágenes. Usa secrets management o variables de entorno en tiempo de ejecución."
+    }
+  ],
+  children: []
+},
+{
+  id: "cicd_y_testing",
+  title: "CI/CD y Testing para ML",
+  subtitle: "Automatización del ciclo de vida del modelo",
+  content: [
+    {
+      type: "text",
+      value: "Los pipelines de Integración Continua y Entrega Continua (CI/CD) automatizan el testing, empaquetado y despliegue de modelos de ML."
+    },
+    {
+      type: "img",
+      value: "Pipeline CI/CD mostrando etapas de build, test, deploy y rollback"
+    },
+    {
+      type: "text",
+      value: "Pruebas esenciales en ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Unit tests para código de preprocesamiento",
+        "Validación de esquema de datos",
+        "Pruebas de rendimiento del modelo",
+        "Pruebas de concepto invariante",
+        "Monitoreo de drift en producción"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de test unitario para preprocesamiento
+def test_feature_engineering():
+    test_data = pd.DataFrame({
+        'age': [25, 30, 35],
+        'income': [50000, 60000, 70000]
+    })
+    
+    processed = preprocess_data(test_data)
+    
+    assert 'income_normalized' in processed.columns
+    assert processed['income_normalized'].between(0, 1).all()
+    assert not processed.isnull().any().any()`
+    }
+  ],
+  children: []
+},
+{
+  id: "versionamiento_de_codigo_y_modelos",
+  title: "Versionamiento de Código y Modelos",
+  subtitle: "Control de cambios en el ciclo de vida de ML",
+  content: [
+    {
+      type: "text",
+      value: "El versionamiento en ML es multidimensional: código, datos, modelos y configuraciones deben estar sincronizados para reproducibilidad."
+    },
+    {
+      type: "img",
+      value: "Estrategia de versionamiento mostrando tags para código, datos y modelos"
+    },
+    {
+      type: "text",
+      value: "Herramientas recomendadas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Git para código (con Git LFS para datos pequeños)",
+        "DVC (Data Version Control) para datasets grandes",
+        "MLflow Model Registry para modelos",
+        "Artifact stores (S3, GCS) con naming semántico"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de versionamiento con DVC
+# Track dataset
+dvc add data/raw/training.csv
+git add data/raw/training.csv.dvc
+
+# Reproducibilidad completa
+dvc repro train_model.dvc
+
+# Versionamiento de modelo
+dvc add models/xgboost.pkl
+git add models/xgboost.pkl.dvc`
+    }
+  ],
+  children: []
+},
+{
+  id: "control_de_data_skew__overfitting",
+  title: "Control de Data Skew y Overfitting",
+  subtitle: "Técnicas para garantizar generalización del modelo",
+  content: [
+    {
+      type: "text",
+      value: "El data skew (desbalance entre entrenamiento/producción) y overfitting (sobreajuste a datos de entrenamiento) son desafíos críticos en ML."
+    },
+    {
+      type: "img",
+      value: "Gráfico comparando distribución de entrenamiento vs producción"
+    },
+    {
+      type: "text",
+      value: "Estrategias de mitigación:"
+    },
+    {
+      type: "list",
+      value: [
+        "Validación cruzada estratificada",
+        "Conjuntos de holdout representativos",
+        "Regularización (L1/L2, dropout)",
+        "Early stopping",
+        "Monitoreo continuo de distribuciones"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de detección de skew con scikit-learn
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_classification
+
+X, y = make_classification(n_samples=1000, n_features=20, 
+                          weights=[0.9, 0.1], random_state=42)
+
+# Split estratificado
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
+
+# Verificar distribución
+print("Train class distribution:", np.bincount(y_train))
+print("Test class distribution:", np.bincount(y_test))`
+    }
+  ],
+  children: []
+},
+{
+  id: "manejo_de_imbalance_smote_sampling",
+  title: "Manejo de Desbalance (SMOTE/Sampling)",
+  subtitle: "Técnicas para datasets con clases desiguales",
+  content: [
+    {
+      type: "text",
+      value: "En problemas con clases desbalanceadas (fraude, fallos raros), las técnicas de muestreo ayudan a evitar sesgos hacia la clase mayoritaria."
+    },
+    {
+      type: "img",
+      value: "Comparación antes/después de aplicar SMOTE mostrando balance de clases"
+    },
+    {
+      type: "text",
+      value: "Enfoques comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Oversampling (SMOTE, ADASYN)",
+        "Undersampling (Random, Tomek Links)",
+        "Pérdidas ponderadas (class_weight)",
+        "Ensembles (BalancedRandomForest)",
+        "Métricas apropiadas (F1, AUC-PR)"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de SMOTE con imbalanced-learn
+from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import RandomForestClassifier
+
+smote = SMOTE(sampling_strategy='minority', random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
+
+model = RandomForestClassifier(class_weight='balanced')
+model.fit(X_resampled, y_resampled)`
+    },
+    {
+      type: "warning",
+      value: "SMOTE puede generar muestras irreales en espacios de alta dimensión. Valida siempre con expertos de dominio."
+    }
+  ],
+  children: []
+},
+{
+  id: "monitoreo_y_trazabilidad",
+  title: "Monitoreo y Trazabilidad",
+  subtitle: "Seguimiento de modelos en producción",
+  content: [
+    {
+      type: "text",
+      value: "El monitoreo continuo detecta degradación de modelos, drift de datos y problemas operativos, mientras la trazabilidad permite investigar incidentes."
+    },
+    {
+      type: "img",
+      value: "Dashboard de monitoreo mostrando métricas, drift y alertas"
+    },
+    {
+      type: "text",
+      value: "Métricas clave a monitorear:"
+    },
+    {
+      type: "list",
+      value: [
+        "Performance (precisión, latencia, throughput)",
+        "Data drift (distribuciones de características)",
+        "Concept drift (relación features-target)",
+        "Integridad de datos (valores nulos, formatos)",
+        "Health del sistema (CPU, memoria, errores)"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de cálculo de drift con Alibi Detect
+from alibi_detect import KSDrift
+
+drift_detector = KSDrift(
+    p_val=0.05,
+    X_ref=X_train  # Datos de referencia
+)
+
+preds = drift_detector.predict(X_production)
+print(f"Drift detected: {preds['data']['is_drift']}")
+print(f"p-value: {preds['data']['p_val']}")`
+    }
+  ],
+  children: []
+},
+{
+  id: "herramientas_por_funcion",
+  title: "Herramientas de ML por Función",
+  subtitle: "Landscape Tecnológico para Ciencia de Datos",
+  content: [
+    {
+      type: "text",
+      value: "El ecosistema de herramientas para machine learning se ha especializado para cubrir cada etapa del ciclo de vida de los modelos. Esta taxonomía organiza las soluciones por su función principal en el flujo de trabajo."
+    },
+    {
+      type: "img",
+      value: "Mapa mental de herramientas de ML categorizadas por función con iconos de cada tecnología"
+    },
+    {
+      type: "text",
+      value: "Áreas funcionales clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Desarrollo: IDEs y notebooks para experimentación",
+        "Orquestación: Automatización de pipelines",
+        "Tracking: Gestión del ciclo de vida de modelos",
+        "Datos: Almacenamiento y feature engineering",
+        "Operaciones: Despliegue y monitoreo"
+      ]
+    }
+  ],
+  children: [
+    "ides__notebooks",
+    "orquestacion_de_workflows",
+    "tracking_y_ml_lifecycle",
+    "feature_stores",
+    "almacenamiento_de_datos",
+    "contenedores_y_registros",
+    "cicd_y_devops",
+    "despliegue_y_produccion",
+    "monitoreo_y_observabilidad",
+    "balanceo_de_datos_y_calidad"
+  ]
+},
+{
+  id: "ides__notebooks",
+  title: "IDEs y Notebooks",
+  subtitle: "Entornos de desarrollo para ciencia de datos",
+  content: [
+    {
+      type: "text",
+      value: "Los entornos interactivos son esenciales para exploración de datos, prototipado rápido y visualización. Ofrecen celdas ejecutables combinadas con documentación."
+    },
+    {
+      type: "img",
+      value: "Comparativa de interfaces: Jupyter Lab vs Colab vs VSCode"
+    },
+    {
+      type: "text",
+      value: "Criterios de selección:"
+    },
+    {
+      type: "list",
+      value: [
+        "Soporte para múltiples kernels (Python, R, Julia)",
+        "Acceso a recursos computacionales (GPUs/TPUs)",
+        "Integración con control de versiones",
+        "Extensiones para visualización",
+        "Colaboración en tiempo real"
+      ]
+    }
+  ],
+  children: [
+    "jupyter",
+    "colab",
+    "vscode"
+  ]
+},
+{
+  id: "jupyter",
+  title: "Jupyter Notebook/Lab",
+  subtitle: "Ecosistema open-source para computación interactiva",
+  content: [
+    {
+      type: "text",
+      value: "Jupyter es el estándar de facto para notebooks en ciencia de datos, permitiendo mezclar código, texto, visualizaciones y multimedia en documentos ejecutables."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo típico en Jupyter
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv')
+df.plot(kind='scatter', x='feature', y='target')
+plt.title('Análisis exploratorio')
+plt.show()`
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Extensible con widgets y plugins",
+        "Soporte para 40+ lenguajes",
+        "JupyterHub para entornos multi-usuario",
+        "Exportación a múltiples formatos (HTML, PDF, slides)",
+        "Integración con kernels remotos"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Los notebooks pueden volverse difíciles de mantener en proyectos grandes. Considera convertir código importante a scripts/modulos."
+    }
+  ],
+  children: []
+},
+{
+  id: "colab",
+  title: "Google Colaboratory",
+  subtitle: "Notebooks en la nube con GPUs gratuitas",
+  content: [
+    {
+      type: "text",
+      value: "Colab ofrece notebooks basados en Jupyter ejecutados en la infraestructura de Google, con acceso gratuito a GPUs/TPUs y almacenamiento en Google Drive."
+    },
+    {
+      type: "img",
+      value: "Interfaz de Colab mostrando conexión a GPU y montaje de Google Drive"
+    },
+    {
+      type: "text",
+      value: "Casos de uso ideales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Prototipado rápido sin configuración local",
+        "Entrenamiento de modelos con aceleración hardware",
+        "Colaboración en tiempo real estilo Google Docs",
+        "Educación y tutoriales interactivos",
+        "Ejecución de notebooks programáticamente"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Conexión a Google Drive en Colab
+from google.colab import drive
+drive.mount('/content/drive')
+
+# Verificar GPU
+import tensorflow as tf
+tf.test.gpu_device_name()`
+    }
+  ],
+  children: []
+},
+{
+  id: "vscode",
+  title: "Visual Studio Code",
+  subtitle: "IDE polivalente para proyectos de ML",
+  content: [
+    {
+      type: "text",
+      value: "VS Code se ha convertido en un IDE preferido para ML gracias a su ecosistema de extensiones, soporte nativo para notebooks y herramientas de desarrollo profesional."
+    },
+    {
+      type: "img",
+      value: "VSCode mostrando extensiones para Python, Jupyter y Docker"
+    },
+    {
+      type: "text",
+      value: "Extensiones imprescindibles:"
+    },
+    {
+      type: "list",
+      value: [
+        "Python (IntelliSense, debugging)",
+        "Jupyter (notebooks interactivos)",
+        "Docker (gestión de contenedores)",
+        "GitLens (control de versiones avanzado)",
+        "Pylance (type checking)"
+      ]
+    },
+    {
+      type: "text",
+      value: "Flujo de trabajo recomendado:"
+    },
+    {
+      type: "list",
+      value: [
+        "Exploración inicial en notebooks",
+        "Refactorización a módulos Python",
+        "Debugging con puntos de interrupción",
+        "Testing integrado",
+        "Control de versiones desde la interfaz"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "orquestacion_de_workflows",
+  title: "Orquestación de Workflows",
+  subtitle: "Programación y automatización de pipelines de ML",
+  content: [
+    {
+      type: "text",
+      value: "Los orquestadores gestionan flujos de trabajo complejos de ML, coordinando tareas como preprocesamiento, entrenamiento y despliegue con manejo de dependencias."
+    },
+    {
+      type: "img",
+      value: "Comparativa de interfaces: Airflow vs Kubeflow vs Prefect"
+    },
+    {
+      type: "text",
+      value: "Criterios de selección:"
+    },
+    {
+      type: "list",
+      value: [
+        "Soporte para ejecución distribuida",
+        "Programación basada en eventos",
+        "Monitorización integrada",
+        "Manejo de fallos y reintentos",
+        "Integración con ecosistema ML"
+      ]
+    }
+  ],
+  children: [
+    "apache_airflow",
+    "kubeflow_pipelines",
+    "prefect__dagster"
+  ]
+},
+{
+  id: "apache_airflow",
+  title: "Apache Airflow",
+  subtitle: "Plataforma para crear, programar y monitorear workflows",
+  content: [
+    {
+      type: "text",
+      value: "Airflow permite definir pipelines como grafos dirigidos acíclicos (DAGs) en Python, con programación precisa y capacidades avanzadas de reintento."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de DAG en Airflow para ML
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
+
+def train_model():
+    # Lógica de entrenamiento
+    pass
+
+default_args = {
+    'owner': 'data_science',
+    'retries': 3
+}
+
+with DAG('ml_pipeline', 
+         schedule_interval='@weekly',
+         default_args=default_args,
+         start_date=datetime(2023, 1, 1)) as dag:
+    
+    preprocess = PythonOperator(
+        task_id='preprocess_data',
+        python_callable=preprocess_fn
+    )
+    
+    train = PythonOperator(
+        task_id='train_model',
+        python_callable=train_model
+    )
+    
+    preprocess >> train`
+    },
+    {
+      type: "text",
+      value: "Ventajas principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Extensa colección de operadores (Kubernetes, Spark, etc)",
+        "Interfaz web para monitoreo",
+        "Escalabilidad con Executors (Celery, Kubernetes)",
+        "Gran comunidad y plugins",
+        "Soporte para backfilling"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Airflow no está diseñado para procesamiento de datos a gran escala. Usalo para orquestación, no como framework de procesamiento."
+    }
+  ],
+  children: []
+},
+{
+  id: "kubeflow_pipelines",
+  title: "Kubeflow Pipelines",
+  subtitle: "Plataforma nativa de Kubernetes para workflows de ML",
+  content: [
+    {
+      type: "text",
+      value: "Kubeflow Pipelines es un componente de Kubeflow que permite construir y desplegar pipelines portables y escalables de ML en Kubernetes."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de Kubeflow mostrando componentes en Kubernetes"
+    },
+    {
+      type: "text",
+      value: "Características distintivas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Componentes reutilizables como contenedores",
+        "Experimentos y ejecuciones comparables",
+        "UI para visualización de pipelines",
+        "Integración con herramientas de ML (TFX, PyTorch)",
+        "Autoescalado nativo con Kubernetes"
+      ]
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de componente en Kubeflow
+from kfp import dsl
+
+@dsl.component
+def preprocess_data(
+    input_path: str,
+    output_path: str
+):
+    import pandas as pd
+    # Lógica de preprocesamiento
+    df = pd.read_csv(input_path)
+    processed = df.dropna()
+    processed.to_csv(output_path, index=False)
+
+@dsl.pipeline(name='ml-pipeline')
+def my_pipeline(data_path: str):
+    preprocess_task = preprocess_data(
+        input_path=data_path,
+        output_path='/output/processed.csv'
+    )`
+    }
+  ],
+  children: []
+},
+{
+  id: "prefect__dagster",
+  title: "Prefect & Dagster",
+  subtitle: "Alternativas modernas a Airflow",
+  content: [
+    {
+      type: "text",
+      value: "Prefect y Dagster son frameworks más nuevos que enfatizan desarrollo local, testing y mantenibilidad para pipelines de datos y ML."
+    },
+    {
+      type: "img",
+      value: "Comparación lado a lado de Prefect y Dagster"
+    },
+    {
+      type: "text",
+      value: "Diferencias clave:"
+    },
+    {
+      type: "table",
+      value: {
+        headers: ["Feature", "Prefect", "Dagster"],
+        rows: [
+          ["Paradigma", "Flujos como funciones", "Grafos de activos"],
+          ["Testing", "Assertions en runtime", "Type system integrado"],
+          ["UI", "Prefect Cloud/Server", "Dagit"],
+          ["ML Focus", "General", "Integración con MLflow"],
+          ["Licencia", "Apache 2.0", "Apache 2.0"]
+        ]
+      }
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de flow en Prefect
+from prefect import flow, task
+
+@task
+def process_data(raw_data):
+    # Transformación
+    return cleaned_data
+
+@flow
+def ml_flow(data_path):
+    raw = load_data(data_path)
+    processed = process_data(raw)
+    model = train_model(processed)
+    
+ml_flow('s3://bucket/data.csv')`
+    }
+  ],
+  children: []
+},
+{
+  id: "tracking_y_ml_lifecycle",
+  title: "Tracking y ML Lifecycle",
+  subtitle: "Gestión de experimentos y modelos",
+  content: [
+    {
+      type: "text",
+      value: "Las herramientas de tracking permiten registrar parámetros, métricas, artefactos y modelos para garantizar reproducibilidad y comparación sistemática."
+    },
+    {
+      type: "img",
+      value: "Dashboard comparativo de experimentos en MLflow y W&B"
+    },
+    {
+      type: "text",
+      value: "Funcionalidades clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Registro de hiperparámetros y métricas",
+        "Almacenamiento de artefactos (modelos, visualizaciones)",
+        "Comparación visual de experimentos",
+        "Model registry para stage management",
+        "Integración con frameworks de ML"
+      ]
+    }
+  ],
+  children: [
+    "mlflow__weights__biases",
+    "neptuneai__dvc"
+  ]
+},
+{
+  id: "mlflow__weights__biases",
+  title: "MLflow vs Weights & Biases",
+  subtitle: "Plataformas líderes para experimentación en ML",
+  content: [
+    {
+      type: "text",
+      value: "MLflow (open-source) y W&B (comercial) ofrecen enfoques complementarios para tracking de experimentos, con diferentes filosofías y capacidades."
+    },
+    {
+      type: "text",
+      value: "Comparación detallada:"
+    },
+    {
+      type: "table",
+      value: {
+        headers: ["Criterio", "MLflow", "Weights & Biases"],
+        rows: [
+          ["Model Registry", "Integrado", "Requiere integración"],
+          ["Visualización", "Básica", "Avanzada (paneles interactivos)"],
+          ["Colaboración", "Self-hosted", "Nativa en la nube"],
+          ["Precio", "Gratuito", "Freemium (pago por uso avanzado)"],
+          ["Integración", "Amplia (principalmente OSS)", "Frameworks principales"]
+        ]
+      }
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de tracking con MLflow
+import mlflow
+
+mlflow.set_experiment("fraud-detection")
+
+with mlflow.start_run():
+    mlflow.log_param("learning_rate", 0.01)
+    mlflow.log_metric("auc", 0.95)
+    mlflow.sklearn.log_model(model, "model")
+    
+# Ejemplo equivalente en W&B
+import wandb
+
+wandb.init(project="fraud-detection")
+wandb.config.learning_rate = 0.01
+wandb.log({"auc": 0.95})
+wandb.sklearn.log_model(model, "model")`
+    },
+    {
+      type: "warning",
+      value: "MLflow requiere configuración manual para backend/store, mientras W&B ofrece una solución inmediata pero con menos control sobre los datos."
+    }
+  ],
+  children: []
+},
+{
+  id: "neptuneai__dvc",
+  title: "Data Version Control (DVC) with Neptune.ai Integration",
+  subtitle: "Managing ML Experiments and Data Versioning",
+  content: [
+    {
+      type: "text",
+      value: "DVC is an open-source version control system for machine learning projects that handles large files, data versions, and experiment reproducibility."
+    },
+    {
+      type: "img",
+      value: "Diagram showing DVC workflow with data pipelines and versioning"
+    },
+    {
+      type: "text",
+      value: "When combined with Neptune.ai, you get enhanced experiment tracking capabilities while maintaining data version control."
+    },
+    {
+      type: "code",
+      value: `# Basic DVC commands
+$ dvc init  # Initialize DVC in a project
+$ dvc add data/raw_dataset  # Start tracking data files
+$ dvc run -n prepare -d src/prepare.py -o data/prepared python src/prepare.py`
+    },
+    {
+      type: "warning",
+      value: "Always commit .dvc files to Git - they contain metadata about your data versions"
+    }
+  ],
+  children: []
+},
+{
+  id: "feature_stores",
+  title: "Feature Stores for Machine Learning",
+  subtitle: "Centralized Feature Management Systems",
+  content: [
+    {
+      type: "text",
+      value: "A feature store is a data system that manages the complete lifecycle of ML features - from creation and storage to serving for training and inference."
+    },
+    {
+      type: "img",
+      value: "Architecture diagram of a feature store showing offline/online storage and serving layers"
+    },
+    {
+      type: "list",
+      value: [
+        "Eliminates feature duplication across projects",
+        "Ensures consistency between training and serving",
+        "Provides point-in-time correct feature values",
+        "Enables feature sharing and discovery"
+      ]
+    },
+    {
+      type: "text",
+      value: "Feature stores are particularly valuable in organizations running multiple ML models that share common features."
+    }
+  ],
+  children: [
+    "feast",
+    "tecton"
+  ]
+},
+{
+  id: "feast",
+  title: "Feast: Open-Source Feature Store",
+  subtitle: "Feature Management for Production ML",
+  content: [
+    {
+      type: "text",
+      value: "Feast (Feature Store) is an open-source framework for managing, storing, and serving machine learning features to models in production."
+    },
+    {
+      type: "code",
+      value: `# Example Feast feature definition
+from feast import Entity, Feature, FeatureView, ValueType
+from feast.infra.offline_stores.file_source import FileSource
+
+driver = Entity(name="driver_id", value_type=ValueType.INT64)
+
+driver_stats_source = FileSource(
+    path="data/driver_stats.parquet",
+    event_timestamp_column="event_timestamp"
+)
+
+driver_stats_fv = FeatureView(
+    name="driver_stats",
+    entities=["driver_id"],
+    features=[
+        Feature(name="avg_daily_trips", dtype=ValueType.FLOAT),
+    ],
+    batch_source=driver_stats_source
+)`
+    },
+    {
+      type: "text",
+      value: "Feast supports both offline (batch) features for training and online (low-latency) features for inference."
+    }
+  ],
+  children: []
+},
+{
+  id: "tecton",
+  title: "Tecton: Enterprise Feature Platform",
+  subtitle: "Production-Grade Feature Store",
+  content: [
+    {
+      type: "text",
+      value: "Tecton provides a fully-managed feature store designed for production machine learning at scale, with built-in feature computation and serving."
+    },
+    {
+      type: "img",
+      value: "Comparison table between Tecton and open-source alternatives showing enterprise features"
+    },
+    {
+      type: "list",
+      value: [
+        "Automated feature computation pipelines",
+        "Point-in-time correct feature retrieval",
+        "Low-latency online serving (<10ms)",
+        "Native integration with data warehouses"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Tecton is a commercial product with different pricing tiers - evaluate cost vs needs before adoption"
+    }
+  ],
+  children: []
+},
+{
+  id: "aws_s3",
+  title: "Amazon S3 for Data Storage",
+  subtitle: "Scalable Object Storage for ML Data",
+  content: [
+    {
+      type: "text",
+      value: "Amazon S3 (Simple Storage Service) provides highly durable, scalable object storage ideal for storing large ML datasets and model artifacts."
+    },
+    {
+      type: "code",
+      value: `# Python example using boto3 to interact with S3
+import boto3
+
+s3 = boto3.client('s3')
+
+# Upload a file
+s3.upload_file('local_data.csv', 'my-ml-bucket', 'raw_data/input.csv')
+
+# Download a file
+s3.download_file('my-ml-bucket', 'processed_data/output.parquet', 'local.parquet')`
+    },
+    {
+      type: "text",
+      value: "Key considerations for ML use cases: storage classes (Standard, Intelligent-Tiering, Glacier), encryption options, and lifecycle policies for cost optimization."
+    }
+  ],
+  children: []
+},
+{
+  id: "gcs",
+  title: "Google Cloud Storage",
+  subtitle: "Object Storage for ML Workloads on GCP",
+  content: [
+    {
+      type: "text",
+      value: "Google Cloud Storage offers multi-regional, regional, and nearline storage options with tight integration to Google's ML services like Vertex AI."
+    },
+    {
+      type: "img",
+      value: "GCS architecture diagram showing storage classes and access patterns"
+    },
+    {
+      type: "list",
+      value: [
+        "Multi-regional for frequently accessed data",
+        "Regional for in-region processing",
+        "Nearline for data accessed less than once per month",
+        "Coldline for archival purposes"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "azure_blob",
+  title: "Azure Blob Storage",
+  subtitle: "Microsoft's Object Storage Solution",
+  content: [
+    {
+      type: "text",
+      value: "Azure Blob Storage provides massively scalable object storage for unstructured data, with tiered access (hot, cool, archive) for cost optimization."
+    },
+    {
+      type: "code",
+      value: `# Python example using Azure Storage Blob client
+from azure.storage.blob import BlobServiceClient
+
+connect_str = "<your_connection_string>"
+blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+
+# Upload a blob
+blob_client = blob_service_client.get_blob_client(
+    container="ml-data", 
+    blob="training_set.csv"
+)
+
+with open("data.csv", "rb") as data:
+    blob_client.upload_blob(data)`
+    }
+  ],
+  children: []
+},
+{
+  id: "minio",
+  title: "MinIO: High-Performance Object Storage",
+  subtitle: "S3-Compatible Storage for Private Clouds",
+  content: [
+    {
+      type: "text",
+      value: "MinIO is an open-source, S3-compatible object storage server perfect for on-premises or private cloud ML deployments."
+    },
+    {
+      type: "text",
+      value: "Key advantages for ML pipelines:"
+    },
+    {
+      type: "list",
+      value: [
+        "High performance for large-scale data operations",
+        "Kubernetes-native deployment",
+        "Compatible with all S3 SDKs and tools",
+        "Lightweight and easy to deploy"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "contenedores_y_registros",
+  title: "Containerization and Registry Services",
+  subtitle: "Packaging and Distributing ML Applications",
+  content: [
+    {
+      type: "text",
+      value: "Containerization provides consistent environments for ML development and deployment, while registries store and distribute container images."
+    },
+    {
+      type: "img",
+      value: "Container lifecycle diagram showing build, push, pull, run stages"
+    },
+    {
+      type: "text",
+      value: "Key benefits for ML workflows:"
+    },
+    {
+      type: "list",
+      value: [
+        "Reproducibility across environments",
+        "Isolation of dependencies",
+        "Scalable deployment",
+        "Version control for models and applications"
+      ]
+    }
+  ],
+  children: [
+    "docker",
+    "ecr",
+    "gcr",
+    "acr"
+  ]
+},
+{
+  id: "docker",
+  title: "Docker for Machine Learning",
+  subtitle: "Containerizing ML Applications",
+  content: [
+    {
+      type: "text",
+      value: "Docker packages ML applications and their dependencies into standardized units (containers) that run consistently across environments."
+    },
+    {
+      type: "code",
+      value: `# Example Dockerfile for a Python ML service
+FROM python:3.8-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy model and application code
+COPY model.pkl .
+COPY app.py .
+
+# Set environment variables
+ENV MODEL_PATH=/app/model.pkl
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]`
+    },
+    {
+      type: "warning",
+      value: "Always pin package versions in requirements.txt to ensure reproducibility"
+    }
+  ],
+  children: []
+},
+{
+  id: "ecr",
+  title: "Amazon Elastic Container Registry (ECR)",
+  subtitle: "Managed Docker Registry on AWS",
+  content: [
+    {
+      type: "text",
+      value: "Amazon ECR is a fully-managed Docker container registry that integrates with AWS services like ECS, EKS, and SageMaker for ML deployments."
+    },
+    {
+      type: "text",
+      value: "Key features for ML workflows:"
+    },
+    {
+      type: "list",
+      value: [
+        "Private image storage with IAM access control",
+        "Image scanning for vulnerabilities",
+        "Lifecycle policies for automatic cleanup",
+        "Cross-region replication for global deployments"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "gcr",
+  title: "Google Container Registry (GCR)",
+  subtitle: "Registro de Docker gestionado en GCP",
+  content: [
+    {
+      type: "text",
+      value: "Google Container Registry ofrece almacenamiento seguro de imágenes Docker con integración nativa para servicios de Google Cloud como GKE y Vertex AI."
+    },
+    {
+      type: "code",
+      value: `# Subir una imagen a GCR
+$ docker tag mi-modelo gcr.io/mi-proyecto/mi-modelo:v1
+$ docker push gcr.io/mi-proyecto/mi-modelo:v1
+
+# Descargar una imagen desde GCR
+$ docker pull gcr.io/mi-proyecto/mi-modelo:v1`
+    },
+    {
+      type: "text",
+      value: "Características clave para ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Escaneo de vulnerabilidades integrado",
+        "Control de acceso granular con IAM",
+        "Replicación geográfica automática",
+        "Integración con Cloud Build para CI/CD"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "acr",
+  title: "Azure Container Registry (ACR)",
+  subtitle: "Registro de contenedores en Azure",
+  content: [
+    {
+      type: "text",
+      value: "ACR ofrece un registro empresarial de Docker con replicación geográfica e integración profunda con Azure ML y servicios Kubernetes."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura de ACR mostrando replicación geográfica"
+    },
+    {
+      type: "text",
+      value: "Ventajas principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Replicación en múltiples regiones",
+        "Autenticación con Azure AD",
+        "ACR Tasks para builds automatizados",
+        "SKU Premium para alto rendimiento"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Habilite la cuenta admin solo cuando sea necesario - prefiera identidades de Azure AD para operaciones regulares"
+    }
+  ],
+  children: []
+},
+{
+  id: "cicd_y_devops",
+  title: "CI/CD y DevOps para Machine Learning",
+  subtitle: "Automatización de flujos de trabajo ML",
+  content: [
+    {
+      type: "text",
+      value: "Las pipelines de Integración y Entrega Continua (CI/CD) automatizan pruebas, construcción y despliegue de modelos de ML, asegurando confiabilidad y reproducibilidad."
+    },
+    {
+      type: "img",
+      value: "Diagrama de pipeline CI/CD para ML mostrando validación de datos, entrenamiento y despliegue"
+    },
+    {
+      type: "text",
+      value: "Componentes clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Validación automatizada de datos",
+        "Entrenamiento de modelos reproducible",
+        "Pruebas de rendimiento del modelo",
+        "Despliegues progresivos (canary)",
+        "Capacidad de rollback"
+      ]
+    }
+  ],
+  children: [
+    "github_actions",
+    "gitlab_ci",
+    "jenkins",
+    "circleci",
+    "argo"
+  ]
+},
+{
+  id: "github_actions",
+  title: "GitHub Actions para ML",
+  subtitle: "CI/CD nativo en GitHub",
+  content: [
+    {
+      type: "text",
+      value: "GitHub Actions permite automatizar flujos de trabajo directamente en repositorios GitHub, ideal para proyectos ML que usan GitHub."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de workflow para tests de modelos
+name: CI de Modelo
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configurar Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Instalar dependencias
+      run: |
+        pip install -r requirements.txt
+    - name: Ejecutar tests
+      run: |
+        python -m pytest tests/`
+    },
+    {
+      type: "text",
+      value: "Casos de uso comunes:"
+    },
+    {
+      type: "list",
+      value: [
+        "Entrenamiento automatizado programado",
+        "Validación de datos en pull requests",
+        "Benchmarking de rendimiento",
+        "Construcción y despliegue de imágenes"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "gitlab_ci",
+  title: "GitLab CI/CD para ML",
+  subtitle: "Pipelines integrales para Machine Learning",
+  content: [
+    {
+      type: "text",
+      value: "GitLab CI ofrece un robusto sistema de pipelines con registro de contenedores integrado, ideal para flujos complejos de ML."
+    },
+    {
+      type: "img",
+      value: "Visualización de pipeline mostrando etapas paralelas de entrenamiento"
+    },
+    {
+      type: "text",
+      value: "Ventajas para proyectos ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Registro de contenedores integrado",
+        "Auto DevOps para pipelines estandarizados",
+        "Despliegue en Kubernetes",
+        "Almacenamiento de artefactos binarios"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "jenkins",
+  title: "Jenkins para Pipelines de ML",
+  subtitle: "Servidor de automatización flexible",
+  content: [
+    {
+      type: "text",
+      value: "Jenkins es un servidor de automatización extensible que puede orquestar flujos complejos de ML con plugins para diversas herramientas."
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de Jenkinsfile para ML
+pipeline {
+  agent any
+  stages {
+    stage('Preparar Datos') {
+      steps {
+        sh 'python src/preparar_datos.py'
+      }
+    }
+    stage('Entrenar') {
+      steps {
+        sh 'python src/entrenar.py'
+      }
+    }
+    stage('Evaluar') {
+      steps {
+        sh 'python src/evaluar.py'
+        archiveArtifacts artifacts: 'metricas/*.json'
+      }
+    }
+  }
+}`
+    },
+    {
+      type: "warning",
+      value: "Gestione los plugins con cuidado - versiones conflictivas pueden romper pipelines"
+    }
+  ],
+  children: []
+},
+{
+  id: "circleci",
+  title: "CircleCI para Proyectos ML",
+  subtitle: "CI/CD en la nube",
+  content: [
+    {
+      type: "text",
+      value: "CircleCI ofrece CI/CD en la nube con potente caché, beneficioso para proyectos ML con grandes dependencias."
+    },
+    {
+      type: "text",
+      value: "Consejos para ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Cachear dependencias entre ejecuciones",
+        "Usar ejecutores con GPU para entrenamiento",
+        "Paralelizar ejecución de tests",
+        "Almacenar artefactos usando workspaces"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "argo",
+  title: "Argo Workflows para ML",
+  subtitle: "Orquestación nativa en Kubernetes",
+  content: [
+    {
+      type: "text",
+      value: "Argo Workflows permite ejecutar pipelines multi-etapa en Kubernetes, ideal para trabajos complejos de entrenamiento."
+    },
+    {
+      type: "img",
+      value: "Visualización de DAG mostrando etapas paralelas de entrenamiento"
+    },
+    {
+      type: "text",
+      value: "Características clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Definición de pipelines basados en DAG",
+        "Uso eficiente de recursos",
+        "Paso de artefactos entre etapas",
+        "Integración con Kubeflow"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "despliegue_y_produccion",
+  title: "Despliegue y Producción",
+  subtitle: "Servicio de Modelos a Escala",
+  content: [
+    {
+      type: "text",
+      value: "El despliegue en producción requiere considerar escalabilidad, monitoreo y requisitos operacionales."
+    },
+    {
+      type: "img",
+      value: "Comparación de arquitecturas (tiempo real vs batch, serverless vs contenedores)"
+    },
+    {
+      type: "text",
+      value: "Aspectos críticos:"
+    },
+    {
+      type: "list",
+      value: [
+        "Versionado y rollback de modelos",
+        "Monitoreo de rendimiento",
+        "Detección de data drift",
+        "Infraestructura escalable",
+        "Seguridad y control de acceso"
+      ]
+    }
+  ],
+  children: [
+    "sagemaker",
+    "vertex_ai",
+    "azure_ml",
+    "bentoml",
+    "fastapi",
+    "docker",
+    "kubernetes"
+  ]
+},
+{
+  id: "vertex_ai",
+  title: "Vertex AI para Despliegue",
+  subtitle: "Plataforma unificada de ML en GCP",
+  content: [
+    {
+      type: "text",
+      value: "Vertex AI ofrece capacidades integrales para entrenamiento, despliegue y monitoreo de modelos en Google Cloud."
+    },
+    {
+      type: "code",
+      value: `# Desplegando un modelo en Vertex AI
+from google.cloud import aiplatform
+
+aiplatform.init(project="mi-proyecto", location="us-central1")
+
+modelo = aiplatform.Model.upload(
+    display_name="mi-modelo",
+    artifact_uri="gs://mi-bucket/modelo",
+    serving_container_image_uri="gcr.io/cloud-aiplatform/prediction/tf2-cpu.2-6:latest"
+)
+
+endpoint = modelo.deploy(
+    machine_type="n1-standard-4",
+    min_replica_count=1,
+    max_replica_count=3
+)`
+    },
+    {
+      type: "text",
+      value: "Características principales:"
+    },
+    {
+      type: "list",
+      value: [
+        "Auto-escalado de endpoints",
+        "Rutinas de predicción personalizadas",
+        "Explicabilidad de modelos",
+        "Monitoreo integrado"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "azure_ml",
+  title: "Azure Machine Learning",
+  subtitle: "ML integral en Microsoft Azure",
+  content: [
+    {
+      type: "text",
+      value: "Azure ML proporciona herramientas completas para entrenamiento, despliegue y gestión de modelos con capacidades empresariales."
+    },
+    {
+      type: "img",
+      value: "Interfaz de Azure ML mostrando opciones de despliegue"
+    },
+    {
+      type: "text",
+      value: "Opciones de despliegue:"
+    },
+    {
+      type: "list",
+      value: [
+        "ACI (Azure Container Instances) para pruebas",
+        "AKS (Azure Kubernetes Service) para producción",
+        "Despliegue en edge para dispositivos IoT",
+        "Endpoints batch para procesamiento asíncrono"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "bentoml",
+  title: "BentoML para Servicio de Modelos",
+  subtitle: "Empaquetado estandarizado de modelos",
+  content: [
+    {
+      type: "text",
+      value: "BentoML empaqueta modelos en bundles listos para producción que pueden desplegarse en múltiples plataformas."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de servicio con BentoML
+import bentoml
+from bentoml.io import NumpyNdarray
+
+@bentoml.service(
+    resources={"cpu": "2"},
+    traffic={"timeout": 10}
+)
+class DeteccionFraude:
+    def __init__(self):
+        self.modelo = bentoml.models.get("deteccion_fraude:latest")
+
+    @bentoml.api(input=NumpyNdarray())
+    def predecir(self, datos_entrada):
+        return self.modelo.predict(datos_entrada)`
+    },
+    {
+      type: "text",
+      value: "Ventajas clave:"
+    },
+    {
+      type: "list",
+      value: [
+        "Soporte multi-framework",
+        "Rendimiento optimizado",
+        "Despliegue en Docker/Kubernetes/Serverless",
+        "Gestión de versiones"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "fastapi",
+  title: "FastAPI para Servicio de Modelos",
+  subtitle: "Framework de alto rendimiento",
+  content: [
+    {
+      type: "text",
+      value: "FastAPI es un framework moderno ideal para construir APIs de servicio de modelos con documentación automática y validación."
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de endpoint con FastAPI
+from fastapi import FastAPI
+from pydantic import BaseModel
+import joblib
+
+app = FastAPI()
+modelo = joblib.load("modelo.pkl")
+
+class DatosEntrada(BaseModel):
+    caracteristicas: list[float]
+
+@app.post("/predecir")
+def predecir(datos: DatosEntrada):
+    prediccion = modelo.predict([datos.caracteristicas])
+    return {"prediccion": prediccion.tolist()}`
+    },
+    {
+      type: "text",
+      value: "Buenas prácticas:"
+    },
+    {
+      type: "list",
+      value: [
+        "Usar Pydantic para validación",
+        "Implementar health checks",
+        "Añadir logging de requests",
+        "Considerar rate limiting"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "kubernetes",
+  title: "Kubernetes para ML a Escala",
+  subtitle: "Orquestación de contenedores",
+  content: [
+    {
+      type: "text",
+      value: "Kubernetes provee una plataforma robusta para desplegar y escalar aplicaciones de ML en producción."
+    },
+    {
+      type: "img",
+      value: "Arquitectura Kubernetes para ML mostrando pods, autoscaling y monitoreo"
+    },
+    {
+      type: "text",
+      value: "Conceptos clave para ML:"
+    },
+    {
+      type: "list",
+      value: [
+        "Deployments para réplicas de modelos",
+        "Horizontal Pod Autoscaler (HPA)",
+        "Custom Resource Definitions (CRDs)",
+        "Gestión de recursos GPU",
+        "Service meshes para enrutamiento avanzado"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "monitoreo_y_observabilidad",
+  title: "Monitoreo y Observabilidad en Data Science",
+  subtitle: "Técnicas y herramientas para garantizar la calidad y rendimiento de modelos en producción",
+  content: [
+    {
+      type: "text",
+      value: "El monitoreo y observabilidad son componentes críticos en el ciclo de vida de los modelos de ML. Permiten detectar problemas como drift de datos, degradación de rendimiento o fallas en la infraestructura."
+    },
+    {
+      type: "img",
+      value: "Diagrama de arquitectura de monitoreo mostrando flujo de datos desde el modelo hasta los paneles de visualización"
+    },
+    {
+      type: "list",
+      value: [
+        "Conceptos clave en monitoreo de modelos:",
+        "Data Drift: Cambios en la distribución de los datos de entrada",
+        "Concept Drift: Cambios en la relación entre características y objetivo",
+        "Degradación de rendimiento: Caída en métricas de evaluación",
+        "Disponibilidad del servicio: Tiempo de actividad y latencia"
+      ]
+    },
+    {
+      type: "warning",
+      value: "Sin un sistema de monitoreo adecuado, los modelos en producción pueden degradarse silenciosamente, generando pérdidas económicas o impactos negativos en la experiencia del usuario."
+    }
+  ],
+  children: [
+    "grafana",
+    "prometheus",
+    "whylabs",
+    "evidentlyai"
+  ]
+},
+{
+  id: "grafana",
+  title: "Grafana para Visualización de Métricas",
+  subtitle: "Plataforma de visualización y creación de dashboards para monitoreo de modelos",
+  content: [
+    {
+      type: "text",
+      value: "Grafana es una herramienta open-source para visualización y análisis de métricas. En el contexto de Data Science, permite crear paneles interactivos para monitorear el comportamiento de modelos en producción."
+    },
+    {
+      type: "img",
+      value: "Ejemplo de dashboard de Grafana mostrando métricas de rendimiento de un modelo de ML"
+    },
+    {
+      type: "code",
+      value: `// Ejemplo de conexión a datasource Prometheus en Grafana
+const dashboard = {
+  title: "Monitoreo Modelo Clasificación",
+  panels: [
+    {
+      title: "Accuracy en Tiempo Real",
+      type: "graph",
+      datasource: "Prometheus",
+      query: 'avg(accuracy_score{model="fraud_detection"}) by (instance)'
+    }
+  ]
+};`
+    },
+    {
+      type: "list",
+      value: [
+        "Ventajas de Grafana:",
+        "Soporte múltiples fuentes de datos (Prometheus, InfluxDB, etc.)",
+        "Visualizaciones altamente personalizables",
+        "Alertas configurables basadas en umbrales",
+        "Compartir dashboards fácilmente"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "prometheus",
+  title: "Prometheus para Monitoreo de Métricas",
+  subtitle: "Sistema de monitoreo y alerta para infraestructura y modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "Prometheus es un sistema de monitoreo y alerta diseñado para confiabilidad y escalabilidad. Es particularmente útil para monitorear métricas de modelos en producción y la infraestructura asociada."
+    },
+    {
+      type: "img",
+      value: "Arquitectura de Prometheus mostrando componentes como el servidor, exportadores y alertmanager"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de métricas exportadas para un modelo de ML
+from prometheus_client import start_http_server, Gauge
+
+model_accuracy = Gauge('model_accuracy', 'Accuracy del modelo en producción')
+prediction_latency = Gauge('prediction_latency_ms', 'Latencia de predicción en milisegundos')
+
+# Actualizar métricas
+model_accuracy.set(0.92)
+prediction_latency.set(45)`
+    },
+    {
+      type: "list",
+      value: [
+        "Características clave:",
+        "Modelo de datos multidimensional con series de tiempo",
+        "Lenguaje de consulta flexible (PromQL)",
+        "Integración nativa con Grafana",
+        "Recolección de métricas mediante pull HTTP"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "whylabs",
+  title: "WhyLabs para Monitoreo de Modelos",
+  subtitle: "Plataforma SaaS para monitoreo de calidad de datos y modelos",
+  content: [
+    {
+      type: "text",
+      value: "WhyLabs es una plataforma que permite monitorear la calidad de los datos y el rendimiento de los modelos de ML en producción, detectando problemas como data drift o degradación de rendimiento."
+    },
+    {
+      type: "img",
+      value: "Interfaz de WhyLabs mostrando detección de drift en características del modelo"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de integración con WhyLabs
+import whylogs as why
+from whylogs.api.writer.whylabs import WhyLabsWriter
+
+# Perfilar datos de entrada
+profile = why.log(df).profile()
+
+# Enviar a WhyLabs
+writer = WhyLabsWriter()
+writer.write(profile)`
+    },
+    {
+      type: "list",
+      value: [
+        "Casos de uso principales:",
+        "Monitoreo continuo de calidad de datos",
+        "Detección temprana de data drift",
+        "Comparación entre conjuntos de entrenamiento y producción",
+        "Alertas automáticas sobre anomalías"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "evidentlyai",
+  title: "Evidently AI para Análisis de Modelos",
+  subtitle: "Herramientas open-source para evaluar y monitorear modelos de ML",
+  content: [
+    {
+      type: "text",
+      value: "Evidently AI proporciona herramientas para analizar el rendimiento de modelos y la calidad de datos en producción. Es especialmente útil para generar reportes automatizados sobre drift y degradación de modelos."
+    },
+    {
+      type: "img",
+      value: "Reporte de Evidently AI mostrando comparación de distribuciones de características"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de reporte de drift con Evidently
+from evidently.report import Report
+from evidently.metrics import DataDriftTable
+
+report = Report(metrics=[DataDriftTable()])
+report.run(current_data=production_data, reference_data=train_data)
+report.save_html("data_drift_report.html")`
+    },
+    {
+      type: "warning",
+      value: "Evidently es excelente para análisis puntuales, pero para monitoreo continuo necesita ser integrado con sistemas como Prometheus o Grafana."
+    },
+    {
+      type: "list",
+      value: [
+        "Tipos de reportes disponibles:",
+        "Data Quality: Estadísticas básicas y valores faltantes",
+        "Data Drift: Comparación de distribuciones",
+        "Model Performance: Métricas de evaluación",
+        "Target Drift: Cambios en la variable objetivo"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "balanceo_de_datos_y_calidad",
+  title: "Balanceo de Datos y Calidad",
+  subtitle: "Técnicas para manejar conjuntos de datos desbalanceados y garantizar calidad",
+  content: [
+    {
+      type: "text",
+      value: "El balanceo de datos es crucial en problemas con clases desbalanceadas, donde una clase domina sobre otras. Esto puede llevar a modelos con buen accuracy global pero pobre rendimiento en las clases minoritarias."
+    },
+    {
+      type: "img",
+      value: "Comparación antes/después de aplicar técnicas de balanceo mostrando distribución de clases"
+    },
+    {
+      type: "list",
+      value: [
+        "Señales de necesidad de balanceo:",
+        "Accuracy alto pero recall bajo en clase minoritaria",
+        "Distribución de clases muy desigual (ej: 95%-5%)",
+        "El modelo siempre predice la clase mayoritaria",
+        "Importancia empresarial de detectar la clase minoritaria"
+      ]
+    }
+  ],
+  children: [
+    "smote",
+    "over__under_sampling",
+    "data_skew_detection"
+  ]
+},
+{
+  id: "smote",
+  title: "SMOTE (Synthetic Minority Over-sampling Technique)",
+  subtitle: "Técnica avanzada para balancear conjuntos de datos mediante generación de muestras sintéticas",
+  content: [
+    {
+      type: "text",
+      value: "SMOTE es una técnica que crea muestras sintéticas de la clase minoritaria en lugar de simplemente duplicar instancias existentes. Funciona interpolando entre instancias cercanas en el espacio de características."
+    },
+    {
+      type: "img",
+      value: "Diagrama de cómo SMOTE genera nuevas instancias interpolando entre vecinos cercanos"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de aplicación de SMOTE con imbalanced-learn
+from imblearn.over_sampling import SMOTE
+
+smote = SMOTE(sampling_strategy='minority', k_neighbors=5)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+print(f"Distribución original: {Counter(y)}")
+print(f"Distribución después de SMOTE: {Counter(y_resampled)}")`
+    },
+    {
+      type: "list",
+      value: [
+        "Parámetros clave:",
+        "k_neighbors: Número de vecinos para interpolar (default 5)",
+        "sampling_strategy: Proporción deseada de clases",
+        "random_state: Para reproducibilidad"
+      ]
+    },
+    {
+      type: "warning",
+      value: "SMOTE puede generar ruido si se aplica a datos con muchas características irrelevantes o outliers. Es recomendable aplicar selección de características primero."
+    }
+  ],
+  children: []
+},
+{
+  id: "over__under_sampling",
+  title: "Over-sampling y Under-sampling",
+  subtitle: "Técnicas básicas para balancear conjuntos de datos",
+  content: [
+    {
+      type: "text",
+      value: "Over-sampling y Under-sampling son técnicas fundamentales para manejar clases desbalanceadas. Over-sampling aumenta las instancias de la clase minoritaria, mientras que Under-sampling reduce las instancias de la clase mayoritaria."
+    },
+    {
+      type: "img",
+      value: "Comparación visual entre over-sampling, under-sampling y combinación de ambos"
+    },
+    {
+      type: "code",
+      value: `# Ejemplo de Random Over-sampling y Under-sampling
+from imblearn.over_sampling import RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
+
+# Over-sampling
+over = RandomOverSampler(sampling_strategy=0.5)
+X_over, y_over = over.fit_resample(X, y)
+
+# Under-sampling
+under = RandomUnderSampler(sampling_strategy=0.5)
+X_under, y_under = under.fit_resample(X, y)`
+    },
+    {
+      type: "list",
+      value: [
+        "Consideraciones:",
+        "Over-sampling puede llevar a overfitting",
+        "Under-sampling puede perder información valiosa",
+        "Combinar ambas técnicas suele dar mejores resultados",
+        "Evaluar siempre en conjunto de validación no balanceado"
+      ]
+    }
+  ],
+  children: []
+},
+{
+  id: "data_skew_detection",
+  title: "Detección de Skew en Datos",
+  subtitle: "Técnicas para identificar y cuantificar desbalance en conjuntos de datos",
+  content: [
+    {
+      type: "text",
+      value: "La detección de skew (sesgo) en los datos es el primer paso para decidir si aplicar técnicas de balanceo. Involucra análisis estadísticos y visualizaciones para entender la distribución de clases."
+    },
+    {
+      type: "img",
+      value: "Visualización de skew mostrando histogramas de clases y métricas de desbalance"
+    },
+    {
+      type: "code",
+      value: `# Cálculo de métricas de desbalance
+import pandas as pd
+from collections import Counter
+
+def calculate_skew_metrics(y):
+    counts = Counter(y)
+    majority = max(counts.values())
+    minority = min(counts.values())
+    imbalance_ratio = majority/minority
+    
+    return {
+        'imbalance_ratio': imbalance_ratio,
+        'class_distribution': counts
+    }
+
+skew_metrics = calculate_skew_metrics(y)
+print(skew_metrics)`
+    },
+    {
+      type: "list",
+      value: [
+        "Métricas clave para detectar skew:",
+        "Imbalance Ratio: Proporción entre clase mayoritaria y minoritaria",
+        "Distribución de clases: Conteo absoluto por clase",
+        "Distancia estadística: KL-Divergence, Jensen-Shannon",
+        "Pruebas estadísticas: Chi-square, Kolmogorov-Smirnov"
+      ]
+    }
+  ],
+  children: []
+} 
 ]
 
 
 export interface ContentItem {
-  type: 'text' | 'img' | 'code';
-  value: string;
+  type: 'text' | 'img' | 'code' | 'list' | 'warning' | 'table';
+  value: any;
 }
 
 export interface TopicNode {

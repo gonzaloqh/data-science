@@ -28,20 +28,67 @@
   </mat-card-header>
 
   <div *ngFor="let item of node.content">
-    <mat-card-content *ngIf="item.type === 'text'">
-      <p class="justified-text"  style="white-space: pre-line;">
+  <!-- Texto normal -->
+  <mat-card-content *ngIf="item.type === 'text'">
+    <p class="justified-text" style="white-space: pre-line;">
+      {{ item.value }}
+    </p>
+  </mat-card-content>
+
+  <!-- Imagen -->
+  <img mat-card-image *ngIf="item.type === 'img'" [src]="item.value" style="margin: 5px 0;">
+
+  <!-- Bloque de código -->
+  <mat-card-content *ngIf="item.type === 'code'">
+    <pre class="code-block" style="white-space: pre-line;">
+      {{ item.value }}
+    </pre>
+  </mat-card-content>
+
+  <!-- Lista con viñetas -->
+  <mat-card-content *ngIf="item.type === 'list'">
+    <ul style="padding-left: 20px;">
+      <li *ngFor="let listItem of item.value">
+        {{ listItem }}
+      </li>
+    </ul>
+  </mat-card-content>
+
+  <!-- Bloque de advertencia en amarillo -->
+  <mat-card-content *ngIf="item.type === 'warning'">
+    <div
+      style="background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 10px; border-radius: 4px;">
+      <strong>⚠ Advertencia:</strong>
+      <p style="margin: 5px 0 0;">
         {{ item.value }}
       </p>
-    </mat-card-content>
+    </div>
+  </mat-card-content>
 
-    <img mat-card-image *ngIf="item.type === 'img'" [src]="item.value" style="margin: 5px 0;">
+  <!-- Tabla -->
+  <mat-card-content *ngIf="item.type === 'table'">
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th *ngFor="let header of item.value.headers" style="border-bottom: 2px solid #ccc; text-align: left; padding: 8px;">
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of item.value.rows">
+            <td *ngFor="let cell of row" style="border-bottom: 1px solid #eee; padding: 8px;">
+              {{ cell }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</div>
 
-    <mat-card-content *ngIf="item.type === 'code'">
-      <pre class="code-block" style="white-space: pre-line;">
-        {{ item.value }}
-      </pre>
-    </mat-card-content>
-  </div>
+
 
 
   <div class="fab-wrapper" *ngFor="let child of children_label" class="card-img">
