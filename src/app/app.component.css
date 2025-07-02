@@ -5,6 +5,14 @@
   z-index: 1000;
 }
 
+.fab-button-left {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 1000;
+}
+
+
 .max-width{
     width: 100%;
 }
@@ -57,4 +65,43 @@ mat-card img {
   border-radius: 8px;
   overflow-x: auto;
   white-space: pre-wrap; /* para que respete \n y se ajuste */
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.example-tree .mat-nested-tree-node div[role=group] {
+  padding-left: 20px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role=group] > .mat-tree-node {
+  padding-left: 20px;
+}
+
+.node-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.highlighted-node {
+  font-weight: bold;
+  color: #1976d2; /* opcional: un color más visible */
 }

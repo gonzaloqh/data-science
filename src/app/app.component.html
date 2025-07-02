@@ -3,7 +3,7 @@
     <mat-form-field class="example-full-width max-width" appearance="fill">
       <mat-label>Search...</mat-label>
       <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelected($event.option.value)">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
           {{option.nombre}}
         </mat-option>
@@ -11,91 +11,134 @@
     </mat-form-field>
   </form>
 
-  <mat-form-field appearance="fill" class="max-width">
+  <!-- <mat-form-field appearance="fill" class="max-width">
     <mat-label>Select Path</mat-label>
     <mat-select>
-      <!--   <mat-option *ngFor="let item of optionSearchPath" [value]="item.id">{{ returnSearchPathLabel(item) }}</mat-option>
- --> </mat-select>
-  </mat-form-field>
+        <mat-option *ngFor="let item of optionSearchPath" [value]="item.id">{{ returnSearchPathLabel(item) }}</mat-option>
+  </mat-select>
+  </mat-form-field> -->
 </div>
 
-<mat-card class="custom-card">
-  <mat-card-header style="padding: 0 16px 16px !important">
-    <div class="custom-title-container">
-      <mat-card-title>{{node.title}}</mat-card-title>
-      <mat-card-subtitle>{{node.subtitle}}</mat-card-subtitle>
-    </div>
-  </mat-card-header>
+<div *ngIf="hierchical">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
 
-  <div *ngFor="let item of node.content">
-  <!-- Texto normal -->
-  <mat-card-content *ngIf="item.type === 'text'">
-    <p class="justified-text" style="white-space: pre-line;">
-      {{ item.value }}
-    </p>
-  </mat-card-content>
+    <!-- Nodo hoja (sin hijos) -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <div>
+        <span [ngClass]="{ 'highlighted-node': isHighlighted(node) }">{{ node.name }}</span>
+        <button mat-icon-button (click)="onNodeClick(node)">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+      </div>
+    </mat-tree-node>
 
-  <!-- Imagen -->
-  <img mat-card-image *ngIf="item.type === 'img'" [src]="item.value" style="margin: 5px 0;">
+    <!-- Nodo con hijos -->
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+      <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <span [ngClass]="{ 'highlighted-node': isHighlighted(node) }">{{ node.name }}</span>
+        <button mat-icon-button (click)="onNodeClick(node)">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+      </div>
+      <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </mat-nested-tree-node>
 
-  <!-- Bloque de código -->
-  <mat-card-content *ngIf="item.type === 'code'">
-    <pre class="code-block" style="white-space: pre-line;">
+  </mat-tree>
+
+
+</div>
+
+<div *ngIf="!hierchical">
+  <mat-card class="custom-card">
+    <mat-card-header style="padding: 0 16px 16px !important">
+      <div class="custom-title-container">
+        <mat-card-title>{{node.name}}</mat-card-title>
+        <mat-card-subtitle>{{node.subtitle}}</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+
+    <div *ngFor="let item of node.content">
+      <!-- Texto normal -->
+      <mat-card-content *ngIf="item.type === 'text'">
+        <p class="justified-text" style="white-space: pre-line;">
+          {{ item.value }}
+        </p>
+      </mat-card-content>
+
+      <!-- Imagen -->
+      <img mat-card-image *ngIf="item.type === 'img'" [src]="item.value" style="margin: 5px 0;">
+
+      <!-- Bloque de código -->
+      <mat-card-content *ngIf="item.type === 'code'">
+        <pre class="code-block" style="white-space: pre-line;">
       {{ item.value }}
     </pre>
-  </mat-card-content>
+      </mat-card-content>
 
-  <!-- Lista con viñetas -->
-  <mat-card-content *ngIf="item.type === 'list'">
-    <ul style="padding-left: 20px;">
-      <li *ngFor="let listItem of item.value">
-        {{ listItem }}
-      </li>
-    </ul>
-  </mat-card-content>
+      <!-- Lista con viñetas -->
+      <mat-card-content *ngIf="item.type === 'list'">
+        <ul style="padding-left: 20px;">
+          <li *ngFor="let listItem of item.value">
+            {{ listItem }}
+          </li>
+        </ul>
+      </mat-card-content>
 
-  <!-- Bloque de advertencia en amarillo -->
-  <mat-card-content *ngIf="item.type === 'warning'">
-    <div
-      style="background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 10px; border-radius: 4px;">
-      <strong>⚠ Advertencia:</strong>
-      <p style="margin: 5px 0 0;">
-        {{ item.value }}
-      </p>
+      <!-- Bloque de advertencia en amarillo -->
+      <mat-card-content *ngIf="item.type === 'warning'">
+        <div
+          style="background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 10px; border-radius: 4px;">
+          <strong>⚠ Advertencia:</strong>
+          <p style="margin: 5px 0 0;">
+            {{ item.value }}
+          </p>
+        </div>
+      </mat-card-content>
+
+      <!-- Tabla -->
+      <mat-card-content *ngIf="item.type === 'table'">
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th *ngFor="let header of item.value.headers"
+                  style="border-bottom: 2px solid #ccc; text-align: left; padding: 8px;">
+                  {{ header }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of item.value.rows">
+                <td *ngFor="let cell of row" style="border-bottom: 1px solid #eee; padding: 8px;">
+                  {{ cell }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
     </div>
-  </mat-card-content>
 
-  <!-- Tabla -->
-  <mat-card-content *ngIf="item.type === 'table'">
-    <div style="overflow-x: auto;">
-      <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th *ngFor="let header of item.value.headers" style="border-bottom: 2px solid #ccc; text-align: left; padding: 8px;">
-              {{ header }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of item.value.rows">
-            <td *ngFor="let cell of row" style="border-bottom: 1px solid #eee; padding: 8px;">
-              {{ cell }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="fab-wrapper" *ngFor="let child of children_label" class="card-img">
+      <button mat-stroked-button color="primary" class="fab-full" (click)="goToChild(child)">{{child.name}}</button>
     </div>
-  </mat-card-content>
+
+    <div style="margin-top: 100px;"></div>
+  </mat-card>
 </div>
-
-
-
-
-  <div class="fab-wrapper" *ngFor="let child of children_label" class="card-img">
-    <button mat-stroked-button color="primary" class="fab-full" (click)="goToChild(child)">{{child.title}}</button>
-  </div>
-</mat-card>
 
 <button mat-fab color="warn" class="fab-button" aria-label="Botón flotante con ícono de home" (click)="goToHome()">
   <mat-icon>home</mat-icon>
+</button>
+
+<button mat-fab color="primary" class="fab-button-left" aria-label="Botón flotante con ícono de tree"
+  (click)="onHierarchyClick()">
+  <mat-icon>account_tree</mat-icon>
 </button>

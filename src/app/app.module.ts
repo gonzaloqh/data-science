@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatTreeModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
